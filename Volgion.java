@@ -13,7 +13,7 @@ public class Volgion {
                 return programs.length;
             }
             static void hr() {
-                System.out.println("=========================================================================");
+                System.out.println("===============================================================================");
             }
             /*static void pContributors(int progId) {
                 String noun = "";
@@ -50,9 +50,10 @@ public class Volgion {
         }
 
         class coffeeShop {
-            private static String[] items = {"Americano ", "Latte     ", "Cappuccino", "Espresso  ", "Arabica   ", "Mochaccino", "Tiramisu ", "Robusta   ", "Liberica  ", "Excelso   ", "Affogato  "};
+            private static String[] items = {"Americano ", "Latte     ", "Cappuccino", "Espresso  ", "Arabica   ", "Mochaccino", "Tiramisu  ", "Robusta   ", "Liberica  ", "Excelso   ", "Affogato  "};
             private static int[] prices = {21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34};
             private static int[] orders = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            static boolean csrun = true;
             static Scanner csinput = new Scanner(System.in);
 
             // getter
@@ -86,12 +87,13 @@ public class Volgion {
                     case "list":
                         list();
                         break;
+                    case "rst":
                     case "reset":
-                        // TODO: resetList();
+                        resetList();
                         break;
                     case "fin":
                     case "done":
-                        // TODO: done();
+                        done();
                         break;
                     case "help":
                         help();
@@ -104,27 +106,35 @@ public class Volgion {
             }
             static void   list() {
                 int total = 0;
-                boolean bdiscount = false;
-                for(int i = 0; i < getItemsCount(); i++) {
+                boolean bdiscount = false, isEmpty = true;;
+                for(int i = 0; i < getOrdersCount(); i++) {
                     if(orders[i] != 0) {
-                        System.out.println((i+1) + ". (" + orders[i] + " items) " + items[i] + " = (" + (orders[i] * getPrices(i)) + "K)");
-                        total += (orders[i] * prices[i]);
+                        isEmpty = false;
                     }
                 }
-                System.out.println("\nTotal price                = " + total + "K");
-                if(total >= 100) {
-                    bdiscount = true;
+                if(isEmpty) {
+                    System.out.println("Your list is empty, use 'add' to add an item.");
+                } else {
+                    for(int i = 0; i < getItemsCount(); i++) {
+                        if(orders[i] != 0) {
+                            System.out.println((i+1) + ". (" + orders[i] + " items) " + items[i] + " = (" + (orders[i] * getPrices(i)) + "K)");
+                            total += (orders[i] * prices[i]);
+                        }
+                    }
+                    System.out.println("\nTotal price                = " + total + "K");
+                    if(total >= 100) {
+                        bdiscount = true;
+                    }
+                    System.out.println("Discount                   = " + bdiscount);
                 }
-                System.out.println("Discount                   = " + bdiscount);
             }
             static void   help() {
                 System.out.println("\nAvailable commands: \n'menu'      : show the items menu.\n'add'       : add an item and its amount to the order list.\n'remove'    : remove an amount of item from the order list\n'list'      : display your current orders list.\n'reset'     : discard the order list and make a new one.\n'done'      : finish choosing and purchase your order list.\n'help'      : show this help menu.\n");
             }
             static void   run() {
-                boolean csrun = true;
                 pWelcome();
                 help();
-                while (csrun) {
+                while (coffeeShop.csrun) {
                     csrun = false;
                     try {
                         main.hr();
@@ -149,7 +159,7 @@ public class Volgion {
                     } else {
                         space = "";
                     }
-                    System.out.println(space + (i+1) + " = " + getItems(i) + "(" + prices[i] + "K)");
+                    System.out.println(space + (i+1) + " = " + getItems(i) + "         (" + prices[i] + "K)");
                 }
                 System.out.println("\n");
             }
@@ -165,7 +175,7 @@ public class Volgion {
                         index = csinput.nextInt();
                         csinput.nextLine();
                         if(index < 0 || index > getItemsCount()) {
-                            System.out.println("(OUT OF RANGE) Please enter an integer between 1 to " + getItemsCount() + " (Inclusive) !");
+                            System.out.println("(OUT OF RANGE) Please enter an integer between 0 to " + getItemsCount() + " (Inclusive) !");
                             bindex = true;
                         }
                     } catch (Exception e) {
@@ -225,7 +235,7 @@ public class Volgion {
                             index = csinput.nextInt();
                             csinput.nextLine();
                             if(index < 0 || index > getItemsCount()) {
-                                System.out.println("(OUT OF RANGE) Please enter an integer between 1 to " + getItemsCount() + " (Inclusive) !");
+                                System.out.println("(OUT OF RANGE) Please enter an integer between 0 to " + getItemsCount() + " (Inclusive) !");
                                 bindex = true;
                             }
                         } catch (Exception e) {
@@ -245,7 +255,7 @@ public class Volgion {
                                 count = csinput.nextLong();
                                 csinput.nextLine();
                                 if (count < 0) {
-                                    System.out.println("(OUT OF RANGE) Please enter a real integer number!");
+                                    System.out.println("(OUT OF RANGE) Please enter a non-negative integer number!");
                                     bcount = true;
                                 }
                             } catch (Exception e) {
@@ -259,7 +269,7 @@ public class Volgion {
                             System.out.println("Cancelling removing item...");
                         } else if (count >= orders[index-1]) {
                             System.out.println("Removed all " + items[index-1]);
-                            count = orders[index-1];
+                            orders[index-1] = 0;
                         } else {
                             System.out.println("Removed " + index + " " + items[index-1]);
                             orders[index-1] -= count;
@@ -267,13 +277,38 @@ public class Volgion {
                     }
                 }
             }
+            static void   resetList() {
+                for(int i = 0; i < getOrdersCount(); i++) {
+                    orders[i] = 0;
+                }
+                System.out.println("List have been discarded!");
+            }
+            static void   done() {
+                System.out.println("Your order will be :");
+                list();
+                System.out.println("\nConfirm purchase? (y/n): ");
+                switch (csinput.nextLine()) {
+                    case "Y":
+                    case "Yes":
+                    case "yes":
+                    case "ye":
+                    case "Ye":
+                    case "y":
+                        System.out.println("Purchase completed!\nEnjoy your coffee!");
+                        coffeeShop.csrun = false;
+                        break;
+                    default:
+                        System.out.println("Purchase cancelled, going back to listing your order!");
+                        break;
+                }
+
+            }
             static void   pWelcome() {
                 main.hr();
                 System.out.println("\nWelcome to the Volgion's Coffee Shop!\n\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)\nWhat will be your order?\n");
                 coffeeShop.pMenu();
             }
         }
-        
         main.pbanner();
         main.pMainMenu();
         boolean run = true;
