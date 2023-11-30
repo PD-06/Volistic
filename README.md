@@ -1,4 +1,4 @@
-# How to Run in MacOs:
+# How to Run Volgion in MacOs:
 ## Prerequisites:
 1. Download JDK [here]([url](https://www.oracle.com/java/technologies/downloads/)) and install it!
 2. Type `java --version` to verify it!
