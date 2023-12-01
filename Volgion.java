@@ -53,7 +53,7 @@ public class Volgion {
             private static String[] items = {"Americano ", "Latte     ", "Cappuccino", "Espresso  ", "Arabica   ", "Mochaccino", "Tiramisu  ", "Robusta   ", "Liberica  ", "Excelso   ", "Affogato  "};
             private static int[] prices = {21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34};
             private static int[] orders = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-            static boolean csrun = true;
+            static boolean csrun = true, end = false;
             static Scanner csinput = new Scanner(System.in);
 
             // getter
@@ -105,7 +105,7 @@ public class Volgion {
                 }
             }
             static void   list() {
-                int total = 0;
+                double total = 0, net = 0;
                 boolean bdiscount = false, isEmpty = true;;
                 for(int i = 0; i < getOrdersCount(); i++) {
                     if(orders[i] != 0) {
@@ -121,11 +121,21 @@ public class Volgion {
                             total += (orders[i] * prices[i]);
                         }
                     }
-                    System.out.println("\nTotal price                = " + total + "K");
+                    System.out.printf("\nTotal price                = %,.0fK\n", total);
                     if(total >= 100) {
                         bdiscount = true;
                     }
-                    System.out.println("Discount                   = " + bdiscount);
+                    if(bdiscount) {
+                        net = (total * 0.85);
+                    } else {
+                        net = (int) total;
+                    }
+                    System.out.println("Discount (15%)             = " + bdiscount);
+                    if((double) net == (int) net) {
+                        System.out.println("Payment                    = " + (int) net + "K");
+                    } else {
+                        System.out.printf("Payment                    = %,.2fK\n", net);
+                    }
                 }
             }
             static void   help() {
@@ -135,17 +145,19 @@ public class Volgion {
                 pWelcome();
                 help();
                 while (coffeeShop.csrun) {
-                    csrun = false;
+                    coffeeShop.csrun = false;
                     try {
                         main.hr();
                         System.out.println("\nEnter your command: ");
                         String iCommand = csinput.nextLine();
                         command(iCommand);
-                        csrun = true;
+                        if(coffeeShop.end == false) {
+                            coffeeShop.csrun = true;
+                        }
                     } catch (Exception e) {
                         main.pExcType("coffeeShop.run()");
                         csinput.nextLine();
-                        csrun = true;
+                        coffeeShop.csrun = true;
                     }
                 }
             }
@@ -271,7 +283,7 @@ public class Volgion {
                             System.out.println("Removed all " + items[index-1]);
                             orders[index-1] = 0;
                         } else {
-                            System.out.println("Removed " + index + " " + items[index-1]);
+                            System.out.println("Removed " + count + " " + items[index-1]);
                             orders[index-1] -= count;
                         }
                     }
@@ -284,24 +296,57 @@ public class Volgion {
                 System.out.println("List have been discarded!");
             }
             static void   done() {
-                System.out.println("Your order will be :");
-                list();
-                System.out.println("\nConfirm purchase? (y/n): ");
-                switch (csinput.nextLine()) {
-                    case "Y":
-                    case "Yes":
-                    case "yes":
-                    case "ye":
-                    case "Ye":
-                    case "y":
-                        System.out.println("Purchase completed!\nEnjoy your coffee!");
-                        coffeeShop.csrun = false;
+                boolean listIsEmpty = true;
+                for(int i = 0; i < getItemsCount(); i++) {
+                    if (orders[i] != 0) {
+                        listIsEmpty = false;
                         break;
-                    default:
-                        System.out.println("Purchase cancelled, going back to listing your order!");
-                        break;
+                    }
                 }
-
+                if(listIsEmpty) {
+                    System.out.println("Your list is empty.");
+                    System.out.println("\nQuit purchase? (y/n): ");
+                    switch (csinput.nextLine()) {
+                        case "":
+                        case "Y":
+                        case "Yes":
+                        case "yes":
+                        case "ye":
+                        case "Ye":
+                        case "y":
+                            System.out.println("You didn't buy anyting for now...\nCome back later!");
+                            coffeeShop.csrun = false;
+                            coffeeShop.end = true;
+                            main.hr();
+                            main.hr();
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    System.out.println("Your order will be :");
+                    list();
+                    System.out.println("\nConfirm purchase? (y/n): ");
+                    switch (csinput.nextLine()) {
+                        case "":
+                        case "Y":
+                        case "Yes":
+                        case "yes":
+                        case "ye":
+                        case "Ye":
+                        case "y":
+                            System.out.println("Purchase completed!\nEnjoy your coffee!");
+                            coffeeShop.csrun = false;
+                            coffeeShop.end = true;
+                            main.hr();
+                            main.hr();
+                            break;
+                        default:
+                            System.out.println("Purchase cancelled, going back to listing your order!");
+                            break;
+                    }
+                }
+                
             }
             static void   pWelcome() {
                 main.hr();
@@ -309,11 +354,11 @@ public class Volgion {
                 coffeeShop.pMenu();
             }
         }
-        main.pbanner();
-        main.pMainMenu();
         boolean run = true;
         while(run) {
             try {
+                main.pbanner();
+                main.pMainMenu();
                 System.out.println("\nSelect the program you want to run: ");
                 switch (input.nextLine()) {
                     case "Coffee Shop":
