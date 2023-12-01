@@ -11,4 +11,9 @@
 4. Type the following commands: 
        `javac Volgion.java`
        `java Volgion`
-5. It should now run the Volgion Program, have fun!
+5. It should now run the Volgion Program, have fun!<br><hr><br>
+## Programs or Modules
+1. Coffe Shop (NEW)
+2. PMR on Duty Allocator (WIP)
+## Images
+<img width="1022" alt="Screenshot 2023-11-30 at 14 22 39" src="https://github.com/DeffreusTheda/ComSci/assets/147963726/a7358378-6358-461b-865a-59e9c8e458ad">
