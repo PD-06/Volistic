@@ -385,6 +385,7 @@ public class Volgion {
                             System.out.println("Purchase completed!\nEnjoy your coffee!");
                             coffeeShop.csrun = false;
                             coffeeShop.end = true;
+                            coffeeShop.resetVar();
                             coffeeShop.pQuit(5);
                             main.hr();
                             main.hr();
@@ -402,6 +403,11 @@ public class Volgion {
                 System.out.println("\nWelcome to the Volgion's Coffee Shop!\n\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)\nWhat will be your order?\n");
                 help();
             }
+            static void   resetVar() {
+                for(int i = 0; i < getItemsCount(); i++) {
+                    coffeeShop.orders[i] = 0;
+                }
+            }
             static void   pQuit(int duration) {
                 System.out.println("\nQuitting in:");
                 for(int i = duration; i > 0; i--) {
@@ -415,7 +421,6 @@ public class Volgion {
             }
         }
         boolean run = true;
-       
         while(run) {
             try {
                 main.clear();
