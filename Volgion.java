@@ -11,8 +11,8 @@ public class Volgion {
         Scanner input = new Scanner(System.in);
 
         class main {
-            private static String[] programs = {"Coffee Shop", "BMI Calculator (EXPERIMENTAL)"};
-            private static String programVersion = "1.0", "0.1";
+            private static String[][] programs = { {"Coffee Shop", "BMI Calculator (BETA)"}, 
+                                                   {"1.0"        , "0.1"                  } };
             // private static String[][] contributors = {{"Muhammad Alfin Azza Pujaar"}};
             public static void clear() {  
                 System.out.print("\033[H\033[2J");  
@@ -35,7 +35,7 @@ public class Volgion {
                 }
             }*/
             static String getProgramsName(int index) {
-                return programs[index];
+                return programs[0][index];
             }
             static void pbanner() {
                 System.out.printf(ansiColor.red + "__     __   ___    _        ____   ___    ___    _   _ \n" + //
@@ -44,7 +44,7 @@ public class Volgion {
                         "  \\ V /   | |_| | | |___  | |_| |  | |  | |_| | | |\\  |\n" + //
                         "   \\_/     \\___/  |_____|  \\____| |___|  \\___/  |_| \\_|\n" + //
                         "");
-                System.out.println("\nV" + programVersion);
+                System.out.println("\nV1.0.1");
                 System.out.println("\nYou can contribute to this project here: https://github.com/DeffreusTheda/ComSci");
                 System.out.println("Please report any bug here:\n    Email      : muhammad.alfin@praditadirgantara.sch.id\n    Discord    : deffreus (recommended)\n    WA         : +62 895-8077-31515" + ansiColor.reset);
             }
@@ -64,77 +64,121 @@ public class Volgion {
         }
 
         class BMICalculator {
+            static boolean bmirun, end, hasName;
+            static String fname, category;
+            static Scanner bmiinput = new Scanner(System.in);
+            static double weight, height, bmi;
             static void run() {
-                Scanner bmiInput = new Scanner(System.in);
-                String fname;
-                double weight, height, bmi;
-                main.clear();
-                System.out.println("Welcome to the Volgion's BMI Calculator!!");
-                while(true) {
+                pWelcome();
+                bmirun = true;
+                end = false;
+                while (bmirun) {
+                    bmirun = false;
                     try {
-                        System.out.println("\n\nWhat is your full name (Blank to skip)?");
-                        fname = bmiInput.nextLine();
-                        break;
-                    } catch(Exception e) {
-                        System.out.println("Something went wrong, please try again.");
+                        main.clear();
+                        main.hr();
+                        iName();
+                        if(fname != "") hasName = true;
+                        if(hasName) System.out.println("\nHello " + fname + "!");
+                        iWeight();
+                        iHeight();
+                        calcBMI(weight, height);
+                        pResult();
+                        iQuit();
+                        if(end == false) {
+                            bmirun = true;
+                        }
+                    } catch (Exception e) {
+                        main.pExcType("You're not supposed to see this message.\nIf you do, report with a screenshot here: deffreus (Discord)");
+                        bmirun = true;
                     }
                 }
-                while(true) {
-                    try {
-                        System.out.println("\nWhat is your weight in kilogram?");
-                        weight = bmiInput.nextDouble();
-                        break;
-                    } catch(Exception e) {
-                        System.out.println("Please enter a number!");
-                        bmiInput.nextLine();
-                    }
-                }
-                while(true) {
-                    try {
-                        System.out.println("\nWhat is your height in cm?");
-                        height = bmiInput.nextDouble();
-                        break;
-                    } catch(Exception e) {
-                        System.out.println("Please enter a number!");
-                        bmiInput.nextLine();
-                    }
-                }
-                bmi = weight/(height*height*0.0001);
-                if(fname != "") System.out.println("\nHello, " + fname + "!");
-                System.out.printf("Your BMI index is: %,.1f!\n", bmi);
-                String category;
-                if(bmi < 18.5) {
-                   category = "Underweight"; 
-                } else if(bmi <=  24.9) {
-                    category = "Normal weight";
-                } else if(bmi <= 29.9) {
-                    category = "Overweight";
-                } else if(bmi <= 34.9) {
-                    category = "Obesity class I";
-                } else if(bmi <= 39.9) {
-                    category = "Obesity class II";
-                } else {
-                    category = "Obesity class III";
-                }
-                System.out.println("Your categorized as: " + category + "\n");
-                while(true) {
-                    System.out.println("\nPlease enter to quit.");
-                    bmiInput.nextLine();
-                    bmiInput.nextLine();
-                    quit(3);
-                    break;
-                }
-                bmiInput.close();
             }
-            static void quit(int time) {
-                try {
-                    System.out.println("\n");
-                    for(int t = time; t > 0; t--) {
-                        System.out.println("Quitting in " + t + "...");
+            static void pQuit(int intSecond) {
+                System.out.println("\nQuitting in:");
+                for(int i = intSecond; i > 0; i--) {
+                    System.out.println(i + "...");
+                    try {
                         Thread.sleep(1000);
+                    } catch (Exception e) {
+                        main.pExcType("Thread sleep exception, dev's fault");
                     }
-                } catch(Exception e) {
-
+                }
+            }
+            static void iQuit() {
+                System.out.println("\nDo you want to calculate again? (Y/n):");
+                String option = bmiinput.nextLine();
+                switch (option) {
+                    case "N":
+                    case "n":
+                    case "No":
+                    case "no":
+                    case "NO":
+                        end = true;
+                        pQuit(3);
+                        break;
+                }
+            }
+            static void pResult() {
+                System.out.println("\n");
+                if(hasName) System.out.println("Here is your result, " + fname + ":");
+                System.out.println("Your weight      : " + weight);
+                System.out.println("Your height      : " + height);
+                System.out.printf("Your BMI index : %.1f", bmi);
+                System.out.println("\nYou're categorized as:\n" + category);
+            }
+            static void calcBMI(double w, double h) {
+                bmi = w/(h*h*0.0001);
+                if(bmi < 16) {
+                    category = "Underweight (Severe thinness)";
+                } else if(bmi <= 16.9) {
+                    category = "Underweight (Moderate thinness)";
+                } else if(bmi <= 18.4) {
+                    category = "Underweight (Mild thinness)";
+                } else if(bmi < 24.9) {
+                    category = "Normal";
+                } else if(bmi <= 29.9) {
+                    category = "Overweight (Pre-obese)";
+                } else if(bmi <= 34.9) {
+                    category = "Obese (Class I)";
+                } else if(bmi <= 39.9) {
+                    category = "Obese (Class II)";
+                } else {
+                    category = "Obese (Class III)";
+                }
+            }
+            static void pWelcome() {
+                main.clear();
+                System.out.println("Welcome to the Volgion BMI Calculator!\n");
+            }
+            static void iName() {
+                System.out.println("\nWhat is your full name? (blank to skip)");
+                fname = bmiinput.nextLine();
+            }
+            static void iWeight() {
+                boolean valid = false;
+                while (!valid) {
+                    valid = true;
+                    try {
+                        System.out.println("\nWhat is your weight (kg)?");
+                        weight = Double.parseDouble(bmiinput.nextLine());
+                    } catch(Exception e) {
+                        main.pExcType("Something is wrong with your weight.");
+                        valid = false;
+                    }
+                }
+            }
+            static void iHeight() {
+                boolean valid = false;
+                while (!valid) {
+                    valid = true;
+                    try {
+                        System.out.println("\nWhat is your height (cm)?");
+                        height = Double.parseDouble(bmiinput.nextLine());
+                    } catch(Exception e) {
+                        main.pExcType("Something is wrong with your height.");
+                        valid = false;
+                    }
                 }
             }
         }
@@ -508,12 +552,16 @@ public class Volgion {
                     case "BMI Calculator":
                     case "2":
                         BMICalculator.run();
-                        input.nextLine();
-                        input.nextLine();
                         break;
                 }
             } catch(Exception e) {
                 main.pExcType("Something went wrong. Please report immediately to: deffreus (Discord). Sorry for the inconvenience T-T");
+                input.nextLine();
+                try {
+                    Thread.sleep(2000);
+                } catch(Exception ee) {
+                    main.pExcType("Thread sleep error.");
+                }
             }
         }
         input.close();
