@@ -9,10 +9,10 @@ public class Volgion {
             public static String reset = "\u001B[0m";
         }
         Scanner input = new Scanner(System.in);
-        
+
         class main {
-            private static String[] programs = {"Coffee Shop"};
-            private static String programVersion = "1.0";
+            private static String[] programs = {"Coffee Shop", "BMI Calculator (EXPERIMENTAL)"};
+            private static String programVersion = "1.0", "0.1";
             // private static String[][] contributors = {{"Muhammad Alfin Azza Pujaar"}};
             public static void clear() {  
                 System.out.print("\033[H\033[2J");  
@@ -63,13 +63,89 @@ public class Volgion {
             }
         }
 
+        class BMICalculator {
+            static void run() {
+                Scanner bmiInput = new Scanner(System.in);
+                String fname;
+                double weight, height, bmi;
+                main.clear();
+                System.out.println("Welcome to the Volgion's BMI Calculator!!");
+                while(true) {
+                    try {
+                        System.out.println("\n\nWhat is your full name (Blank to skip)?");
+                        fname = bmiInput.nextLine();
+                        break;
+                    } catch(Exception e) {
+                        System.out.println("Something went wrong, please try again.");
+                    }
+                }
+                while(true) {
+                    try {
+                        System.out.println("\nWhat is your weight in kilogram?");
+                        weight = bmiInput.nextDouble();
+                        break;
+                    } catch(Exception e) {
+                        System.out.println("Please enter a number!");
+                        bmiInput.nextLine();
+                    }
+                }
+                while(true) {
+                    try {
+                        System.out.println("\nWhat is your height in cm?");
+                        height = bmiInput.nextDouble();
+                        break;
+                    } catch(Exception e) {
+                        System.out.println("Please enter a number!");
+                        bmiInput.nextLine();
+                    }
+                }
+                bmi = weight/(height*height*0.0001);
+                if(fname != "") System.out.println("\nHello, " + fname + "!");
+                System.out.printf("Your BMI index is: %,.1f!\n", bmi);
+                String category;
+                if(bmi < 18.5) {
+                   category = "Underweight"; 
+                } else if(bmi <=  24.9) {
+                    category = "Normal weight";
+                } else if(bmi <= 29.9) {
+                    category = "Overweight";
+                } else if(bmi <= 34.9) {
+                    category = "Obesity class I";
+                } else if(bmi <= 39.9) {
+                    category = "Obesity class II";
+                } else {
+                    category = "Obesity class III";
+                }
+                System.out.println("Your categorized as: " + category + "\n");
+                while(true) {
+                    System.out.println("\nPlease enter to quit.");
+                    bmiInput.nextLine();
+                    bmiInput.nextLine();
+                    quit(3);
+                    break;
+                }
+                bmiInput.close();
+            }
+            static void quit(int time) {
+                try {
+                    System.out.println("\n");
+                    for(int t = time; t > 0; t--) {
+                        System.out.println("Quitting in " + t + "...");
+                        Thread.sleep(1000);
+                    }
+                } catch(Exception e) {
+
+                }
+            }
+        }
+
         class coffeeShop {
             private static String[] items = {"Americano ", "Latte     ", "Cappuccino", "Espresso  ", "Arabica   ", "Mochaccino", "Tiramisu  ", "Robusta   ", "Liberica  ", "Excelso   ", "Affogato  "};
             private static int[] prices = {21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34};
             private static int[] orders = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             static boolean csrun = true, end = false;
             static Scanner csinput = new Scanner(System.in);
-
+    
             // getter
             static int    getItemsCount() {
                 return items.length;
@@ -171,8 +247,7 @@ public class Volgion {
                     try {
                         main.hr();
                         System.out.println("\nEnter your command: ");
-                        String iCommand = csinput.nextLine();
-                        command(iCommand);
+                        command(csinput.nextLine());
                         if(coffeeShop.end == false) {
                             coffeeShop.csrun = true;
                         }
@@ -386,11 +461,7 @@ public class Volgion {
                             coffeeShop.csrun = false;
                             coffeeShop.end = true;
                             coffeeShop.resetVar();
-                            coffeeShop.pQuit(5);
-                            main.hr();
-                            main.hr();
-                            main.pbanner();
-                            main.pMainMenu();
+                            coffeeShop.pQuit(5);;
                             break;
                         default:
                             System.out.println("Purchase cancelled, going back to listing your order!");
@@ -427,14 +498,18 @@ public class Volgion {
                 main.pbanner();
                 main.pMainMenu();
                 System.out.println("\nSelect the program you want to run: ");
-                switch (input.nextLine()) {
+                String chosenProgram = input.nextLine();
+                switch (chosenProgram) {
                     case "Coffee Shop":
                     case "1":
                         coffeeShop.run();
                         break;
-                    default:
-                        System.out.println("Program unknown.");
-                        main.pMainMenu();
+                    case "BMI":
+                    case "BMI Calculator":
+                    case "2":
+                        BMICalculator.run();
+                        input.nextLine();
+                        input.nextLine();
                         break;
                 }
             } catch(Exception e) {
