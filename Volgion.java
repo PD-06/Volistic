@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 // Let start over again:
 
@@ -9,17 +10,29 @@ public class Volgion {
             public static String reset = "\u001B[0m";
         }
         Scanner input = new Scanner(System.in);
-
-        class main {
-            private static String[][] programs = { {"Coffee Shop", "BMI Calculator (BETA)"}, 
-                                                   {"1.0"        , "0.1"                  } };
+        class Main {
+            private static String[][] programs = { {"Coffee Shop", "BMI Calculator (NEW)", "Two Variable Calculator (BETA)"}, 
+                                                   {"1.0"        , "0.3"                  , "0.1"} };
             // private static String[][] contributors = {{"Muhammad Alfin Azza Pujaar"}};
+            static void quit(int second) {  
+                System.out.println("\nQuitting in:");
+                for(int i = second; i > 0; i--) {
+                    System.out.println(i + "...");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        Main.pExcType("Thread sleep error");
+                    }
+                }
+                Main.clear();
+                System.exit(1);
+            }   
             public static void clear() {  
                 System.out.print("\033[H\033[2J");  
                 System.out.flush();  
             }
             static int getProgramsCount() {
-                return programs.length;
+                return programs[0].length;
             }
             static void hr() {
                 System.out.println("================================================================================");
@@ -44,7 +57,7 @@ public class Volgion {
                         "  \\ V /   | |_| | | |___  | |_| |  | |  | |_| | | |\\  |\n" + //
                         "   \\_/     \\___/  |_____|  \\____| |___|  \\___/  |_| \\_|\n" + //
                         "");
-                System.out.println("\nV1.0.1");
+                System.out.println("\nV1.0.2");
                 System.out.println("\nYou can contribute to this project here: https://github.com/DeffreusTheda/ComSci");
                 System.out.println("Please report any bug here:\n    Email      : muhammad.alfin@praditadirgantara.sch.id\n    Discord    : deffreus (recommended)\n    WA         : +62 895-8077-31515" + ansiColor.reset);
             }
@@ -55,7 +68,7 @@ public class Volgion {
                 }
             }
             static void pExcType(String message) {
-                System.out.println(ansiColor.red + "main.pExcType: (ERROR: INVALID INPUT): " + message + ansiColor.reset);
+                System.out.println(ansiColor.red + "Main.pExcType: (ERROR: INVALID INPUT): " + message + ansiColor.reset);
             }
             static String nospace(String string) {
                 String res = string.replaceAll("\\s", "");
@@ -63,20 +76,158 @@ public class Volgion {
             }
         }
 
+        class TwoVarCalculator {
+            static Scanner tvcinput = new Scanner(System.in);
+            static boolean tvcIsRunning, tvcIsEnded;
+            static String operator;
+            static double A, B;
+            
+            static void run() {
+                tvcIsRunning = true;
+                tvcIsEnded = false;
+                while(tvcIsRunning) {
+                    tvcIsRunning = false;
+                    try {
+                        Main.clear();
+                        Main.hr();
+                        pWelcome();
+                        Main.hr();
+                        iOperator();
+                        iA();
+                        iB();
+                        pRes();
+                        iQuit();
+                        if(tvcIsEnded == false) {
+                            tvcIsRunning = true;
+                        }
+                    } catch (Exception e) {
+                        Main.pExcType(ansiColor.red + "CALCULATOR ERROR." + ansiColor.reset);
+                    }
+                }
+            }
+            static void iQuit () {
+                String opt;
+                boolean valid = false;
+                while(valid != true) {
+                    System.out.println("\nDo you want calculate again? (Y/n)");
+                    opt = tvcinput.nextLine();
+                    switch (opt) {
+                        case "Y":
+                        case "y":
+                        case "Yes":
+                        case "yes":
+                        case "YES":
+                        case "":
+                            valid = true;
+                            tvcIsEnded = false;
+                            break;
+                        case "n":
+                        case "N":
+                        case "No":
+                        case "no":
+                        case "NO":
+                            valid = true;
+                            tvcIsEnded = true;
+                            break;
+                        default:
+                            System.out.println("Invalid input.");           
+                }
+            }
+            }
+            static void pRes() {
+                System.out.println("\nThe result of the calculation is: " + calc(operator));
+            }
+            static double calc(String val) {
+                double result = 1;
+                switch (val) {
+                    case "1":
+                    case "+":
+                        result = A + B;
+                        break;
+                    case "2":
+                    case "-":
+                        result = A - B;
+                        break;
+                    case "3":
+                    case "x":
+                    case "*":
+                        result = A * B;
+                        break;
+                    case "4":
+                    case "/":
+                        result = A / B;
+                        break;
+                    case "5":
+                    case "^":
+                    case "**":
+                        for(int i = 0; i < B; i++) result *= A;
+                        break;
+                    case "√":
+                    case "6":
+                        double exponent = 1 / B;
+                        result = Math.pow(A, exponent);
+                        break;
+                    case "7":
+                    case "%":
+                        result = A % B;
+                        break;
+                    default:
+                        break;
+                }
+                return result;
+            }
+            static void iB() {
+                System.out.println("\nPlease enter a value for the variable B: ");
+                B = Double.parseDouble(tvcinput.nextLine());
+            }
+            static void iA() {
+                System.out.println("\nPlease enter a value for the variable A: ");
+                A = Double.parseDouble(tvcinput.nextLine());
+            }
+            static void iOperator() {
+                System.out.println("\nWhat type of calculation you want?\n");
+                System.out.println("1 (+) = Increase A by B");
+                System.out.println("2 (-) = Substract B from A");
+                System.out.println("3 (x) = Multiply A and B");
+                System.out.println("4 (/) = Divide A by B");
+                System.out.println("5 (^) = A to the power of B");
+                System.out.println("6 (√) = 'B' root of A");
+                System.out.println("7 (%) = A modulo B");
+                boolean keepAsking = true;
+                while(keepAsking) {
+                    System.out.println("\n(Enter the index number or symbol):");
+                    try {
+                        operator = Main.nospace(tvcinput.nextLine());
+                        keepAsking = false;
+                    } catch (Exception e) {
+                        Main.pExcType("Please input a number!");
+                        keepAsking = true;
+                    }
+                }
+            }
+            static void pWelcome() {
+                System.out.println("\nWelcome to the Volgion's Two Variable Calculator!\n");
+            }
+        }
+
         class BMICalculator {
+            // Deklarasi variabel yang akan dipakai.
             static boolean bmirun, end, hasName;
             static String fname, category;
             static Scanner bmiinput = new Scanner(System.in);
             static double weight, height, bmi;
+            
+            // method buat jalanin bmi kalkulatornya
             static void run() {
-                pWelcome();
                 bmirun = true;
                 end = false;
                 while (bmirun) {
                     bmirun = false;
                     try {
-                        main.clear();
-                        main.hr();
+                        Main.clear();
+                        Main.hr();
+                        pWelcome();
+                        Main.hr();
                         iName();
                         if(fname != "") hasName = true;
                         if(hasName) System.out.println("\nHello " + fname + "!");
@@ -89,7 +240,7 @@ public class Volgion {
                             bmirun = true;
                         }
                     } catch (Exception e) {
-                        main.pExcType("You're not supposed to see this message.\nIf you do, report with a screenshot here: deffreus (Discord)");
+                        Main.pExcType("You're not supposed to see this message.\nIf you do, report with a screenshot here: deffreus (Discord)");
                         bmirun = true;
                     }
                 }
@@ -101,7 +252,7 @@ public class Volgion {
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
-                        main.pExcType("Thread sleep exception, dev's fault");
+                        Main.pExcType("Thread sleep exception, dev's fault");
                     }
                 }
             }
@@ -124,7 +275,7 @@ public class Volgion {
                 if(hasName) System.out.println("Here is your result, " + fname + ":");
                 System.out.println("Your weight      : " + weight);
                 System.out.println("Your height      : " + height);
-                System.out.printf("Your BMI index : %.1f", bmi);
+                System.out.printf("Your BMI index   : %.1f\n", bmi);
                 System.out.println("\nYou're categorized as:\n" + category);
             }
             static void calcBMI(double w, double h) {
@@ -148,8 +299,7 @@ public class Volgion {
                 }
             }
             static void pWelcome() {
-                main.clear();
-                System.out.println("Welcome to the Volgion BMI Calculator!\n");
+                System.out.println("\nWelcome to the Volgion BMI Calculator!\n");
             }
             static void iName() {
                 System.out.println("\nWhat is your full name? (blank to skip)");
@@ -162,8 +312,15 @@ public class Volgion {
                     try {
                         System.out.println("\nWhat is your weight (kg)?");
                         weight = Double.parseDouble(bmiinput.nextLine());
+                        if(weight > 635) {
+                           System.out.println("I don't think you can be that fat.\n");
+                           valid = false;
+                        } else if(weight < 0.25) {
+                          System.out.println("I don't think even a baby could be that light.\n");
+                          valid = false;  
+                        } 
                     } catch(Exception e) {
-                        main.pExcType("Something is wrong with your weight.");
+                        Main.pExcType("Something is wrong with your weight.");
                         valid = false;
                     }
                 }
@@ -175,15 +332,22 @@ public class Volgion {
                     try {
                         System.out.println("\nWhat is your height (cm)?");
                         height = Double.parseDouble(bmiinput.nextLine());
+                        if(height > 272) {
+                            System.out.println("Even the tallest man in the world, Robert Wadlow, doesn't reach that height.");
+                            valid = false;
+                        } else if(height < 25) {
+                            System.out.println("That's kinda extremely small, what are you huh?");
+                            valid = false;
+                        }
                     } catch(Exception e) {
-                        main.pExcType("Something is wrong with your height.");
+                        Main.pExcType("Something is wrong with your height.");
                         valid = false;
                     }
                 }
             }
         }
 
-        class coffeeShop {
+        class CoffeeShop {
             private static String[] items = {"Americano ", "Latte     ", "Cappuccino", "Espresso  ", "Arabica   ", "Mochaccino", "Tiramisu  ", "Robusta   ", "Liberica  ", "Excelso   ", "Affogato  "};
             private static int[] prices = {21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34};
             private static int[] orders = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -219,7 +383,7 @@ public class Volgion {
                         break;
                     case "ls":
                     case "list":
-                        main.clear();
+                        Main.clear();
                         list();
                         break;
                     case "rst":
@@ -232,15 +396,15 @@ public class Volgion {
                         break;
                     case "quit":
                         pQuit(3);
-                        coffeeShop.end = true;
+                        CoffeeShop.end = true;
                         break;
                     case "help":
-                        main.clear();
+                        Main.clear();
                         help();
                         break;
                     default:
-                        main.clear();
-                        main.pExcType("Command unknown.");
+                        Main.clear();
+                        Main.pExcType("Command unknown.");
                         System.out.println("Type 'help' to display the help menu");
                         break;
                 }
@@ -280,30 +444,30 @@ public class Volgion {
                 }
             }
             static void   help() {
-                System.out.println("\nAvailable commands: \n'menu'      : show the items menu.\n'add'       : add an item and its amount to the order list.\n'remove'    : remove an amount of item from the order list\n'list'      : display your current orders list.\n'reset'     : discard the order list and make a new one.\n'done'      : finish choosing and purchase your order list.\n'quit'      : simply quit the program and goes back to Volgion main menu.\n'help'      : show this help menu.\n");
+                System.out.println("\nAvailable commands: \n'menu'      : show the items menu.\n'add'       : add an item and its amount to the order list.\n'remove'    : remove an amount of item from the order list\n'list'      : display your current orders list.\n'reset'     : discard the order list and make a new one.\n'done'      : finish choosing and purchase your order list.\n'quit'      : simply quit the program and goes back to Volgion Main menu.\n'help'      : show this help menu.\n");
             }
             static void   run() {
                 pWelcome();
                 csrun = true;
                 end = false;
-                while (coffeeShop.csrun) {
-                    coffeeShop.csrun = false;
+                while (CoffeeShop.csrun) {
+                    CoffeeShop.csrun = false;
                     try {
-                        main.hr();
+                        Main.hr();
                         System.out.println("\nEnter your command: ");
                         command(csinput.nextLine());
-                        if(coffeeShop.end == false) {
-                            coffeeShop.csrun = true;
+                        if(CoffeeShop.end == false) {
+                            CoffeeShop.csrun = true;
                         }
                     } catch (Exception e) {
-                        main.pExcType("You're not supposed to see this message.\nIf you do, report with a screenshot here: deffreus (Discord)");
+                        Main.pExcType("You're not supposed to see this message.\nIf you do, report with a screenshot here: deffreus (Discord)");
                         csinput.nextLine();
-                        coffeeShop.csrun = true;
+                        CoffeeShop.csrun = true;
                     }
                 }
             }
             static void   pMenu() {
-                main.clear();
+                Main.clear();
                 System.out.println("\nAvailable items:");
                 System.out.println(" 0 = (Cancel current command)");
                 String space;
@@ -318,7 +482,7 @@ public class Volgion {
                 System.out.println("\n");
             }
             static void   iAdd() {
-                main.clear();
+                Main.clear();
                 pMenu();
                 boolean bindex = true, bcount = true;;
                 int index = 0;
@@ -334,7 +498,7 @@ public class Volgion {
                             bindex = true;
                         }
                     } catch (Exception e) {
-                        main.pExcType("Please enter an integer number between 0 to " + getItemsCount() + " (Inclusive) !");
+                        Main.pExcType("Please enter an integer number between 0 to " + getItemsCount() + " (Inclusive) !");
                         csinput.nextLine();
                         bindex = true;
                     }
@@ -342,7 +506,7 @@ public class Volgion {
                 if(index == 0) {
                     System.out.println("Cancelling adding item...");
                 } else {
-                    System.out.println("Selecting : " + main.nospace(items[index-1]) + " (" + prices[index-1] + "K)");
+                    System.out.println("Selecting : " + Main.nospace(items[index-1]) + " (" + prices[index-1] + "K)");
                     while (bcount) {
                         bcount = false;
                         try {
@@ -354,24 +518,24 @@ public class Volgion {
                                 bcount = true;
                             }
                         } catch (Exception e) {
-                            main.pExcType("Please enter a real integer number!");
+                            Main.pExcType("Please enter a real integer number!");
                             csinput.nextLine();
                             bcount = true;
                             
                         }
                     }
                     if(count == 0) {
-                        main.clear();
+                        Main.clear();
                         System.out.println("Cancelling adding item...");
                     } else {
-                        main.clear();
+                        Main.clear();
                         orders[index-1] += count;
                         System.out.println("Your order list is updated successfully.\n");
                     }
                 }
             }
             static void   iRemove() {
-                main.clear();
+                Main.clear();
                 boolean isEmpty = true;
                 int orderCount = 0, lastIndex = 0;
                 for(int i = 0; i < getOrdersCount(); i++) {
@@ -400,13 +564,13 @@ public class Volgion {
                                     System.out.println("(OUT OF RANGE) Please enter an integer between 0 to " + getItemsCount() + " (Inclusive) !");
                                     bindex = true;
                                 } else if(orders[index-1] == 0) {
-                                    System.out.println(main.nospace(items[index-1]) + " is not on your order list.");
+                                    System.out.println(Main.nospace(items[index-1]) + " is not on your order list.");
                                 }
                             } else {
                                 index = lastIndex;
                             }
                         } catch (Exception e) {
-                            main.pExcType("Please enter an integer between 0 to " + getItemsCount() + " (Inclusive) !");
+                            Main.pExcType("Please enter an integer between 0 to " + getItemsCount() + " (Inclusive) !");
                             csinput.nextLine();
                             bindex = true;
                         }
@@ -415,9 +579,9 @@ public class Volgion {
                         System.out.println("Cancelling removing item...");
                     } else {
                         if(orderCount == 1) {
-                            System.out.println("\nSelecting : " + main.nospace(items[index-1]) + " (" + prices[index-1] + "K)");
+                            System.out.println("\nSelecting : " + Main.nospace(items[index-1]) + " (" + prices[index-1] + "K)");
                         } else {
-                            System.out.println("Selecting : " + main.nospace(items[index-1]) + " (" + prices[index-1] + "K)");
+                            System.out.println("Selecting : " + Main.nospace(items[index-1]) + " (" + prices[index-1] + "K)");
                         }
                         while (bcount) {
                             bcount = false;
@@ -425,7 +589,7 @@ public class Volgion {
                                 if(orderCount != 1) {
                                     System.out.println("\nHow many do you want to remove? (Type '0' to cancel)");
                                 } else {
-                                    System.out.println("\nHow many " + main.nospace(items[index-1]) + " do you want to remove? (Type '0' to cancel)");
+                                    System.out.println("\nHow many " + Main.nospace(items[index-1]) + " do you want to remove? (Type '0' to cancel)");
                                 }
                                 count = csinput.nextLong();
                                 csinput.nextLine();
@@ -434,7 +598,7 @@ public class Volgion {
                                     bcount = true;
                                 }
                             } catch (Exception e) {
-                                main.pExcType("Please enter a non-negative integer number!");
+                                Main.pExcType("Please enter a non-negative integer number!");
                                 csinput.nextLine();
                                 bcount = true;
                                 
@@ -443,24 +607,24 @@ public class Volgion {
                         if(count == 0) {
                             System.out.println("Cancelling removing item...");
                         } else if (count >= orders[index-1]) {
-                            System.out.println("Successfullly removed all " + main.nospace(items[index-1]) + ".");
+                            System.out.println("Successfullly removed all " + Main.nospace(items[index-1]) + ".");
                             orders[index-1] = 0;
                         } else {
-                            System.out.println("Successfully removed " + count + " " + main.nospace(items[index-1]) + ".");
+                            System.out.println("Successfully removed " + count + " " + Main.nospace(items[index-1]) + ".");
                             orders[index-1] -= count;
                         }
                     }
                 }
             }
             static void   resetList() {
-                main.clear();
+                Main.clear();
                 for(int i = 0; i < getOrdersCount(); i++) {
                     orders[i] = 0;
                 }
                 System.out.println("Your order list have been discarded!");
             }
             static void   done() {
-                main.clear();
+                Main.clear();
                 boolean listIsEmpty = true;
                 for(int i = 0; i < getItemsCount(); i++) {
                     if (orders[i] != 0) {
@@ -480,11 +644,11 @@ public class Volgion {
                         case "Ye":
                         case "y":
                             System.out.println("You haven't buy anything for now...\nCome back later!");
-                            coffeeShop.csrun = false;
-                            coffeeShop.end = true;
+                            CoffeeShop.csrun = false;
+                            CoffeeShop.end = true;
                             pQuit(3);
-                            main.hr();
-                            main.hr();
+                            Main.hr();
+                            Main.hr();
                             break;
                         default:
                             break;
@@ -502,10 +666,10 @@ public class Volgion {
                         case "Ye":
                         case "y":
                             System.out.println("Purchase completed!\nEnjoy your coffee!");
-                            coffeeShop.csrun = false;
-                            coffeeShop.end = true;
-                            coffeeShop.resetVar();
-                            coffeeShop.pQuit(5);;
+                            CoffeeShop.csrun = false;
+                            CoffeeShop.end = true;
+                            CoffeeShop.resetVar();
+                            CoffeeShop.pQuit(5);;
                             break;
                         default:
                             System.out.println("Purchase cancelled, going back to listing your order!");
@@ -513,14 +677,14 @@ public class Volgion {
                 }
             }
             static void   pWelcome() {
-                main.clear();
-                main.hr();
+                Main.clear();
+                Main.hr();
                 System.out.println("\nWelcome to the Volgion's Coffee Shop!\n\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)\nWhat will be your order?\n");
                 help();
             }
             static void   resetVar() {
                 for(int i = 0; i < getItemsCount(); i++) {
-                    coffeeShop.orders[i] = 0;
+                    CoffeeShop.orders[i] = 0;
                 }
             }
             static void   pQuit(int duration) {
@@ -535,32 +699,40 @@ public class Volgion {
                 }
             }
         }
+        
         boolean run = true;
         while(run) {
             try {
-                main.clear();
-                main.pbanner();
-                main.pMainMenu();
+                Main.clear();
+                Main.pbanner();
+                Main.pMainMenu();
                 System.out.println("\nSelect the program you want to run: ");
                 String chosenProgram = input.nextLine();
                 switch (chosenProgram) {
                     case "Coffee Shop":
                     case "1":
-                        coffeeShop.run();
+                        CoffeeShop.run();
                         break;
                     case "BMI":
                     case "BMI Calculator":
                     case "2":
                         BMICalculator.run();
                         break;
+                    case "3":
+                        TwoVarCalculator.run();
+                        break;
+                    case "exit":
+                    case "quit":
+                        Main.quit(3);
+                        break;
                 }
             } catch(Exception e) {
-                main.pExcType("Something went wrong. Please report immediately to: deffreus (Discord). Sorry for the inconvenience T-T");
+                Main.pExcType("Something went wrong. Please report immediately to: deffreus (Discord). Sorry for the inconvenience T-T");
                 input.nextLine();
                 try {
                     Thread.sleep(2000);
                 } catch(Exception ee) {
-                    main.pExcType("Thread sleep error.");
+                    Main.pExcType("Thread sleep error.");
                 }
             }
         }
