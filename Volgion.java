@@ -74,6 +74,9 @@ public class Volgion {
                 String res = string.replaceAll("\\s", "");
                 return res;
             }
+            static void pQuit() {
+                System.out.println("\n(Type 'quit' or 'exit' to quit Volgion from this menu)");
+            }
         }
 
         class TwoVarCalculator {
@@ -436,7 +439,7 @@ public class Volgion {
                         net = (int) total;
                     }
                     System.out.println("Discount (15%)             = " + bdiscount);
-                    if((double) net == (int) net) {
+                    if(net == (int) net) {
                         System.out.println("Payment                    = " + (int) net + "K");
                     } else {
                         System.out.printf("Payment                    = %,.2fK\n", net);
@@ -704,6 +707,7 @@ public class Volgion {
         while(run) {
             try {
                 Main.clear();
+                Main.pQuit();
                 Main.pbanner();
                 Main.pMainMenu();
                 System.out.println("\nSelect the program you want to run: ");
