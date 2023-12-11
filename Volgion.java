@@ -220,7 +220,7 @@ public class Volgion {
             static Scanner bmiinput = new Scanner(System.in);
             static double weight, height, bmi;
             
-            // method buat jalanin bmi kalkulatornya
+            // Method buat jalanin bmi kalkulatornya
             static void run() {
                 bmirun = true;
                 end = false;
@@ -371,7 +371,7 @@ public class Volgion {
                 return orders.length;
             }
             
-            // methods
+            // Methods
             static void   command(String command) {
                 switch (command) {
                     case "menu":
