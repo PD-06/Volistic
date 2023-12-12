@@ -5,8 +5,14 @@ import java.lang.Math;
 /*
  * Hello friends!
  * Here, you can change the code however you want,
+ * Lines that start with '#' is a command, press Ccommand + Shift + P adn then type the following command!
+ * 
  * If you want to publish the changes you made:
- * Commit and Push
+ * # Git: Commit
+ * # Git: Push
+ * 
+ * Also, don't forget to Fetch frequently
+ * # Git: Fetch
  */
 
 public class Volgion {
