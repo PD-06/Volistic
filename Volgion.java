@@ -707,13 +707,14 @@ public class Volgion {
             static void run() {
                 Scanner tristansc = new Scanner(System.in);            
                 System.out.println("Selemat datang di programmnya Tristan!\nKamu tidur jam brp?\n(Format = $JAM $MENIT):");
-                int jam_tidur = tristansc.nextInt(), int menit_tidur = tristansc.nextInt(); tristansc.nextLine();
+                int jam_tidur = tristansc.nextInt(); int menit_tidur = tristansc.nextInt(); tristansc.nextLine();
                 System.out.println("Kamu bangun jam brp?\n(Format = $JAM $MENIT):");
-                int jam_bangun = tristansc.nextInt(), int menit_bangun = tristansc.nextInt(); tristansc.nextLine();
+                int jam_bangun = tristansc.nextInt(); int menit_bangun = tristansc.nextInt(); tristansc.nextLine();
                 int durasiA = (24*60) - (jam_tidur*60+menit_tidur);
                 int durasiB = jam_bangun*60+menit_bangun;
                 int durasiTot = durasiA + durasiB;
                 System.out.println("\nKamu tidur " + (durasiTot/60) + " jam, " + (durasiTot%60) + " menit");
+                tristansc.close();
                 Main.quit(5);
             }
         }
