@@ -886,8 +886,8 @@ public class Volgion {
         while (run) {
             try {
                 Main.clear();
-                Main.pQuit();
                 Main.pbanner();
+                Main.pQuit();
                 Main.pMainMenu();
                 System.out.println("\nSelect the program you want to run: ");
                 String chosenProgram = input.nextLine();
