@@ -2,6 +2,12 @@ import java.util.Scanner;
 import java.lang.Math;
 
 // Let start over again:
+/*
+ * Hello friends!
+ * Here, you can change the code however you want,
+ * If you want to publish the changes you made:
+ * Commit and Push
+ */
 
 public class Volgion {
     public static void main(String[ ] args) {
