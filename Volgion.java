@@ -18,8 +18,8 @@ public class Volgion {
         Scanner input = new Scanner(System.in);
         class Main {
             private static String[][] programs = {
-                    { "Coffee Shop", "BMI Calculator (NEW)", "Two Variable Calculator (BETA)" },
-                    { "1.0", "0.3", "0.1" } };
+                    { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (BETA)", "Tristan's Sleep Duration Calculator" },
+                    { "1.0", "1.0", "0.1", "0.2" } };
 
             // private static String[][] contributors = {{"Muhammad Alfin Azza Pujaar"}};
             static void quit(int second) {
@@ -72,7 +72,7 @@ public class Volgion {
                         "  \\ V /   | |_| | | |___  | |_| |  | |  | |_| | | |\\  |\n" + //
                         "   \\_/     \\___/  |_____|  \\____| |___|  \\___/  |_| \\_|\n" + //
                         "");
-                System.out.println("\nV1.0.2");
+                System.out.println("\nV1.0.4");
                 System.out
                         .println("\nYou can contribute to this project here: https://github.com/DeffreusTheda/ComSci");
                 System.out.println(
@@ -83,7 +83,7 @@ public class Volgion {
             static void pMainMenu() {
                 System.out.println("\nPrograms menu:");
                 for (int i = 0; i < getProgramsCount(); i++) {
-                    System.out.println((i + 1) + " = " + getProgramsName(i));
+                    System.out.println((i + 1) + " = " + getProgramsName(i) + " (V" + programs[1][i] + ")");
                 }
             }
 
@@ -905,6 +905,8 @@ public class Volgion {
                         TwoVarCalculator.run();
                         break;
                     case "4":
+                    case "Tristan":
+                    case "Tristan's Sleep Duration Calculator":
                         Tristan.run();
                         break;
                     case "exit":
