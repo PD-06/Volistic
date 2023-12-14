@@ -35,6 +35,7 @@ public class Volgion {
                 { "Tristan"        , "Deffreus Theda" }, // Sleep Duration Calculator
                 { "Anton"          , "Deffreus Theda" }, // Morse Code Translator
             };
+
             static void quit(int second) {
                 System.out.println("\nQuitting in:");
                 for (int i = second; i > 0; i--) {
@@ -48,36 +49,19 @@ public class Volgion {
                 Main.clear();
                 System.exit(1);
             }
-
             public static void clear() {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
             }
-
             static int getProgramsCount() {
                 return programs[0].length;
             }
-
             static void hr() {
                 System.out.println("================================================================================");
             }
-
-            /*
-             * static void pContributors(int progId) {
-             * String noun = "";
-             * if(contributors[progId].length > 1) {
-             * noun = "s";
-             * }
-             * System.out.println(programs[progId] + " awesome contributor" + noun + " : ");
-             * for(int i = 0; i < contributors[progId].length; i++) {
-             * System.err.println(contributors[progId][i]);
-             * }
-             * }
-             */
             static String getProgramsName(int index) {
                 return programs[0][index];
             }
-
             static void pbanner() {
                 System.out.printf(ansiColor.red + "__     __   ___    _        ____   ___    ___    _   _ \n" + //
                         "\\ \\   / /  / _ \\  | |      / ___| |_ _|  / _ \\  | \\ | |\n" + //
@@ -85,14 +69,13 @@ public class Volgion {
                         "  \\ V /   | |_| | | |___  | |_| |  | |  | |_| | | |\\  |\n" + //
                         "   \\_/     \\___/  |_____|  \\____| |___|  \\___/  |_| \\_|\n" + //
                         "");
-                System.out.println("\nV1.0.4");
+                System.out.println("\nV1.1.0");
                 System.out
                         .println("\nYou can contribute to this project here: https://github.com/DeffreusTheda/ComSci");
                 System.out.println(
                         "Please report any bug here:\n    Email      : muhammad.alfin@praditadirgantara.sch.id\n    Discord    : deffreus (recommended)\n    WA         : +62 895-8077-31515"
                                 + ansiColor.reset);
             }
-
             static void pMainMenu() {
                 System.out.println("\nPrograms menu:");
                 for (int i = 0; i < getProgramsCount(); i++) {
@@ -107,21 +90,17 @@ public class Volgion {
                             if(j < ContributorCount-2) {System.out.print(", ");}
                             if(j == ContributorCount-2) {System.out.print(", & ");}
                         }
-                    }
-                    System.out.print("\n");
+                    } System.out.print("\n");
                 }
             }
-
             static void pExcType(String message) {
                 System.out
                         .println(ansiColor.red + "Main.pExcType: (ERROR: INVALID INPUT): " + message + ansiColor.reset);
             }
-
             static String nospace(String string) {
                 String res = string.replaceAll("\\s", "");
                 return res;
             }
-
             static void pQuit() {
                 System.out.println("\n(Type 'quit' or 'exit' to quit Volgion from this menu)");
             }
@@ -904,7 +883,7 @@ public class Volgion {
         class Anton { // mau bikin morse code translator katanya
             static Scanner BAPAKMU = new Scanner(System.in);
             static String dictionary[][] = {{"A" ,"B"   ,"C"   ,"D"  ,"E","F"   ,"G"  ,"H"   ,"I" ,"J"   ,"K"  ,"L"   ,"M" ,"N" ,"O"  ,"P"   ,"Q"   ,"R"  ,"S"  ,"T","U"  ,"V"   ,"W"  ,"X"   ,"Y"   ,"Z"   }, 
-                                        {".-","_...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."} };
+                                            {".-","_...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."} };
             static boolean isEnded, isRunning;
             static String input, result[];
             static int mode;
@@ -950,12 +929,10 @@ public class Volgion {
                 System.out.println("\nType what you want to be translated:");
                 input = (BAPAKMU.nextLine()).toUpperCase();
             }
-            static void LetterToMorse() {
-                
-            }
-            static void MorseToLetter() {}
-            static void pResult() {}
-            static void iQuit() {}
+            static void LetterToMorse() {} // TODO: Anton.LetterToMorse()
+            static void MorseToLetter() {} // TODO: Anton.MorseToLetter()
+            static void pResult() {} // TODO: Anton.pResult()
+            static void iQuit() {} // TODO: Anton.iQuit()
         }
 
         boolean run = true;
