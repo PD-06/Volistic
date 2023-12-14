@@ -25,10 +25,16 @@ public class Volgion {
         Scanner input = new Scanner(System.in);
         class Main {
             private static String[][] programs = {
-                    { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (BETA)", "Tristan's Sleep Duration Calculator", "Anton's Morse Code Translator (EXPERIMENTAL)" },
-                    { "1.0", "1.0.1", "0.1", "0.2", "0.1" } };
-
-            // private static String[][] contributors = {{"Muhammad Alfin Azza Pujaar"}};
+                { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (BETA)", "Sleep Duration Calculator", "Morse Code Translator (EXPERIMENTAL)" },
+                { "1.0"        , "1.0.1"         , "0.1"                           , "0.2"                      , "0.1"                                  } };
+            private static String[][] contributors = {
+            //  | Main Contributor | Others           |
+                { "Deffreus Theda"                    }, // Coffee Shop
+                { "Deffreus Theda"                    }, // BMI Calculator
+                { "Deffreus Theda"                    }, // Two Variable Calculator
+                { "Tristan"        , "Deffreus Theda" }, // Sleep Duration Calculator
+                { "Anton"          , "Deffreus Theda" }, // Morse Code Translator
+            };
             static void quit(int second) {
                 System.out.println("\nQuitting in:");
                 for (int i = second; i > 0; i--) {
@@ -90,7 +96,19 @@ public class Volgion {
             static void pMainMenu() {
                 System.out.println("\nPrograms menu:");
                 for (int i = 0; i < getProgramsCount(); i++) {
-                    System.out.println((i + 1) + " = " + getProgramsName(i) + " (V" + programs[1][i] + ")");
+                    System.out.print((i + 1) + " = " + getProgramsName(i) + " (V" + programs[1][i] + ")" + " by ");
+                    int ContributorCount = contributors[i].length;
+                    // yang ini gausah dipahamin gpp, aku juga bingung
+                    for(int j = 0; j < ContributorCount; j++) {
+                        System.out.print(contributors[i][j]);
+                        if(ContributorCount == 2) {
+                            if(j == ContributorCount-2) {System.out.print(" & ");}
+                        } else { 
+                            if(j < ContributorCount-2) {System.out.print(", ");}
+                            if(j == ContributorCount-2) {System.out.print(", & ");}
+                        }
+                    }
+                    System.out.print("\n");
                 }
             }
 
