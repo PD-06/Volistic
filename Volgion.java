@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.lang.Math;
+import java.lang.String;
 
 // Let start over again:
 /*
@@ -24,8 +25,8 @@ public class Volgion {
         Scanner input = new Scanner(System.in);
         class Main {
             private static String[][] programs = {
-                    { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (BETA)", "Tristan's Sleep Duration Calculator" },
-                    { "1.0", "1.0", "0.1", "0.2" } };
+                    { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (BETA)", "Tristan's Sleep Duration Calculator", "Anton's Morse Code Translator (EXPERIMENTAL)" },
+                    { "1.0", "1.0.1", "0.1", "0.2", "0.1" } };
 
             // private static String[][] contributors = {{"Muhammad Alfin Azza Pujaar"}};
             static void quit(int second) {
@@ -253,7 +254,7 @@ public class Volgion {
         class BMICalculator {
             // Deklarasi variabel yang akan dipakai.
             static boolean bmirun, end, hasName;
-            static String fname, category;
+            static String fname, category; // fname -> "Full Name"
             static Scanner bmiinput = new Scanner(System.in);
             static double weight, height, bmi;
 
@@ -261,46 +262,46 @@ public class Volgion {
             static void run() {
                 bmirun = true;
                 end = false;
+                // Biar bisa ngulang-ulang kalkulasi BMI
                 while (bmirun) {
                     bmirun = false;
+                    // 'try': kalau ada error (Exception) di sebuah line of code, langsung lompat ke 'catch'
                     try {
-                        Main.clear();
-                        Main.hr();
+                        Main.clear(); // clear terminal
+                        Main.hr(); // print horizontal line
+                        // perhatiin penamaan methodnya: pWelcome -> "Print Welcome", iName -> "Input Name"
                         pWelcome();
                         Main.hr();
                         iName();
-                        if (fname != "")
+                        if (fname != "") // kalau namanya nggak kosong
                             hasName = true;
-                        if (hasName)
-                            System.out.println("\nHello " + fname + "!");
+                        if (hasName) {System.out.println("\nHello " + fname + "!");} // kamu bisa lo nulis if begini
                         iWeight();
                         iHeight();
-                        calcBMI(weight, height);
+                        calcBMI(weight, height); // method ini pakai 'parameter': weight & height, buat dipakai di method 'calcBMI' nya
                         pResult();
                         iQuit();
-                        if (end == false) {
-                            bmirun = true;
-                        }
-                    } catch (Exception e) {
+                        if (end == false) {bmirun = true;} // kamu bisa lo nulis if begini
+                    } catch (Exception e) { // ini catch!
                         Main.pExcType(
-                                "You're not supposed to see this message.\nIf you do, report with a screenshot here: deffreus (Discord)");
-                        bmirun = true;
+                                "You're not supposed to see this message.\nIf you do, report with a screenshot and how to replicate it here: deffreus (Discord)");
+                        bmirun = true; // biar ngulang
                     }
                 }
             }
-
+            // timer buat quitting aja
             static void pQuit(int intSecond) {
                 System.out.println("\nQuitting in:");
                 for (int i = intSecond; i > 0; i--) {
                     System.out.println(i + "...");
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(1000); // wait for 1000 milisecond = 1 second
                     } catch (Exception e) {
                         Main.pExcType("Thread sleep exception, dev's fault");
                     }
                 }
             }
-
+            // jujur ini kurang sih:
             static void iQuit() {
                 System.out.println("\nDo you want to calculate again? (Y/n):");
                 String option = bmiinput.nextLine();
@@ -315,9 +316,8 @@ public class Volgion {
                         break;
                 }
             }
-
             static void pResult() {
-                System.out.println("\n");
+                System.out.println("\n"); // biar tetep misahin output walau `hasName == false`
                 if (hasName)
                     System.out.println("Here is your result, " + fname + ":");
                 System.out.println("Your weight      : " + weight);
@@ -325,9 +325,8 @@ public class Volgion {
                 System.out.printf("Your BMI index   : %.1f\n", bmi);
                 System.out.println("\nYou're categorized as:\n" + category);
             }
-
             static void calcBMI(double w, double h) {
-                bmi = w / (h * h * 0.0001);
+                bmi = w / (h * h * 0.0001); // pake 0.0001 karena unit nya centimeter
                 if (bmi < 16) {
                     category = "Underweight (Severe thinness)";
                 } else if (bmi <= 16.9) {
@@ -346,19 +345,16 @@ public class Volgion {
                     category = "Obese (Class III)";
                 }
             }
-
             static void pWelcome() {
                 System.out.println("\nWelcome to the Volgion BMI Calculator!\n");
             }
-
             static void iName() {
                 System.out.println("\nWhat is your full name? (blank to skip)");
                 fname = bmiinput.nextLine();
             }
-
             static void iWeight() {
                 boolean valid = false;
-                while (!valid) {
+                while (!valid) { // minta terus input sampai input tersebut valid! (angka doang)
                     valid = true;
                     try {
                         System.out.println("\nWhat is your weight (kg)?");
@@ -376,10 +372,9 @@ public class Volgion {
                     }
                 }
             }
-
             static void iHeight() {
                 boolean valid = false;
-                while (!valid) {
+                while (!valid) { // mirip yang di `iWeight()` (angka doang)
                     valid = true;
                     try {
                         System.out.println("\nWhat is your height (cm)?");
@@ -888,6 +883,63 @@ public class Volgion {
             }
         }
 
+        class Anton { // mau bikin morse code translator katanya
+            static Scanner BAPAKMU = new Scanner(System.in);
+            static String dictionary[][] = {{"A" ,"B"   ,"C"   ,"D"  ,"E","F"   ,"G"  ,"H"   ,"I" ,"J"   ,"K"  ,"L"   ,"M" ,"N" ,"O"  ,"P"   ,"Q"   ,"R"  ,"S"  ,"T","U"  ,"V"   ,"W"  ,"X"   ,"Y"   ,"Z"   }, 
+                                        {".-","_...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."} };
+            static boolean isEnded, isRunning;
+            static String input, result[];
+            static int mode;
+            static void run() {;
+                Main.clear();
+                pWelcome();
+                iMode();
+                iInput();
+                if(mode == 1) {LetterToMorse();}
+                else if(mode == 2) {MorseToLetter();};
+                pResult();
+                iQuit();
+            }
+            static void pWelcome() {
+                Main.hr();
+                System.out.println("\nWelcome to Anton's Morse Code Translator!");
+                Main.hr();
+            }
+            static void iMode() {
+                boolean inputIsValid = false;
+                while(!inputIsValid) {
+                    System.out.println("\nSelect mode:\n1 = Letters to Morse Code\n2 = Morse Code to Letters");
+                    try {
+                        mode = Integer.parseInt(BAPAKMU.nextLine());
+                        switch(mode) {
+                            case 1:
+                                LetterToMorse();
+                                inputIsValid = true;
+                                break;
+                            case 2:
+                                MorseToLetter();
+                                inputIsValid = true;
+                                break;
+                        }
+                    } 
+                    catch(Exception e) {
+                        Main.pExcType("(INVALID INPUT): Please enter either '1' or '2'!");
+                        if(BAPAKMU.hasNextLine()) {BAPAKMU.nextLine();}
+                    }
+                }
+            }
+            static void iInput() {
+                System.out.println("\nType what you want to be translated:");
+                input = (BAPAKMU.nextLine()).toUpperCase();
+            }
+            static void LetterToMorse() {
+                
+            }
+            static void MorseToLetter() {}
+            static void pResult() {}
+            static void iQuit() {}
+        }
+
         boolean run = true;
         while (run) {
             try {
@@ -914,6 +966,11 @@ public class Volgion {
                     case "Tristan":
                     case "Tristan's Sleep Duration Calculator":
                         Tristan.run();
+                        break;
+                    case "5":
+                    case "Anton":
+                    case "Morse Code":
+                        Anton.run();
                         break;
                     case "exit":
                     case "quit":
