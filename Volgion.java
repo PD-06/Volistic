@@ -25,8 +25,8 @@ public class Volgion {
         Scanner input = new Scanner(System.in);
         class Main {
             private static String[][] programs = {
-                { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (BETA)", "Sleep Duration Calculator", "Morse Code Translator (EXPERIMENTAL)" },
-                { "1.0"        , "1.0.1"         , "0.1"                           , "0.2"                      , "0.1"                                  } };
+                { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (BETA)", "Morse Code Translator (EXPERIMENTAL)" },
+                { "1.0"        , "1.0.1"         , "1.0"                          , "0.2"                             , "0.1"                                  } };
             private static String[][] contributors = {
             //  | Main Contributor | Others           |
                 { "Deffreus Theda"                    }, // Coffee Shop
@@ -108,9 +108,10 @@ public class Volgion {
 
         class TwoVarCalculator {
             static Scanner tvcinput = new Scanner(System.in);
-            static boolean tvcIsRunning, tvcIsEnded;
-            static String operator;
+            static boolean tvcIsRunning, tvcIsEnded, operatorIsValid;
+            private static String operator = "TRmSvJWbtu9FXgMBdtfEOt3e0e90Th2Z8u6SVZ0jB0aU4QSh0n";
             static double A, B;
+            static int op;
 
             static void run() {
                 tvcIsRunning = true;
@@ -123,19 +124,26 @@ public class Volgion {
                         pWelcome();
                         Main.hr();
                         iOperator();
-                        iA();
-                        iB();
-                        pRes();
-                        iQuit();
-                        if (tvcIsEnded == false) {
-                            tvcIsRunning = true;
-                        }
+                        if(!tvcIsEnded) {iA(); iB(); pRes(); iQuit();}
+                        if(!tvcIsEnded) {tvcIsRunning = true;}
                     } catch (Exception e) {
                         Main.pExcType(ansiColor.red + "CALCULATOR ERROR." + ansiColor.reset);
                     }
                 }
+                pQuit(3);
             }
-
+            static void pQuit(int seconds) {
+                System.out.println("\nThank you so much for using the Volgion Two Variable Calculator!! :D");
+                System.out.println("\nQuitting in:");
+                for (int i = seconds; i > 0; i--) {
+                    System.out.println(i + "...");
+                    try {
+                        Thread.sleep(1000); // wait for 1000 milisecond = 1 second
+                    } catch (Exception e) {
+                        Main.pExcType("Thread sleep exception, dev's fault");
+                    }
+                } 
+            }
             static void iQuit() {
                 String opt;
                 boolean valid = false;
@@ -161,90 +169,126 @@ public class Volgion {
                             tvcIsEnded = true;
                             break;
                         default:
-                            System.out.println("Invalid input.");
+                            Main.pExcType("Please enter yes or no!");
                     }
                 }
             }
-
             static void pRes() {
-                System.out.println("\nThe result of the calculation is: " + calc(operator));
+                double resdouble = calc(operator);
+                int resint = (int) calc(operator);
+                if(resdouble == resint) {System.out.println("\nThe result of the calculation is: " + resint);}
+                else {System.out.println("\nThe result of the calculation is: " + resdouble);}
             }
-
             static double calc(String val) {
                 double result = 1;
+                operatorIsValid = true;
                 switch (val) {
                     case "1":
                     case "+":
+                        op = 1;
                         result = A + B;
                         break;
                     case "2":
                     case "-":
+                        op = 2;
                         result = A - B;
                         break;
                     case "3":
                     case "x":
                     case "*":
+                        op = 3;
                         result = A * B;
                         break;
                     case "4":
                     case "/":
+                        op = 4;
                         result = A / B;
                         break;
                     case "5":
                     case "^":
                     case "**":
+                        op = 5;
                         for (int i = 0; i < B; i++)
                             result *= A;
                         break;
                     case "√":
                     case "6":
+                        op = 6;
                         double exponent = 1 / B;
                         result = Math.pow(A, exponent);
                         break;
                     case "7":
                     case "%":
+                        op = 7;
                         result = A % B;
                         break;
+                    case "quit":
+                    case "exit":   
+                        tvcIsEnded = true;
+                        break;
                     default:
+                        operator = "TRmSvJWbtu9FXgMBdtfEOt3e0e90Th2Z8u6SVZ0jB0aU4QSh0n";
+                        operatorIsValid = false;
                         break;
                 }
                 return result;
             }
-
             static void iB() {
-                System.out.println("\nPlease enter a value for the variable B: ");
-                B = Double.parseDouble(tvcinput.nextLine());
-            }
-
-            static void iA() {
-                System.out.println("\nPlease enter a value for the variable A: ");
-                A = Double.parseDouble(tvcinput.nextLine());
-            }
-
-            static void iOperator() {
-                System.out.println("\nWhat type of calculation you want?\n");
-                System.out.println("1 (+) = Increase A by B");
-                System.out.println("2 (-) = Substract B from A");
-                System.out.println("3 (x) = Multiply A and B");
-                System.out.println("4 (/) = Divide A by B");
-                System.out.println("5 (^) = A to the power of B");
-                System.out.println("6 (√) = 'B' root of A");
-                System.out.println("7 (%) = A modulo B");
-                boolean keepAsking = true;
-                while (keepAsking) {
-                    System.out.println("\n(Enter the index number or symbol):");
+                boolean BIsValid = false;
+                while(!BIsValid) {
                     try {
-                        operator = Main.nospace(tvcinput.nextLine());
-                        keepAsking = false;
-                    } catch (Exception e) {
-                        Main.pExcType("Please input a number!");
-                        keepAsking = true;
+                        System.out.println("\nPlease enter a value for the variable B: ");
+                        B = Double.parseDouble(tvcinput.nextLine());
+                        BIsValid = true;
+                    } catch(Exception e) {
+                        if(!tvcIsEnded) {Main.pExcType("Please enter a number for variable B!");}
                     }
                 }
             }
-
+            static void iA() {
+                boolean AIsValid = false;
+                while(!AIsValid) {
+                    try {
+                        System.out.println("\nPlease enter a value for the variable A: ");
+                        A = Double.parseDouble(tvcinput.nextLine());
+                        AIsValid = true;
+                    } catch(Exception e) {
+                        if(!tvcIsEnded) {Main.pExcType("Please enter a number for variable B!");}
+                    }
+                }
+            }
+            static void iOperator() {
+                String calculations[][] = {
+                    {"Symbol","Description"        ,"Name"          ,"Format" },
+                    {"+"     ,"Increase A by B"    ,"Incrementation","(A + B)"},
+                    {"-"     ,"Substract B from A" ,"Substraction"  ,"(A - B)"}, 
+                    {"x"     ,"Multiply A and B"   ,"Multiplication","(A x B)"},
+                    {"/"     ,"Divide A by B"      ,"Division"      ,"(A / B)"},
+                    {"^"     ,"A to the Power of B","Exponentiation","(A^B)"  },
+                    {"√"     ,"'B' root of A"      ,"Nth Root"      ,"(B√ A)" },
+                    {"%"     ,"A modulo B"         ,"Modulus"       ,"(A % B)"}
+                };
+                System.out.println("\nWhat type of calculation you want?\n");
+                for(int i = 1; i < calculations.length; i++) {System.out.printf("%s (%s) = %s\n", i, calculations[i][0], calculations[i][1]);}
+                boolean keepAsking = true;
+                while (keepAsking) {
+                    keepAsking = true;
+                    System.out.println("\n(Enter the index number or symbol):");
+                    try {
+                        operator = Main.nospace(tvcinput.nextLine());
+                        calc(operator);
+                        if(operatorIsValid) {keepAsking = false;}
+                        else {Main.pExcType("Please enter the index number or symbol above!");}
+                    } catch (Exception e) {
+                        Main.pExcType("Please input a number or symbol!");
+                        keepAsking = true;
+                    }
+                }
+                if(!tvcIsEnded) {System.out.println("Selecting: " + calculations[op][2] + "... " + calculations[op][3]);}
+            }
             static void pWelcome() {
-                System.out.println("\nWelcome to the Volgion's Two Variable Calculator!\n");
+                System.out.println("\nWelcome to the Volgion's Two Variable Calculator!");
+                System.out.println("(Enter 'quit' or 'exit' to exit)\n");
             }
         }
 
@@ -905,7 +949,7 @@ public class Volgion {
             static void iMode() {
                 boolean inputIsValid = false;
                 while(!inputIsValid) {
-                    System.out.println("\nSelect mode:\n1 = Letters to Morse Code\n2 = Morse Code to Letters");
+                    System.out.println("\nSelect mode:\n1 = Letters --> Morse Code\n2 = Morse Code --> Letters");
                     try {
                         mode = Integer.parseInt(BAPAKMU.nextLine());
                         switch(mode) {
@@ -920,7 +964,7 @@ public class Volgion {
                         }
                     } 
                     catch(Exception e) {
-                        Main.pExcType("(INVALID INPUT): Please enter either '1' or '2'!");
+                        Main.pExcType("Please enter either '1' or '2'!");
                         if(BAPAKMU.hasNextLine()) {BAPAKMU.nextLine();}
                     }
                 }
