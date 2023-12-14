@@ -253,7 +253,7 @@ public class Volgion {
                         A = Double.parseDouble(tvcinput.nextLine());
                         AIsValid = true;
                     } catch(Exception e) {
-                        if(!tvcIsEnded) {Main.pExcType("Please enter a number for variable B!");}
+                        if(!tvcIsEnded) {Main.pExcType("Please enter a number for variable A!");}
                     }
                 }
             }
