@@ -1,16 +1,29 @@
+// Comments glossary (Abbreviation):
+/* example: define oop orang-orang proyek
+ * define px pixel
+ */
+
 import javax.swing.*;
 
 public class VolgionGUI {
+    JFrame frame; // Declare `frame`
+
+    VolgionGUI() {
+        frame = new JFrame(); // Create an instance of JFrame; initialize `frame`
+
+        JButton button = new JButton("I'm a button!"); // Create an istance of of JButton; declare & initialize
+                                                       // `button`
+        button.setBounds(100, 50, 100, 50); // Set respectively: x axis in px from upper-right corner, y axis in px
+                                            // from upper-right corner, button's width, and button's height
+
+        frame.add(button); // Add `button` (a JButton) to `frame` (a JFrame)
+
+        frame.setSize(300, 180); // Widht, height: include window title bar (around 30px)
+        frame.setLayout(null); // Use no layout manager
+        frame.setVisible(true); // Make the frame visible; default is false, I think
+    }
+
     public static void main(String[] args) {
-        JFrame jFrame = new JFrame(); // Create an instance of JFrame
-
-        JButton jButton = new JButton("Hello, World!"); // Create an instance of JButton
-        jButton.setBounds(100, 50, 100, 50); // x axis, y axis, width, height
-
-        jFrame.add(jButton); // Adding a button to jFrame
-
-        jFrame.setSize(300, 180); // Widht, height: include window title bar (around 30px)
-        jFrame.setLayout(null); // Use no layout manager
-        jFrame.setVisible(true); // Make the frame visible
+        new VolgionGUI();
     }
 }
