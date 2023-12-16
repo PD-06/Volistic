@@ -104,6 +104,12 @@ public class Volgion {
             static void pQuit() {
                 System.out.println("\n(Type 'quit' or 'exit' to quit Volgion from this menu)");
             }
+            static String nice(double valval) {
+                int valint = (int) valval; String res = "";
+                if(valint == valval) {res = Integer.toString(valint);}
+                else {res = Double.toString(valval);}
+                return res;
+            }
         }
 
         class TwoVarCalculator {
@@ -361,8 +367,8 @@ public class Volgion {
                 System.out.println("\n"); // biar tetep misahin output walau `hasName == false`
                 if (hasName)
                     System.out.println("Here is your result, " + fname + ":");
-                System.out.println("Your weight      : " + weight);
-                System.out.println("Your height      : " + height);
+                System.out.println("Your weight      : " + Main.nice(weight) + " kg");
+                System.out.println("Your height      : " + Main.nice(height) + " cm");
                 System.out.printf("Your BMI index   : %.1f\n", bmi);
                 System.out.println("\nYou're categorized as:\n" + category);
             }
