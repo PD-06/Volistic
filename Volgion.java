@@ -25,8 +25,8 @@ public class Volgion {
         Scanner input = new Scanner(System.in);
         class Main {
             private static String[][] programs = {
-                { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (BETA)", "Morse Code Translator (EXPERIMENTAL)" },
-                { "1.0"        , "1.0.1"         , "1.0"                          , "0.2"                             , "0.1"                                  } };
+                { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (NEW)", "Morse Code Translator (EXPERIMENTAL)" },
+                { "1.0"        , "1.0.1"         , "1.0"                          , "1.0"                             , "0.1"                                  } };
             private static String[][] contributors = {
             //  | Main Contributor | Others           |
                 { "Deffreus Theda"                    }, // Coffee Shop
@@ -69,9 +69,9 @@ public class Volgion {
                         "  \\ V /   | |_| | | |___  | |_| |  | |  | |_| | | |\\  |\n" + //
                         "   \\_/     \\___/  |_____|  \\____| |___|  \\___/  |_| \\_|\n" + //
                         "");
-                System.out.println("\nV1.1.0");
+                System.out.println("\n -- Version 1.1.1 -- ");
                 System.out
-                        .println("\nYou can contribute to this project here: https://github.com/DeffreusTheda/ComSci");
+                        .println("\nYou can contribute to this project here: https://github.com/DeffreusTheda/Volgion");
                 System.out.println(
                         "Please report any bug here:\n    Email      : muhammad.alfin@praditadirgantara.sch.id\n    Discord    : deffreus (recommended)\n    WA         : +62 895-8077-31515"
                                 + ansiColor.reset);
@@ -823,7 +823,7 @@ public class Volgion {
         class Tristan {
             static Scanner tristaninput = new Scanner(System.in);
             static boolean tristanIsRunning, tristanIsEnded;
-            static int jam_tidur, menit_tidur, jam_bangun, menit_bangun, durasi_kiri, durasi_kanan;
+            static int jam_tidur, menit_tidur, jam_bangun, menit_bangun;
 
             static void run() {
                 tristanIsRunning = true;
@@ -847,7 +847,17 @@ public class Volgion {
                     }
                 }
             }
-
+            static void pQuit(int second) {
+                System.out.println("\nQuitting in:");
+                for(int i = second; i > 0; i--) {
+                    System.out.println(i + "...");
+                    try {
+                        Thread.sleep(1000);
+                    } catch(Exception e) {
+                        Main.pExcType("Thread sleep exception! Dev's fault, not yours!");
+                    }
+                }
+            }
             static void iQuit() {
                 String opt;
                 boolean valid = false;
@@ -873,54 +883,80 @@ public class Volgion {
                             tristanIsEnded = true;
                             break;
                         default:
-                            System.out.println("Invalid input.");
+                            System.out.println("Invalid input!");
                     }
                 }
+                System.out.println("\nThank you for using the Sleep Duration Calculator!! :D");
+                pQuit(3);
             }
-
             static void pRes() {
-                durasi_kiri = (24 * 60) - (jam_tidur * 60 + menit_tidur);
-                durasi_kanan = jam_bangun * 60 + menit_bangun;
-                int durasi_total = durasi_kanan + durasi_kiri;
-                System.out.println("\nThe duration of your sleep is: " + durasi_total / 60 + " hours, and "
-                        + durasi_total % 60 + " minutes!");
-            }
+                // kalkulasi durasi tidur:
+                int tidur = jam_tidur*60+menit_tidur; int bangun = jam_bangun*60+menit_bangun;
+                if(tidur > bangun) {tidur -= (24*60);}
+                int hours = (bangun-tidur)/60; int minutes = (bangun-tidur)%60;
 
+                // output formatting!
+                // ketika tidur sama dengan bangun:
+                if(hours+minutes == 0) {System.out.printf("\nYou sleep in less than a minute or what? :O\n");}
+                // ketika tidur dibawah satu jam:
+                else if(hours == 0 && minutes != 0) {
+                    if(minutes == 1) {System.out.printf("\nYou've slept for a minute! XD\n");}
+                    else {System.out.printf("\nYou've slept for %d minutes! :v\n", minutes);}
+                }
+                // ketika tidur tepat N jam:
+                else if(minutes == 0 && hours != 0) {
+                    if(hours == 1) System.out.printf("\nYou've slept for an hour! :p\n");
+                    else {System.out.printf("\nYou've slept for %d hours! :>\n", hours);}
+                } 
+                // output format jam dan menit:
+                else {
+                    if(hours == 1 && minutes == 1) {System.out.printf("\nYou've slept for an hour and a minute! o_o\n");}
+                    else if(hours == 1) {System.out.printf("\nYou've slept for an hours and %d minutes! :)\n", minutes);}
+                    else if(minutes == 1) {System.out.printf("\nYou've slept for %d hours and a minute! c:\n", hours);}
+                    else System.out.printf("\nYou slept for " + hours + " hours and " + minutes + " minutes! :D\n");
+                }
+            }
             static void iJamBangun() {
                 boolean inputIsValid = false;
                 while (!inputIsValid) {
                     try {
-                        System.out.println("\nAt what time do you usually wakr up? (Format = $HOUR $MINUTES): ");
+                        System.out.println("\nAt what time did you wake up? (Example = 03 50): ");
                         jam_bangun = tristaninput.nextInt();
                         menit_bangun = tristaninput.nextInt();
                         tristaninput.nextLine();
-                        inputIsValid = true;
+                        // check validity:
+                        if((jam_bangun >= 24 || jam_bangun < 0) || (menit_bangun < 0 || menit_bangun >= 60)) {
+                            inputIsValid = false; Main.pExcType("That's not a valid time!");
+                        } else {inputIsValid = true;}
                     } catch (Exception e) {
                         Main.pExcType("Please enter the hour and minutes in a valid format: $HOUR $MINUTES");
                         tristaninput.nextLine();
                     }
                 }
             }
-
             static void iJamTidur() {
                 boolean inputIsValid = false;
                 while (!inputIsValid) {
                     try {
-                        System.out.println("\nAt what time do you usually sleep? (Format = $HOUR $MINUTES): ");
+                        System.out.println("\nAt what time did you slept? (Example = 22 15): ");
                         jam_tidur = tristaninput.nextInt();
                         menit_tidur = tristaninput.nextInt();
                         tristaninput.nextLine();
-                        inputIsValid = true;
+                        // check validity:
+                        if((jam_tidur >= 24 || jam_tidur < 0) || (menit_tidur < 0 || menit_tidur >= 60)) {
+                            inputIsValid = false; Main.pExcType("That's not a valid time!");
+                        } else {inputIsValid = true;}
                     } catch (Exception e) {
                         Main.pExcType("Please enter the hour and minutes in a valid format: $HOUR $MINUTES");
                         tristaninput.nextLine();
                     }
-
                 }
             }
-
             static void pWelcome() {
                 System.out.println("\nWelcome to the Tristan's Sleep Duration Calculator!\n");
+                System.out.println("Write time in the 24 hour format!");
+                System.out.println("Write '24 00' as '00 00' !");
+            System.out.println("\n(Tristan gave the idea, and Deffreus made the code)\n");
             }
         }
 
