@@ -448,20 +448,16 @@ public class Volgion {
             static int getItemsCount() {
                 return items.length;
             }
-
             static String getItems(int index) {
                 return items[index];
             }
-
             static int getPrices(int index) {
                 return prices[index];
             }
-
             static int getOrdersCount() {
                 return orders.length;
             }
 
-            // Methods
             static void command(String command) {
                 switch (command) {
                     case "menu":
@@ -502,7 +498,6 @@ public class Volgion {
                         break;
                 }
             }
-
             static void list() {
                 double total = 0, net = 0;
                 boolean bdiscount = false, isEmpty = true;
@@ -539,12 +534,10 @@ public class Volgion {
                     }
                 }
             }
-
             static void help() {
                 System.out.println(
                         "\nAvailable commands: \n'menu'      : show the items menu.\n'add'       : add an item and its amount to the order list.\n'remove'    : remove an amount of item from the order list\n'list'      : display your current orders list.\n'reset'     : discard the order list and make a new one.\n'done'      : finish choosing and purchase your order list.\n'quit'      : simply quit the program and goes back to Volgion Main menu.\n'help'      : show this help menu.\n");
             }
-
             static void run() {
                 pWelcome();
                 csrun = true;
@@ -566,7 +559,6 @@ public class Volgion {
                     }
                 }
             }
-
             static void pMenu() {
                 Main.clear();
                 System.out.println("\nAvailable items:");
@@ -582,7 +574,6 @@ public class Volgion {
                 }
                 System.out.println("\n");
             }
-
             static void iAdd() {
                 Main.clear();
                 pMenu();
@@ -640,7 +631,6 @@ public class Volgion {
                     }
                 }
             }
-
             static void iRemove() {
                 Main.clear();
                 boolean isEmpty = true;
@@ -729,7 +719,6 @@ public class Volgion {
                     }
                 }
             }
-
             static void resetList() {
                 Main.clear();
                 for (int i = 0; i < getOrdersCount(); i++) {
@@ -737,7 +726,6 @@ public class Volgion {
                 }
                 System.out.println("Your order list have been discarded!");
             }
-
             static void done() {
                 Main.clear();
                 boolean listIsEmpty = true;
@@ -792,7 +780,6 @@ public class Volgion {
                     }
                 }
             }
-
             static void pWelcome() {
                 Main.clear();
                 Main.hr();
@@ -800,14 +787,28 @@ public class Volgion {
                         "\nWelcome to the Volgion's Coffee Shop!\n\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)\nWhat will be your order?\n");
                 help();
             }
-
             static void resetVar() {
                 for (int i = 0; i < getItemsCount(); i++) {
                     CoffeeShop.orders[i] = 0;
                 }
             }
-
             static void pQuit(int duration) {
+                System.out.println("\n\n" + //
+"                ██    ██    ██                                    \n" + //
+"              ██      ██  ██                                      \n" + //
+"              ██    ██    ██                                      \n" + //
+"                ██  ██      ██                                    \n" + //
+"                ██    ██    ██                                    \n" + //
+"                                                                  \n" + //
+"            ████████████████████                                  \n" + //
+"            ██                ██████                              \n" + //
+"            ██                ██  ██                              \n" + //
+"            ██                ██  ██                              \n" + //
+"            ██                ██████                              \n" + //
+"              ██            ██                                    \n" + //
+"          ████████████████████████                                \n" + //
+"          ██                    ██                                \n" + //
+"            ████████████████████                                  \n");
                 System.out.println("\nQuitting in:");
                 for (int i = duration; i > 0; i--) {
                     System.out.println(i + "...");
