@@ -1,71 +1,94 @@
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 public class CoffeeShop extends JFrame {
     private static String[] items = { "Americano ", "Latte     ", "Cappuccino", "Espresso  ", "Arabica   ",
             "Mochaccino", "Tiramisu  ", "Robusta   ", "Liberica  ", "Excelso   ", "Affogato  " };
-    private static int[] prices = { 21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34 };
-    private static int[] orders = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    /*
+     * private static int[] prices = { 21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34 };
+     * private static int[] orders = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+     */
     final private Font mainFont = new Font("Monospace", Font.PLAIN, 12);
-    JTextField tfCount1;
-    JButton bAdd1, bRM1, bPurchase, bReset;
 
     CoffeeShop() {
-        // North Panel
-        JLabel lInfo = new JLabel("(If your total purchase reach Rp. 100K, you will get a 15% discount!)");
-        lInfo.setFont(mainFont);
+        JPanel pCF = new JPanel();
+        pCF.setLayout(new BorderLayout());
 
+        // North
+        JLabel lWelcome = new JLabel("*If your purchase reach Rp.100K, you will get a 15% discount!");
+        lWelcome.setFont(mainFont);
         JPanel pNorth = new JPanel();
-        pNorth.setLayout(new GridLayout(1, 1, 5, 5));
-        pNorth.add(lInfo);
+        pNorth.add(lWelcome);
+        pCF.add(pNorth, BorderLayout.NORTH);
 
-        // Center Panel
-        tfCount1 = new JTextField();
-        tfCount1.setFont(mainFont);
-
-        JPanel pCenter = new JPanel();
-        pCenter.setLayout(new GridLayout(1, 1, 5, 5));
-        pCenter.add(tfCount1);
-
-        // East Panel
-        bAdd1 = new JButton("+");
-        bRM1 = new JButton("-");
-
-        // South Panel
-        bPurchase = new JButton("Purchase");
+        // West
+        JButton bPurchase = new JButton("Purchase");
         bPurchase.setFont(mainFont);
-        bPurchase.addActionListener(new ActionListener() {
+        JButton bReset = new JButton("Reset");
+        bReset.setFont(mainFont);
+        JPanel pWest = new JPanel();
+        pWest.add(bPurchase);
+        pWest.add(bReset);
+        pWest.setLayout(new GridLayout(2, 1));
+        pCF.add(pWest, BorderLayout.WEST);
+
+        // Center
+        JLabel lItem;
+        JLabel lMenu = new JLabel("Available Menu:");
+        JPanel pCenter = new JPanel();
+        pCenter.add(lMenu);
+        for (int i = 0; i < items.length; i++) {
+            lItem = new JLabel(items[i]);
+            pCenter.add(lItem);
+        }
+        pCenter.setLayout(new GridLayout((items.length + 1), 1));
+        pCF.add(pCenter, BorderLayout.CENTER);
+
+        // East
+        JTextField tfCount1 = new JTextField("0");
+        tfCount1.setSize(50, 50);
+        JButton min1 = new JButton("-");
+        min1.setSize(50, 50);
+        min1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Add Action Listener on Purchase Button
+                tfCount1.setText(Integer.toString(Integer.parseInt(tfCount1.getText()) - 1));
+                if (Integer.parseInt(tfCount1.getText()) < 0) {
+                    tfCount1.setText("0");
+                }
             }
         });
-        bReset = new JButton("Reset");
-        bReset.setFont(mainFont);
+        JButton plus1 = new JButton("+");
+        plus1.setSize(50, 50);
+        plus1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tfCount1.setText(Integer.toString(Integer.parseInt(tfCount1.getText()) + 1));
+            }
+        });
+        JPanel pPlusOrMinus1 = new JPanel();
+        pPlusOrMinus1.add(min1);
+        pPlusOrMinus1.add(plus1);
+        pPlusOrMinus1.setLayout(new GridLayout());
+        JPanel pButtons1 = new JPanel();
+        pButtons1.add(tfCount1);
+        pButtons1.add(pPlusOrMinus1);
+        pButtons1.setLayout(new GridLayout(1, 2, 5, 0));
+        pCF.add(pButtons1, BorderLayout.EAST);
 
+        // South
+        double cost = 0;
         JPanel pSouth = new JPanel();
-        pSouth.setLayout(new GridLayout(1, 2, 5, 5));
-        pSouth.add(bPurchase);
-        pSouth.add(bReset);
+        JLabel lPrice = new JLabel("Price: Rp." + cost + "K");
+        pSouth.add(lPrice);
+        pCF.add(pSouth, BorderLayout.SOUTH);
 
-        JPanel pEast = new JPanel();
-        pEast.setLayout(new GridLayout(1, 2, 5, 5));
-        pEast.add(bAdd1);
-        pEast.add(bRM1);
-
-        // Main Panel
-
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBackground(new Color(26, 118, 168));
-        mainPanel.add(pEast, BorderLayout.EAST);
-        mainPanel.add(pCenter, BorderLayout.CENTER);
-        mainPanel.add(pNorth, BorderLayout.NORTH);
-        mainPanel.add(pSouth, BorderLayout.SOUTH);
-
-        setTitle("Welcome to Volgion Coffee Shop!");
+        add(pCF);
         setSize(500, 800);
-        setMinimumSize(new Dimension(250, 400));
+        setTitle("Welcome to Volgion Coffee Shop!");
+        setMinimumSize(new Dimension(500, 800));
+        setMaximumSize(new Dimension(500, 800));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
