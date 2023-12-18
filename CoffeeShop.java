@@ -11,7 +11,7 @@ public class CoffeeShop extends JFrame {
     double cost;
     boolean isDiscount;
     JLabel lRawCost, lIsDiscount, lFinalCost;
-    JTextField[] tfCount;
+    JLabel[] tfCount;
 
     CoffeeShop() {
         JPanel pCF = new JPanel();
@@ -78,12 +78,12 @@ public class CoffeeShop extends JFrame {
         pEast.add(lReduceButtons);
         JLabel lIncreaseButtons = new JLabel("");
         pEast.add(lIncreaseButtons);
-        tfCount = new JTextField[items.length];
+        tfCount = new JLabel[items.length];
         JButton[] bReduce = new JButton[items.length];
         JButton[] bIncrease = new JButton[items.length];
         for (int i = 0; i < tfCount.length; i++) {
             final int id = i;
-            tfCount[i] = new JTextField("0");
+            tfCount[i] = new JLabel("0");
             pEast.add(tfCount[i]);
             bReduce[i] = new JButton("-");
             bReduce[i].addActionListener(new ActionListener() {
@@ -137,9 +137,9 @@ public class CoffeeShop extends JFrame {
 
         add(pCF);
         setSize(600, 400);
+        setMinimumSize(new Dimension(600, 400));
+        setMaximumSize(new Dimension(600, 400));
         setTitle("Welcome to Volgion Coffee Shop!");
-        // setMinimumSize(new Dimension(500, 800));
-        // setMaximumSize(new Dimension(500, 800));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(new Color(99, 97, 107));
         setVisible(true);
