@@ -967,61 +967,6 @@ public class Volgion {
             }
         }
 
-        class Anton { // mau bikin morse code translator katanya
-            static Scanner BAPAKMU = new Scanner(System.in);
-            static String dictionary[][] = {{"A" ,"B"   ,"C"   ,"D"  ,"E","F"   ,"G"  ,"H"   ,"I" ,"J"   ,"K"  ,"L"   ,"M" ,"N" ,"O"  ,"P"   ,"Q"   ,"R"  ,"S"  ,"T","U"  ,"V"   ,"W"  ,"X"   ,"Y"   ,"Z"   }, 
-                                            {".-","_...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."} };
-            static boolean isEnded, isRunning;
-            static String input, result[];
-            static int mode;
-            static void run() {;
-                Main.clear();
-                pWelcome();
-                iMode();
-                iInput();
-                if(mode == 1) {LetterToMorse();}
-                else if(mode == 2) {MorseToLetter();};
-                pResult();
-                iQuit();
-            }
-            static void pWelcome() {
-                Main.hr();
-                System.out.println("\nWelcome to Anton's Morse Code Translator!");
-                Main.hr();
-            }
-            static void iMode() {
-                boolean inputIsValid = false;
-                while(!inputIsValid) {
-                    System.out.println("\nSelect mode:\n1 = Letters --> Morse Code\n2 = Morse Code --> Letters");
-                    try {
-                        mode = Integer.parseInt(BAPAKMU.nextLine());
-                        switch(mode) {
-                            case 1:
-                                LetterToMorse();
-                                inputIsValid = true;
-                                break;
-                            case 2:
-                                MorseToLetter();
-                                inputIsValid = true;
-                                break;
-                        }
-                    } 
-                    catch(Exception e) {
-                        Main.pExcType("Please enter either '1' or '2'!");
-                        if(BAPAKMU.hasNextLine()) {BAPAKMU.nextLine();}
-                    }
-                }
-            }
-            static void iInput() {
-                System.out.println("\nType what you want to be translated:");
-                input = (BAPAKMU.nextLine()).toUpperCase();
-            }
-            static void LetterToMorse() {} // TODO: Anton.LetterToMorse()
-            static void MorseToLetter() {} // TODO: Anton.MorseToLetter()
-            static void pResult() {} // TODO: Anton.pResult()
-            static void iQuit() {} // TODO: Anton.iQuit()
-        }
-
         boolean run = true;
         while (run) {
             try {
