@@ -779,7 +779,6 @@ public class Volgion {
                             CoffeeShop.end = true;
                             CoffeeShop.resetVar();
                             CoffeeShop.pQuit(5);
-                            ;
                             break;
                         default:
                             System.out.println("Purchase cancelled, going back to listing your order!");
