@@ -2,18 +2,17 @@ import java.util.Scanner;
 import java.lang.Math;
 import java.lang.String;
 
-// Let start over again:
 /*
  * Hello friends!
  * Here, you can change the code however you want,
- * Lines that start with '#' is a command, press Ccommand + Shift + P adn then type the following command!
+ * Lines that start with '#' is a command:
+ * press `Command + Shift + P` and then type the following command!
  * 
- * If you want to publish the changes you made:
- * # Git: Commit
+ * If you want to publish the commits you've made:
  * # Git: Push
  * 
- * Also, don't forget to Fetch frequently
- * # Git: Fetch
+ * Also, don't forget to Pull frequently
+ * # Git: Pull
  */
 
 public class Volgion {
@@ -25,15 +24,16 @@ public class Volgion {
         Scanner input = new Scanner(System.in);
         class Main {
             private static String[][] programs = {
-                { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (NEW)", "Morse Code Translator (EXPERIMENTAL)" },
-                { "1.0"        , "1.0.1"         , "1.0"                          , "1.0"                             , "0.1"                                  } };
+                    { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)",
+                            "Sleep Duration Calculator (NEW)", "Morse Code Translator (EXPERIMENTAL)" },
+                    { "1.0", "1.0.1", "1.0", "1.0", "0.1" } };
             private static String[][] contributors = {
-            //  | Main Contributor | Others           |
-                { "Deffreus Theda"                    }, // Coffee Shop
-                { "Deffreus Theda"                    }, // BMI Calculator
-                { "Deffreus Theda"                    }, // Two Variable Calculator
-                { "Tristan"        , "Deffreus Theda" }, // Sleep Duration Calculator
-                { "Anton"          , "Deffreus Theda" }, // Morse Code Translator
+                    // | Main Contributor | Others |
+                    { "Deffreus Theda" }, // Coffee Shop
+                    { "Deffreus Theda" }, // BMI Calculator
+                    { "Deffreus Theda" }, // Two Variable Calculator
+                    { "Tristan", "Deffreus Theda" }, // Sleep Duration Calculator
+                    { "Anton", "Deffreus Theda" }, // Morse Code Translator
             };
 
             static void quit(int second) {
@@ -49,19 +49,24 @@ public class Volgion {
                 Main.clear();
                 System.exit(1);
             }
+
             public static void clear() {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
             }
+
             static int getProgramsCount() {
                 return programs[0].length;
             }
+
             static void hr() {
                 System.out.println("================================================================================");
             }
+
             static String getProgramsName(int index) {
                 return programs[0][index];
             }
+
             static void pbanner() {
                 System.out.printf(ansiColor.red + "__     __   ___    _        ____   ___    ___    _   _ \n" + //
                         "\\ \\   / /  / _ \\  | |      / ___| |_ _|  / _ \\  | \\ | |\n" + //
@@ -76,38 +81,54 @@ public class Volgion {
                         "Please report any bug here:\n    Email      : muhammad.alfin@praditadirgantara.sch.id\n    Discord    : deffreus (recommended)\n    WA         : +62 895-8077-31515"
                                 + ansiColor.reset);
             }
+
             static void pMainMenu() {
                 System.out.println("\nPrograms menu:");
                 for (int i = 0; i < getProgramsCount(); i++) {
                     System.out.print((i + 1) + " = " + getProgramsName(i) + " (V" + programs[1][i] + ")" + " by ");
                     int ContributorCount = contributors[i].length;
                     // yang ini gausah dipahamin gpp, aku juga bingung
-                    for(int j = 0; j < ContributorCount; j++) {
+                    for (int j = 0; j < ContributorCount; j++) {
                         System.out.print(contributors[i][j]);
-                        if(ContributorCount == 2) {
-                            if(j == ContributorCount-2) {System.out.print(" & ");}
-                        } else { 
-                            if(j < ContributorCount-2) {System.out.print(", ");}
-                            if(j == ContributorCount-2) {System.out.print(", & ");}
+                        if (ContributorCount == 2) {
+                            if (j == ContributorCount - 2) {
+                                System.out.print(" & ");
+                            }
+                        } else {
+                            if (j < ContributorCount - 2) {
+                                System.out.print(", ");
+                            }
+                            if (j == ContributorCount - 2) {
+                                System.out.print(", & ");
+                            }
                         }
-                    } System.out.print("\n");
+                    }
+                    System.out.print("\n");
                 }
             }
+
             static void pExcType(String message) {
                 System.out
                         .println(ansiColor.red + "Main.pExcType: (ERROR: INVALID INPUT): " + message + ansiColor.reset);
             }
+
             static String nospace(String string) {
                 String res = string.replaceAll("\\s", "");
                 return res;
             }
+
             static void pQuit() {
                 System.out.println("\n(Type 'quit' or 'exit' to quit Volgion from this menu)");
             }
+
             static String nice(double valval) {
-                int valint = (int) valval; String res = "";
-                if(valint == valval) {res = Integer.toString(valint);}
-                else {res = Double.toString(valval);}
+                int valint = (int) valval;
+                String res = "";
+                if (valint == valval) {
+                    res = Integer.toString(valint);
+                } else {
+                    res = Double.toString(valval);
+                }
                 return res;
             }
         }
@@ -130,14 +151,22 @@ public class Volgion {
                         pWelcome();
                         Main.hr();
                         iOperator();
-                        if(!tvcIsEnded) {iA(); iB(); pRes(); iQuit();}
-                        if(!tvcIsEnded) {tvcIsRunning = true;}
+                        if (!tvcIsEnded) {
+                            iA();
+                            iB();
+                            pRes();
+                            iQuit();
+                        }
+                        if (!tvcIsEnded) {
+                            tvcIsRunning = true;
+                        }
                     } catch (Exception e) {
                         Main.pExcType(ansiColor.red + "CALCULATOR ERROR." + ansiColor.reset);
                     }
                 }
                 pQuit(3);
             }
+
             static void pQuit(int seconds) {
                 System.out.println("\nThank you so much for using the Volgion Two Variable Calculator!! :D");
                 System.out.println("\nQuitting in:");
@@ -148,8 +177,9 @@ public class Volgion {
                     } catch (Exception e) {
                         Main.pExcType("Thread sleep exception, dev's fault");
                     }
-                } 
+                }
             }
+
             static void iQuit() {
                 String opt;
                 boolean valid = false;
@@ -179,12 +209,17 @@ public class Volgion {
                     }
                 }
             }
+
             static void pRes() {
                 double resdouble = calc(operator);
                 int resint = (int) calc(operator);
-                if(resdouble == resint) {System.out.println("\nThe result of the calculation is: " + resint);}
-                else {System.out.println("\nThe result of the calculation is: " + resdouble);}
+                if (resdouble == resint) {
+                    System.out.println("\nThe result of the calculation is: " + resint);
+                } else {
+                    System.out.println("\nThe result of the calculation is: " + resdouble);
+                }
             }
+
             static double calc(String val) {
                 double result = 1;
                 operatorIsValid = true;
@@ -229,7 +264,7 @@ public class Volgion {
                         result = A % B;
                         break;
                     case "quit":
-                    case "exit":   
+                    case "exit":
                         tvcIsEnded = true;
                         break;
                     default:
@@ -239,43 +274,52 @@ public class Volgion {
                 }
                 return result;
             }
+
             static void iB() {
                 boolean BIsValid = false;
-                while(!BIsValid) {
+                while (!BIsValid) {
                     try {
                         System.out.println("\nPlease enter a value for the variable B: ");
                         B = Double.parseDouble(tvcinput.nextLine());
                         BIsValid = true;
-                    } catch(Exception e) {
-                        if(!tvcIsEnded) {Main.pExcType("Please enter a number for variable B!");}
+                    } catch (Exception e) {
+                        if (!tvcIsEnded) {
+                            Main.pExcType("Please enter a number for variable B!");
+                        }
                     }
                 }
             }
+
             static void iA() {
                 boolean AIsValid = false;
-                while(!AIsValid) {
+                while (!AIsValid) {
                     try {
                         System.out.println("\nPlease enter a value for the variable A: ");
                         A = Double.parseDouble(tvcinput.nextLine());
                         AIsValid = true;
-                    } catch(Exception e) {
-                        if(!tvcIsEnded) {Main.pExcType("Please enter a number for variable A!");}
+                    } catch (Exception e) {
+                        if (!tvcIsEnded) {
+                            Main.pExcType("Please enter a number for variable A!");
+                        }
                     }
                 }
             }
+
             static void iOperator() {
                 String calculations[][] = {
-                    {"Symbol","Description"        ,"Name"          ,"Format" },
-                    {"+"     ,"Increase A by B"    ,"Incrementation","(A + B)"},
-                    {"-"     ,"Substract B from A" ,"Substraction"  ,"(A - B)"}, 
-                    {"x"     ,"Multiply A and B"   ,"Multiplication","(A x B)"},
-                    {"/"     ,"Divide A by B"      ,"Division"      ,"(A / B)"},
-                    {"^"     ,"A to the Power of B","Exponentiation","(A^B)"  },
-                    {"√"     ,"'B' root of A"      ,"Nth Root"      ,"(B√ A)" },
-                    {"%"     ,"A modulo B"         ,"Modulus"       ,"(A % B)"}
+                        { "Symbol", "Description", "Name", "Format" },
+                        { "+", "Increase A by B", "Incrementation", "(A + B)" },
+                        { "-", "Substract B from A", "Substraction", "(A - B)" },
+                        { "x", "Multiply A and B", "Multiplication", "(A x B)" },
+                        { "/", "Divide A by B", "Division", "(A / B)" },
+                        { "^", "A to the Power of B", "Exponentiation", "(A^B)" },
+                        { "√", "'B' root of A", "Nth Root", "(B√ A)" },
+                        { "%", "A modulo B", "Modulus", "(A % B)" }
                 };
                 System.out.println("\nWhat type of calculation you want?\n");
-                for(int i = 1; i < calculations.length; i++) {System.out.printf("%s (%s) = %s\n", i, calculations[i][0], calculations[i][1]);}
+                for (int i = 1; i < calculations.length; i++) {
+                    System.out.printf("%s (%s) = %s\n", i, calculations[i][0], calculations[i][1]);
+                }
                 boolean keepAsking = true;
                 while (keepAsking) {
                     keepAsking = true;
@@ -283,15 +327,21 @@ public class Volgion {
                     try {
                         operator = Main.nospace(tvcinput.nextLine());
                         calc(operator);
-                        if(operatorIsValid) {keepAsking = false;}
-                        else {Main.pExcType("Please enter the index number or symbol above!");}
+                        if (operatorIsValid) {
+                            keepAsking = false;
+                        } else {
+                            Main.pExcType("Please enter the index number or symbol above!");
+                        }
                     } catch (Exception e) {
                         Main.pExcType("Please input a number or symbol!");
                         keepAsking = true;
                     }
                 }
-                if(!tvcIsEnded) {System.out.println("Selecting: " + calculations[op][2] + "... " + calculations[op][3]);}
+                if (!tvcIsEnded) {
+                    System.out.println("Selecting: " + calculations[op][2] + "... " + calculations[op][3]);
+                }
             }
+
             static void pWelcome() {
                 System.out.println("\nWelcome to the Volgion's Two Variable Calculator!");
                 System.out.println("(Enter 'quit' or 'exit' to exit)\n");
@@ -312,23 +362,30 @@ public class Volgion {
                 // Biar bisa ngulang-ulang kalkulasi BMI
                 while (bmirun) {
                     bmirun = false;
-                    // 'try': kalau ada error (Exception) di sebuah line of code, langsung lompat ke 'catch'
+                    // 'try': kalau ada error (Exception) di sebuah line of code, langsung lompat ke
+                    // 'catch'
                     try {
                         Main.clear(); // clear terminal
                         Main.hr(); // print horizontal line
-                        // perhatiin penamaan methodnya: pWelcome -> "Print Welcome", iName -> "Input Name"
+                        // perhatiin penamaan methodnya: pWelcome -> "Print Welcome", iName -> "Input
+                        // Name"
                         pWelcome();
                         Main.hr();
                         iName();
                         if (fname != "") // kalau namanya nggak kosong
                             hasName = true;
-                        if (hasName) {System.out.println("\nHello " + fname + "!");} // kamu bisa lo nulis if begini
+                        if (hasName) {
+                            System.out.println("\nHello " + fname + "!");
+                        } // kamu bisa lo nulis if begini
                         iWeight();
                         iHeight();
-                        calcBMI(weight, height); // method ini pakai 'parameter': weight & height, buat dipakai di method 'calcBMI' nya
+                        calcBMI(weight, height); // method ini pakai 'parameter': weight & height, buat dipakai di
+                                                 // method 'calcBMI' nya
                         pResult();
                         iQuit();
-                        if (end == false) {bmirun = true;} // kamu bisa lo nulis if begini
+                        if (end == false) {
+                            bmirun = true;
+                        } // kamu bisa lo nulis if begini
                     } catch (Exception e) { // ini catch!
                         Main.pExcType(
                                 "You're not supposed to see this message.\nIf you do, report with a screenshot and how to replicate it here: deffreus (Discord)");
@@ -336,6 +393,7 @@ public class Volgion {
                     }
                 }
             }
+
             // timer buat quitting aja
             static void pQuit(int intSecond) {
                 System.out.println("\nQuitting in:");
@@ -348,6 +406,7 @@ public class Volgion {
                     }
                 }
             }
+
             // jujur ini kurang sih:
             static void iQuit() {
                 System.out.println("\nDo you want to calculate again? (Y/n):");
@@ -363,6 +422,7 @@ public class Volgion {
                         break;
                 }
             }
+
             static void pResult() {
                 System.out.println("\n"); // biar tetep misahin output walau `hasName == false`
                 if (hasName)
@@ -372,6 +432,7 @@ public class Volgion {
                 System.out.printf("Your BMI index   : %.1f\n", bmi);
                 System.out.println("\nYou're categorized as:\n" + category);
             }
+
             static void calcBMI(double w, double h) {
                 bmi = w / (h * h * 0.0001); // pake 0.0001 karena unit nya centimeter
                 if (bmi < 16) {
@@ -392,13 +453,16 @@ public class Volgion {
                     category = "Obese (Class III)";
                 }
             }
+
             static void pWelcome() {
                 System.out.println("\nWelcome to the Volgion BMI Calculator!\n");
             }
+
             static void iName() {
                 System.out.println("\nWhat is your full name? (blank to skip)");
                 fname = bmiinput.nextLine();
             }
+
             static void iWeight() {
                 boolean valid = false;
                 while (!valid) { // minta terus input sampai input tersebut valid! (angka doang)
@@ -419,6 +483,7 @@ public class Volgion {
                     }
                 }
             }
+
             static void iHeight() {
                 boolean valid = false;
                 while (!valid) { // mirip yang di `iWeight()` (angka doang)
@@ -454,12 +519,15 @@ public class Volgion {
             static int getItemsCount() {
                 return items.length;
             }
+
             static String getItems(int index) {
                 return items[index];
             }
+
             static int getPrices(int index) {
                 return prices[index];
             }
+
             static int getOrdersCount() {
                 return orders.length;
             }
@@ -504,6 +572,7 @@ public class Volgion {
                         break;
                 }
             }
+
             static void list() {
                 double total = 0, net = 0;
                 boolean bdiscount = false, isEmpty = true;
@@ -540,10 +609,12 @@ public class Volgion {
                     }
                 }
             }
+
             static void help() {
                 System.out.println(
                         "\nAvailable commands: \n'menu'      : show the items menu.\n'add'       : add an item and its amount to the order list.\n'remove'    : remove an amount of item from the order list\n'list'      : display your current orders list.\n'reset'     : discard the order list and make a new one.\n'done'      : finish choosing and purchase your order list.\n'quit'      : simply quit the program and goes back to Volgion Main menu.\n'help'      : show this help menu.\n");
             }
+
             static void run() {
                 pWelcome();
                 csrun = true;
@@ -565,6 +636,7 @@ public class Volgion {
                     }
                 }
             }
+
             static void pMenu() {
                 Main.clear();
                 System.out.println("\nAvailable items:");
@@ -580,6 +652,7 @@ public class Volgion {
                 }
                 System.out.println("\n");
             }
+
             static void iAdd() {
                 Main.clear();
                 pMenu();
@@ -637,6 +710,7 @@ public class Volgion {
                     }
                 }
             }
+
             static void iRemove() {
                 Main.clear();
                 boolean isEmpty = true;
@@ -725,6 +799,7 @@ public class Volgion {
                     }
                 }
             }
+
             static void resetList() {
                 Main.clear();
                 for (int i = 0; i < getOrdersCount(); i++) {
@@ -732,6 +807,7 @@ public class Volgion {
                 }
                 System.out.println("Your order list have been discarded!");
             }
+
             static void done() {
                 Main.clear();
                 boolean listIsEmpty = true;
@@ -786,6 +862,7 @@ public class Volgion {
                     }
                 }
             }
+
             static void pWelcome() {
                 Main.clear();
                 Main.hr();
@@ -793,28 +870,30 @@ public class Volgion {
                         "\nWelcome to the Volgion's Coffee Shop!\n\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)\nWhat will be your order?\n");
                 help();
             }
+
             static void resetVar() {
                 for (int i = 0; i < getItemsCount(); i++) {
                     CoffeeShop.orders[i] = 0;
                 }
             }
+
             static void pQuit(int duration) {
                 System.out.println("\n\n" + //
-"                ██    ██    ██                                    \n" + //
-"              ██      ██  ██                                      \n" + //
-"              ██    ██    ██                                      \n" + //
-"                ██  ██      ██                                    \n" + //
-"                ██    ██    ██                                    \n" + //
-"                                                                  \n" + //
-"            ████████████████████                                  \n" + //
-"            ██                ██████                              \n" + //
-"            ██                ██  ██                              \n" + //
-"            ██                ██  ██                              \n" + //
-"            ██                ██████                              \n" + //
-"              ██            ██                                    \n" + //
-"          ████████████████████████                                \n" + //
-"          ██                    ██                                \n" + //
-"            ████████████████████                                  \n");
+                        "                ██    ██    ██                                    \n" + //
+                        "              ██      ██  ██                                      \n" + //
+                        "              ██    ██    ██                                      \n" + //
+                        "                ██  ██      ██                                    \n" + //
+                        "                ██    ██    ██                                    \n" + //
+                        "                                                                  \n" + //
+                        "            ████████████████████                                  \n" + //
+                        "            ██                ██████                              \n" + //
+                        "            ██                ██  ██                              \n" + //
+                        "            ██                ██  ██                              \n" + //
+                        "            ██                ██████                              \n" + //
+                        "              ██            ██                                    \n" + //
+                        "          ████████████████████████                                \n" + //
+                        "          ██                    ██                                \n" + //
+                        "            ████████████████████                                  \n");
                 System.out.println("\nQuitting in:");
                 for (int i = duration; i > 0; i--) {
                     System.out.println(i + "...");
@@ -854,17 +933,19 @@ public class Volgion {
                     }
                 }
             }
+
             static void pQuit(int second) {
                 System.out.println("\nQuitting in:");
-                for(int i = second; i > 0; i--) {
+                for (int i = second; i > 0; i--) {
                     System.out.println(i + "...");
                     try {
                         Thread.sleep(1000);
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         Main.pExcType("Thread sleep exception! Dev's fault, not yours!");
                     }
                 }
             }
+
             static void iQuit() {
                 String opt;
                 boolean valid = false;
@@ -896,33 +977,51 @@ public class Volgion {
                 System.out.println("\nThank you for using the Sleep Duration Calculator!! :D");
                 pQuit(3);
             }
+
             static void pRes() {
                 // kalkulasi durasi tidur:
-                int tidur = jam_tidur*60+menit_tidur; int bangun = jam_bangun*60+menit_bangun;
-                if(tidur > bangun) {tidur -= (24*60);}
-                int hours = (bangun-tidur)/60; int minutes = (bangun-tidur)%60;
+                int tidur = jam_tidur * 60 + menit_tidur;
+                int bangun = jam_bangun * 60 + menit_bangun;
+                if (tidur > bangun) {
+                    tidur -= (24 * 60);
+                }
+                int hours = (bangun - tidur) / 60;
+                int minutes = (bangun - tidur) % 60;
 
                 // output formatting!
                 // ketika tidur sama dengan bangun:
-                if(hours+minutes == 0) {System.out.printf("\nYou sleep in less than a minute or what? :O\n");}
+                if (hours + minutes == 0) {
+                    System.out.printf("\nYou sleep in less than a minute or what? :O\n");
+                }
                 // ketika tidur dibawah satu jam:
-                else if(hours == 0 && minutes != 0) {
-                    if(minutes == 1) {System.out.printf("\nYou've slept for a minute! XD\n");}
-                    else {System.out.printf("\nYou've slept for %d minutes! :v\n", minutes);}
+                else if (hours == 0 && minutes != 0) {
+                    if (minutes == 1) {
+                        System.out.printf("\nYou've slept for a minute! XD\n");
+                    } else {
+                        System.out.printf("\nYou've slept for %d minutes! :v\n", minutes);
+                    }
                 }
                 // ketika tidur tepat N jam:
-                else if(minutes == 0 && hours != 0) {
-                    if(hours == 1) System.out.printf("\nYou've slept for an hour! :p\n");
-                    else {System.out.printf("\nYou've slept for %d hours! :>\n", hours);}
-                } 
+                else if (minutes == 0 && hours != 0) {
+                    if (hours == 1)
+                        System.out.printf("\nYou've slept for an hour! :p\n");
+                    else {
+                        System.out.printf("\nYou've slept for %d hours! :>\n", hours);
+                    }
+                }
                 // output format jam dan menit:
                 else {
-                    if(hours == 1 && minutes == 1) {System.out.printf("\nYou've slept for an hour and a minute! o_o\n");}
-                    else if(hours == 1) {System.out.printf("\nYou've slept for an hours and %d minutes! :)\n", minutes);}
-                    else if(minutes == 1) {System.out.printf("\nYou've slept for %d hours and a minute! c:\n", hours);}
-                    else System.out.printf("\nYou slept for " + hours + " hours and " + minutes + " minutes! :D\n");
+                    if (hours == 1 && minutes == 1) {
+                        System.out.printf("\nYou've slept for an hour and a minute! o_o\n");
+                    } else if (hours == 1) {
+                        System.out.printf("\nYou've slept for an hours and %d minutes! :)\n", minutes);
+                    } else if (minutes == 1) {
+                        System.out.printf("\nYou've slept for %d hours and a minute! c:\n", hours);
+                    } else
+                        System.out.printf("\nYou slept for " + hours + " hours and " + minutes + " minutes! :D\n");
                 }
             }
+
             static void iJamBangun() {
                 boolean inputIsValid = false;
                 while (!inputIsValid) {
@@ -932,15 +1031,19 @@ public class Volgion {
                         menit_bangun = tristaninput.nextInt();
                         tristaninput.nextLine();
                         // check validity:
-                        if((jam_bangun >= 24 || jam_bangun < 0) || (menit_bangun < 0 || menit_bangun >= 60)) {
-                            inputIsValid = false; Main.pExcType("That's not a valid time!");
-                        } else {inputIsValid = true;}
+                        if ((jam_bangun >= 24 || jam_bangun < 0) || (menit_bangun < 0 || menit_bangun >= 60)) {
+                            inputIsValid = false;
+                            Main.pExcType("That's not a valid time!");
+                        } else {
+                            inputIsValid = true;
+                        }
                     } catch (Exception e) {
                         Main.pExcType("Please enter the hour and minutes in a valid format: $HOUR $MINUTES");
                         tristaninput.nextLine();
                     }
                 }
             }
+
             static void iJamTidur() {
                 boolean inputIsValid = false;
                 while (!inputIsValid) {
@@ -950,52 +1053,67 @@ public class Volgion {
                         menit_tidur = tristaninput.nextInt();
                         tristaninput.nextLine();
                         // check validity:
-                        if((jam_tidur >= 24 || jam_tidur < 0) || (menit_tidur < 0 || menit_tidur >= 60)) {
-                            inputIsValid = false; Main.pExcType("That's not a valid time!");
-                        } else {inputIsValid = true;}
+                        if ((jam_tidur >= 24 || jam_tidur < 0) || (menit_tidur < 0 || menit_tidur >= 60)) {
+                            inputIsValid = false;
+                            Main.pExcType("That's not a valid time!");
+                        } else {
+                            inputIsValid = true;
+                        }
                     } catch (Exception e) {
                         Main.pExcType("Please enter the hour and minutes in a valid format: $HOUR $MINUTES");
                         tristaninput.nextLine();
                     }
                 }
             }
+
             static void pWelcome() {
                 System.out.println("\nWelcome to the Tristan's Sleep Duration Calculator!\n");
                 System.out.println("Write time in the 24 hour format!");
                 System.out.println("Write '24 00' as '00 00' !");
-            System.out.println("\n(Tristan gave the idea, and Deffreus made the code)\n");
+                System.out.println("\n(Tristan gave the idea, and Deffreus made the code)\n");
             }
         }
 
         class Anton { // mau bikin morse code translator katanya
             static Scanner BAPAKMU = new Scanner(System.in);
-            static String dictionary[][] = {{"A" ,"B"   ,"C"   ,"D"  ,"E","F"   ,"G"  ,"H"   ,"I" ,"J"   ,"K"  ,"L"   ,"M" ,"N" ,"O"  ,"P"   ,"Q"   ,"R"  ,"S"  ,"T","U"  ,"V"   ,"W"  ,"X"   ,"Y"   ,"Z"   }, 
-                                            {".-","_...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."} };
+            static String dictionary[][] = {
+                    { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+                            "T", "U", "V", "W", "X", "Y", "Z" },
+                    { ".-", "_...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.",
+                            "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." } };
             static boolean isEnded, isRunning;
             static String input, result[];
             static int mode;
-            static void run() {;
+
+            static void run() {
+                ;
                 Main.clear();
                 pWelcome();
                 iMode();
                 iInput();
-                if(mode == 1) {LetterToMorse();}
-                else if(mode == 2) {MorseToLetter();};
+                if (mode == 1) {
+                    LetterToMorse();
+                } else if (mode == 2) {
+                    MorseToLetter();
+                }
+                ;
                 pResult();
                 iQuit();
             }
+
             static void pWelcome() {
                 Main.hr();
                 System.out.println("\nWelcome to Anton's Morse Code Translator!");
                 Main.hr();
             }
+
             static void iMode() {
                 boolean inputIsValid = false;
-                while(!inputIsValid) {
+                while (!inputIsValid) {
                     System.out.println("\nSelect mode:\n1 = Letters --> Morse Code\n2 = Morse Code --> Letters");
                     try {
                         mode = Integer.parseInt(BAPAKMU.nextLine());
-                        switch(mode) {
+                        switch (mode) {
                             case 1:
                                 LetterToMorse();
                                 inputIsValid = true;
@@ -1005,21 +1123,31 @@ public class Volgion {
                                 inputIsValid = true;
                                 break;
                         }
-                    } 
-                    catch(Exception e) {
+                    } catch (Exception e) {
                         Main.pExcType("Please enter either '1' or '2'!");
-                        if(BAPAKMU.hasNextLine()) {BAPAKMU.nextLine();}
+                        if (BAPAKMU.hasNextLine()) {
+                            BAPAKMU.nextLine();
+                        }
                     }
                 }
             }
+
             static void iInput() {
                 System.out.println("\nType what you want to be translated:");
                 input = (BAPAKMU.nextLine()).toUpperCase();
             }
-            static void LetterToMorse() {} // TODO: Anton.LetterToMorse()
-            static void MorseToLetter() {} // TODO: Anton.MorseToLetter()
-            static void pResult() {} // TODO: Anton.pResult()
-            static void iQuit() {} // TODO: Anton.iQuit()
+
+            static void LetterToMorse() {
+            } // TODO: Anton.LetterToMorse()
+
+            static void MorseToLetter() {
+            } // TODO: Anton.MorseToLetter()
+
+            static void pResult() {
+            } // TODO: Anton.pResult()
+
+            static void iQuit() {
+            } // TODO: Anton.iQuit()
         }
 
         boolean run = true;
