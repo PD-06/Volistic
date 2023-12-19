@@ -48,7 +48,7 @@ Anyone is allowed to give feedback and even contributions, that would be much ap
 - Extension Pack for Java by Microsoft
 - Language Support for Java(TM) by Red Hat
 
-#### Linking your GitHub Account
+#### Link your GitHub Account
 
 1. On the side bar, press the 'Accounts' icon, then press the sign in button!
 2. You'll then be redirected to GitHub. Login to your account or create an account if you don't have one!
