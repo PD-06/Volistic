@@ -7,7 +7,7 @@ public class CoffeeShop extends JFrame {
             "Mochaccino", "Tiramisu  ", "Robusta   ", "Liberica  ", "Excelso   ", "Affogato  " };
     private static int[] prices = { 21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34 };
     private static int[] orders = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    final private Font mainFont = new Font("Monospace", Font.PLAIN, 12);
+    final private Font westButtonFont = new Font("Georgia", Font.PLAIN, 20);
     double cost;
     boolean isDiscount;
     JLabel lRawCost, lIsDiscount, lFinalCost;
@@ -21,22 +21,31 @@ public class CoffeeShop extends JFrame {
 
         /******************************** NORTH *********************************/
         JLabel lWelcome = new JLabel("*If your purchase reach Rp.100K, you will get a 15% discount!");
-        lWelcome.setFont(mainFont);
+        lWelcome.setFont(new Font("MS Serif", Font.BOLD, 14));
         JPanel pNorth = new JPanel();
         pNorth.add(lWelcome);
         pCF.add(pNorth, BorderLayout.NORTH);
 
         /********************************* WEST *********************************/
         JButton bPurchase = new JButton("Purchase");
-        bPurchase.setFont(mainFont);
+        bPurchase.setFont(westButtonFont);
         bPurchase.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 update();
-                // TODO: new Transaction();
+                boolean orderListIsEmpty = true;
+                for (int i = 0; i < items.length; i++) {
+                    if (orders[i] != 0) {
+                        orderListIsEmpty = false;
+                        break;
+                    }
+                }
+                if (!orderListIsEmpty) {
+                    // TODO: new Transaction();
+                }
             }
         });
         JButton bReset = new JButton("Reset");
-        bReset.setFont(mainFont);
+        bReset.setFont(westButtonFont);
         bReset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cost = 0;
@@ -135,6 +144,7 @@ public class CoffeeShop extends JFrame {
         pSouth.setLayout(new GridLayout(3, 2));
         pCF.add(pSouth, BorderLayout.SOUTH);
 
+        /******************************** FRAME *********************************/
         add(pCF);
         setSize(600, 400);
         setMinimumSize(new Dimension(600, 400));
@@ -165,6 +175,62 @@ public class CoffeeShop extends JFrame {
     String nice(double cc) {
         String res = (cc % 1 == 0) ? String.format("%.0f", cc) : String.format("%.1f", cc);
         return res;
+    }
+
+    public class Transaction extends JFrame {
+
+        Transaction() {
+            setLayout(new BorderLayout());
+            /******************************** NORTH *********************************/
+            // Upper Half
+            ImageIcon iiVolgion = new ImageIcon("GUIFiles/VOLGION-NOBG.png");
+            JLabel lVolgion = new JLabel(iiVolgion);
+            JPanel pUpperNorth = new JPanel();
+            pUpperNorth.add(lVolgion);
+            pUpperNorth.setLayout(new GridLayout(1, 1));
+            // Lower Half
+            String date = java.time.LocalDate.now().toString();
+            JLabel lDate = new JLabel(date);
+            String time = java.time.LocalTime.now().toString();
+            JLabel lTime = new JLabel(time);
+            JPanel pLowerNorth = new JPanel();
+            pLowerNorth.add(lDate);
+            pLowerNorth.add(lTime);
+            pLowerNorth.setLayout(new GridLayout(1, 23));
+
+            JPanel pNorth = new JPanel();
+            pNorth.add(pUpperNorth);
+            pNorth.add(pLowerNorth);
+            pNorth.setLayout(new GridLayout(2, 1));
+
+            /******************************** CENTER ********************************/
+            int orderCount = 0;
+            int[] ordersIndex = {};
+            for (int i = 0; i < orders.length; i++) {
+                if (orders[i] > 0) {
+                    ordersIndex[orderCount] = i;
+                    orderCount++;
+                }
+            }
+            JLabel[] lItem = new JLabel[orderCount];
+            for (int i = 0; i < lItem.length; i++) {
+                lItem[i] = new JLabel();
+            }
+
+            JPanel pCenter = new JPanel();
+
+            /******************************** SOUTH *********************************/
+            JPanel pSouth = new JPanel();
+
+            /******************************** FRAME *********************************/
+            add(pNorth, BorderLayout.NORTH);
+            add(pSouth, BorderLayout.SOUTH);
+            add(pCenter, BorderLayout.CENTER);
+            setSize(500, 500);
+            setVisible(true);
+            setTitle("Volgion Coffee Shop Struck");
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
     }
 
     public static void main(String[] args) {
