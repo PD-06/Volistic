@@ -994,11 +994,6 @@ public class Volgion {
                     case "Tristan's Sleep Duration Calculator":
                         Tristan.run();
                         break;
-                    case "5":
-                    case "Anton":
-                    case "Morse Code":
-                        Anton.run();
-                        break;
                     case "exit":
                     case "quit":
                         Main.quit(3);
