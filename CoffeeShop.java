@@ -39,9 +39,7 @@ public class CoffeeShop extends JFrame {
                         break;
                     }
                 }
-                if (!orderListIsEmpty) {
-                    // TODO: new Transaction();
-                }
+                if (!orderListIsEmpty) {new Transaction();}
             }
         });
         JButton bReset = new JButton("Reset");
@@ -171,19 +169,22 @@ public class CoffeeShop extends JFrame {
         double finalCost = (isDiscount) ? cost * 0.85 : cost;
         lFinalCost.setText("Rp. " + nice(finalCost) + "K");
     }
-
     String nice(double cc) {
         String res = (cc % 1 == 0) ? String.format("%.0f", cc) : String.format("%.1f", cc);
+        return res;
+    }
+    String noSpace(String ns) {
+        String res = ns.replaceAll(" ", "");
         return res;
     }
 
     public class Transaction extends JFrame {
 
         Transaction() {
-            setLayout(new BorderLayout());
+            setLayout(new BorderLayout(0, 25));
             /******************************** NORTH *********************************/
             // Upper Half
-            ImageIcon iiVolgion = new ImageIcon("GUIFiles/VOLGION-NOBG.png");
+            ImageIcon iiVolgion = new ImageIcon("Images/VOLGION-NOBG.png");
             JLabel lVolgion = new JLabel(iiVolgion);
             JPanel pUpperNorth = new JPanel();
             pUpperNorth.add(lVolgion);
@@ -196,7 +197,7 @@ public class CoffeeShop extends JFrame {
             JPanel pLowerNorth = new JPanel();
             pLowerNorth.add(lDate);
             pLowerNorth.add(lTime);
-            pLowerNorth.setLayout(new GridLayout(1, 23));
+            pLowerNorth.setLayout(new FlowLayout(1));
 
             JPanel pNorth = new JPanel();
             pNorth.add(pUpperNorth);
@@ -205,19 +206,32 @@ public class CoffeeShop extends JFrame {
 
             /******************************** CENTER ********************************/
             int orderCount = 0;
-            int[] ordersIndex = {};
             for (int i = 0; i < orders.length; i++) {
-                if (orders[i] > 0) {
-                    ordersIndex[orderCount] = i;
-                    orderCount++;
+                if (orders[i] > 0) {orderCount++;}
+            }
+            JPanel pCenter = new JPanel();
+            JLabel lItem = new JLabel("Purchased:");
+            pCenter.add(lItem);
+            JLabel lCount = new JLabel("QTY:");
+            pCenter.add(lCount);
+            JLabel lPrice = new JLabel("Prices:");
+            pCenter.add(lPrice);
+            JLabel[] lItems = new JLabel[orderCount];
+            JLabel[] lCounts = new JLabel[orderCount];
+            JLabel[] lPrices = new JLabel[orderCount];
+            int id = 0;
+            for (int i = 0; i < orders.length; i++) {
+                if(orders[i] > 0) {
+                    lItems[id] = new JLabel(noSpace(items[i]));
+                    pCenter.add(lItems[id]);
+                    lCounts[id] = new JLabel(Integer.toString(orders[i]));
+                    pCenter.add(lCounts[id]);
+                    lPrices[id] = new JLabel(Integer.toString(prices[i]) + "K");
+                    pCenter.add(lPrices[id]);
+                    id++;
                 }
             }
-            JLabel[] lItem = new JLabel[orderCount];
-            for (int i = 0; i < lItem.length; i++) {
-                lItem[i] = new JLabel();
-            }
-
-            JPanel pCenter = new JPanel();
+            pCenter.setLayout(new GridLayout(orderCount+1, 2));
 
             /******************************** SOUTH *********************************/
             JPanel pSouth = new JPanel();
@@ -226,10 +240,10 @@ public class CoffeeShop extends JFrame {
             add(pNorth, BorderLayout.NORTH);
             add(pSouth, BorderLayout.SOUTH);
             add(pCenter, BorderLayout.CENTER);
-            setSize(500, 500);
+            int width = 250; int height = 200+100+((orderCount+1)*25);
+            setSize(width, height);
             setVisible(true);
             setTitle("Volgion Coffee Shop Struck");
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
     }
 
