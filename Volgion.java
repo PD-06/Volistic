@@ -25,10 +25,10 @@ public class Volgion {
         Scanner input = new Scanner(System.in);
         class Main {
             private static String[][] programs = {
-                { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (NEW)", "Morse Code Translator (EXPERIMENTAL)" },
-                { "1.0"        , "1.0.1"         , "1.0"                          , "1.0"                             , "0.1"                                  } };
+                { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (NEW)", "Morse Code Translator (NEW)" },
+                { "1.0"        , "1.0.1"         , "1.0"                          , "1.0"                             , "1.0"                        } };
             private static String[][] contributors = {
-            //  | Main Contributor | Others           |
+            //  | Main Contributor | Others (1)       |
                 { "Deffreus Theda"                    }, // Coffee Shop
                 { "Deffreus Theda"                    }, // BMI Calculator
                 { "Deffreus Theda"                    }, // Two Variable Calculator
@@ -70,9 +70,9 @@ public class Volgion {
                         "  \\ V /   | |_| | | |___  | |_| |  | |  | |_| | | |\\  |\n" + //
                         "   \\_/     \\___/  |_____|  \\____| |___|  \\___/  |_| \\_|\n" + //
                         "");
-                System.out.println("\n -- Version 1.1.1 -- ");
+                System.out.println("\n -- Version 1.2.0 -- ");
                 System.out.println("\nYou can contribute to this project here: https://github.com/PD-06/Volgion");
-                System.out.println("\nPlease report any bug here:\n    Discord    : deffreus"+ ansiColor.reset);
+                System.out.println("Please report any bug here:\n    Discord    : deffreus" + ansiColor.reset);
             }
             static void pMainMenu() {
                 System.out.println("\nPrograms menu:");
@@ -794,7 +794,6 @@ public class Volgion {
                             "          ██                    ██                                \n" + //
                             "            ████████████████████                                  \n");
                             CoffeeShop.pQuit(5);
-                            ;
                             break;
                         default:
                             System.out.println("Purchase cancelled, going back to listing your order!");
@@ -966,6 +965,137 @@ public class Volgion {
             }
         }
 
+        class Anton { // mau bikin morse code translator katanya
+            static Scanner BAPAKMU = new Scanner(System.in); // Amrul lo yang namain
+            static String dictionary[][] = {{"A" ,"B"   ,"C"   ,"D"  ,"E","F"   ,"G"  ,"H"   ,"I" ,"J"   ,"K"  ,"L"   ,"M" ,"N" ,"O"  ,"P"   ,"Q"   ,"R"  ,"S"  ,"T","U"  ,"V"   ,"W"  ,"X"   ,"Y"   ,"Z"   }, 
+                                            {".-","_...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."} };
+            static boolean isEnded, isRunning;
+            static String input, result;
+            static int mode;
+            static void run() {;
+                isRunning = true;
+                isEnded = false;
+                while(isRunning) {
+                    input = "";
+                    Main.clear();
+                    pWelcome();
+                    iMode();
+                    iInput();
+                    if(mode == 1) {LetterToMorse();}
+                    else if(mode == 2) {MorseToLetter();};
+                    pResult();
+                    iQuit();
+                    if(isEnded) {isRunning = false;}
+                }
+            }
+            static void pWelcome() {
+                Main.hr();
+                System.out.println("\nWelcome to Anton's Morse Code Translator!");
+                System.out.println("\"Thanks to Amrul for the program idea!\" — Deffreus");
+                System.out.println("\n*Note: This program DO NOT accept input that's not alphabet or morse code!\n");
+                Main.hr();
+            }
+            static void iMode() {
+                boolean inputIsValid = false;
+                while(!inputIsValid) {
+                    System.out.println("\nSelect translation mode\n1 = Alphabet --> Morse Code\n2 = Morse Code --> Alphabet\n(Enter the number):");
+                    try {
+                        mode = Integer.parseInt(BAPAKMU.nextLine());
+                        switch(mode) {
+                            case 1:
+                                inputIsValid = true;
+                                break;
+                            case 2:
+                                inputIsValid = true;
+                                break;
+                            default:
+                                Main.pExcType("Please enter either '1' or '2'!");
+                                break;
+                        }
+                    } 
+                    catch(Exception e) {
+                        Main.pExcType("Please enter either '1' or '2'!");
+                    }
+                }
+            }
+            static void iInput() {
+                System.out.println("\nType what you want to be translated:");
+                if(mode == 1) {System.out.println("(Alphabets):");} else {System.out.println("(Morse code):");}
+                input = (BAPAKMU.nextLine()).toUpperCase();
+            }
+            static void LetterToMorse() {
+                result = "";
+                char[] charsOfInput = input.toCharArray();
+                for(int i = 0; i < charsOfInput.length; i++) {
+                    for(int j = 0; j < dictionary[0].length; j++) {
+                        if(String.valueOf(charsOfInput[i]).equals(dictionary[0][j])) {
+                            result = result.concat(dictionary[1][j] + " "); 
+                            break;
+                        }
+                    }
+                }
+                System.out.println("\n(Morse code):");
+            }
+            static void MorseToLetter() {
+                result = "";
+                String currentMorseLetter[] = input.split(" ", 0);
+                for(int i = 0; i < currentMorseLetter.length; i++) {
+                    for(int j = 0; j < dictionary[1].length; j++) {
+                        if(currentMorseLetter[i].equals(dictionary[1][j])) {
+                            // result.concat(dictionary[0][j]); // idk why, but this just doesn't work
+                            result = result + dictionary[0][j];
+                            break;
+                        }
+                    }
+                }
+                System.out.println("\n(Alphabets):"); 
+            }
+            static void pResult() {
+                System.out.println(result);
+            }
+            static void iQuit() {
+                System.out.println("\nDo you want to translate again?\n(Y/n):");
+                boolean inputIsValid = false;
+                while(!inputIsValid) {
+                    String quit = BAPAKMU.nextLine();
+                    switch(quit) {
+                        case "Y":
+                        case "y":
+                        case "Yes":
+                        case "yes":
+                        case "YES":
+                        case "":
+                            inputIsValid = true;
+                            isEnded = false;
+                            break;
+                        case "n":
+                        case "N":
+                        case "No":
+                        case "no":
+                        case "NO":
+                            inputIsValid = true;
+                            isEnded = true;
+                            pQuit(3);
+                            break;
+                        default:
+                            Main.pExcType("Invalid: response unknown.");
+                            break;
+                    }
+                }
+            }
+            static void pQuit(int duration) {
+                System.out.println("\nQuitting in:");
+                for (int i = duration; i > 0; i--) {
+                    System.out.println(i + "...");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        System.out.println("Something went wrong...");
+                    }
+                } 
+            }
+        }
+
         boolean run = true;
         while (run) {
             try {
@@ -992,6 +1122,12 @@ public class Volgion {
                     case "Tristan":
                     case "Tristan's Sleep Duration Calculator":
                         Tristan.run();
+                        break;
+                    case "5":
+                    case "Anton":
+                    case "Morse":
+                    case "morse":
+                        Anton.run();
                         break;
                     case "exit":
                     case "quit":
