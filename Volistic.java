@@ -14,7 +14,7 @@ import java.util.*;
  * # Git: Fetch
  */
 
-public class Volgion {
+public class Volistic {
     public static void main(String[] args) {
         class ansiColor {
             static final String RESET = "\u001B[0m";

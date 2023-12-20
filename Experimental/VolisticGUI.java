@@ -8,10 +8,10 @@ package Experimental;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class VolgionGUI {
+public class VolisticGUI {
     JFrame frame; // Declare `frame`; here -> global
 
-    VolgionGUI() {
+    VolisticGUI() {
         // Create an instance of JFrame
         frame = new JFrame("Welcome to VolgionGUI!");
 
@@ -52,6 +52,6 @@ public class VolgionGUI {
     }
 
     public static void main(String[] args) {
-        new VolgionGUI();
+        new VolisticGUI();
     }
 }
