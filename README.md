@@ -10,6 +10,8 @@ Anyone is allowed to give feedback and even contributions, that would be much ap
 
 ## Prerequisites
 
+### - Have '[Git](https://git-scm.com/downloads)' installed (Click on the link to go to Git download page)
+
 ### - Download Java Development Kit (JDK)
 
 1. Click [here](https://www.oracle.com/java/technologies/downloads/) to download JDK! (For MacOs: `ARM64 DMG Installer`)
@@ -25,9 +27,14 @@ Anyone is allowed to give feedback and even contributions, that would be much ap
 3. If it's installed, it should be like this:
 ![Java-verified](https://github.com/DeffreusTheda/ComSci/assets/147963726/752f5d49-01cf-4f87-be2a-33838d471b06)
 
-## How to Contribute
+## 🍎・Wanna Try it Out??
 
-### - Have '[Git](https://git-scm.com/downloads)' installed (Click on the link to go to Git download page)
+1. On your local machine, clone this repository into a your preferred folder!
+2. Navigate to the cloned repository, and open a terminal at the folder `VolisticCLI`!
+3. Copy paste this command: `javac Volistic.java; java Volistic` to your terminal and press `return↵`!
+4. 🎉・It should now run the Volistic Program, have fun!・🎊
+
+## How to Contribute
 
 ### Through VSCode (Recommended)
 
@@ -91,25 +98,3 @@ When you're making code changes in VSCode, you're editing your local repository.
 3. After your changes are staged, under the 'SOURCE CONTROL' dropdown, enter a commit message describing what changes you made!
 4. Press `Cmd⌘ + return↵` to send the commit!
 5. Finally, 'push' your commit(s) by pressing `Cmd⌘ + Shift⇧ + P` and typing 'Git: Push'
-
-## 🍎・Wanna Try it Out??
-
-There are two version of Volistic currently:
-
-1. Volistic CLI : `Volistic.java`
-2. Volistic GUI (Only for Coffee Shop) : `CoffeeShop.java`
-
-The CLI version of Volistic contains 4 programs: Coffee Shop, BMI Calculator, Two Variable Calculator, and Sleep Duration Calculator
-
-As of the current development progress, only Coffee Shop has been imported into GUI
-
-## Downloading & Running Volistic
-
-1. Download the file above: `Volistic.java`! (Just place it on your Downloads folder for convenient sake)
-2. Once done, open up `Terminal`, and enter these commands:
-
-       - `cd /Users/USERNAME/Downloads`
-       - `javac Volistic.java`
-       - `java Volistic`
-
-3. 🎉・It should now run the Volistic Program, have fun!・🎊
