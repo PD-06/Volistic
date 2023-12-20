@@ -29,10 +29,11 @@ Anyone is allowed to give feedback and even contributions, that would be much ap
 
 ## 🍎・Wanna Try it Out??
 
-1. On your local machine, clone this repository into a your preferred folder!
-2. Navigate to the cloned repository, and open a terminal at the folder `VolisticCLI`!
-3. Copy paste this command: `javac Volistic.java; java Volistic` to your terminal and press `return↵`!
-4. 🎉・It should now run the Volistic Program, have fun!・🎊
+1. On your local machine, [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) into a your preferred folder!
+2. Navigate to the cloned repository, and [open a terminal at the folder](https://www.google.com/search?client=opera-gx&q=opening+a+terminal+at+a+folder&sourceid=opera&ie=UTF-8&oe=UTF-8) `VolisticCLI`!
+3. Type `pwd` to your terminal and press `return↵`! If it show `.../Volistic/VolisticCLI` then your current working directory is correct!
+4. Copy paste this command: `javac Volistic.java; java Volistic` to your terminal and press `return↵`!
+5. 🎉・It should now run the Volistic Program, have fun!・🎊
 
 ## How to Contribute
 
