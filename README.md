@@ -1,10 +1,10 @@
-# 🎉・VOLGION・🎊
+# 🎉・VOLISTIC・🎊
 
 ![DeffreusThedaBanner](https://github.com/DeffreusTheda/ComSci/assets/147963726/eb1f6827-0b64-49c4-8686-5c4e2cbe23ab)
 
 Version: 1.1
 
-**Volgion** is an open-source Java project, bundling the programs made by PD`06 in IB Computer Science
+**Volistic** is an open-source Java project, bundling the programs made by PD`06 in IB Computer Science
 
 Anyone is allowed to give feedback and even contributions, that would be much appreciated 💖
 
@@ -60,7 +60,7 @@ To work and make changes to the source code, it's recommended to edit in your ow
 
 1. Press `Cmd⌘ + Shift⇧ + P` and type 'Git: Clone'!
 2. Choose 'Clone from GitHub'!
-3. Type 'PD-06/Volgion' and press `return↵`!
+3. Type 'PD-06/Volistic' and press `return↵`!
 4. Select your preferred folder for the repository! (It's not recommended to put it on the 'Downloads' folder)
 5. **Open the cloned repository!** You can now make changes to the code!
 6. VSCode will ask if you trust the authors of the files. Check the 'Trust the authors of all files in the parent folder...' and click the 'Yes, I trust the authors' button!
@@ -94,22 +94,22 @@ When you're making code changes in VSCode, you're editing your local repository.
 
 ## 🍎・Wanna Try it Out??
 
-There are two version of Volgion currently:
+There are two version of Volistic currently:
 
-1. Volgion CLI : `Volgion.java`
-2. Volgion GUI (Only for Coffee Shop) : `CoffeeShop.java`
+1. Volistic CLI : `Volistic.java`
+2. Volistic GUI (Only for Coffee Shop) : `CoffeeShop.java`
 
-The CLI version of Volgion contains 4 programs: Coffee Shop, BMI Calculator, Two Variable Calculator, and Sleep Duration Calculator
+The CLI version of Volistic contains 4 programs: Coffee Shop, BMI Calculator, Two Variable Calculator, and Sleep Duration Calculator
 
 As of the current development progress, only Coffee Shop has been imported into GUI
 
-## Downloading & Running Volgion
+## Downloading & Running Volistic
 
-1. Download the file above: `Volgion.java`! (Just place it on your Downloads folder for convenient sake)
+1. Download the file above: `Volistic.java`! (Just place it on your Downloads folder for convenient sake)
 2. Once done, open up `Terminal`, and enter these commands:
 
        - `cd /Users/USERNAME/Downloads`
-       - `javac Volgion.java`
-       - `java Volgion`
+       - `javac Volistic.java`
+       - `java Volistic`
 
-3. 🎉・It should now run the Volgion Program, have fun!・🎊
+3. 🎉・It should now run the Volistic Program, have fun!・🎊
