@@ -436,7 +436,7 @@ public class Volistic {
                 int colorSeed = (int) (Math.random()*(ansiColor.colors.length));
                 System.out.println(ansiColor.colors[colorSeed] + banners[bannerSeed]);
                 System.out.println("\n -- Version 1.2.1 -- ");
-                System.out.println("\nYou can contribute to this project here: https://github.com/PD-06/Volgion");
+                System.out.println("\nYou can contribute to this project here: https://github.com/PD-06/Volistic");
                 System.out.println("Please report any bug here:\n    Discord    : deffreus" + ansiColor.RESET);
             }
             static void pMainMenu() {
@@ -465,7 +465,7 @@ public class Volistic {
                 return res;
             }
             static void pQuit() {
-                System.out.println("\n(Type 'quit' or 'exit' to quit Volgion from this menu)");
+                System.out.println("\n(Type 'quit' or 'exit' to quit Volistic from this menu)");
             }
             static String nice(double valval) {
                 int valint = (int) valval; String res = "";
@@ -502,7 +502,7 @@ public class Volistic {
                 pQuit(3);
             }
             static void pQuit(int seconds) {
-                System.out.println("\nThank you so much for using the Volgion Two Variable Calculator!! :D");
+                System.out.println("\nThank you so much for using the Volistic Two Variable Calculator!! :D");
                 System.out.println("\nQuitting in:");
                 for (int i = seconds; i > 0; i--) {
                     System.out.println(i + "...");
@@ -656,7 +656,7 @@ public class Volistic {
                 if(!tvcIsEnded) {System.out.println("Selecting: " + calculations[op][2] + "... " + calculations[op][3]);}
             }
             static void pWelcome() {
-                System.out.println("\nWelcome to the Volgion's Two Variable Calculator!");
+                System.out.println("\nWelcome to the Volistic's Two Variable Calculator!");
                 System.out.println("(Enter 'quit' or 'exit' to exit)\n");
             }
         }
@@ -756,7 +756,7 @@ public class Volistic {
                 }
             }
             static void pWelcome() {
-                System.out.println("\nWelcome to the Volgion BMI Calculator!\n");
+                System.out.println("\nWelcome to the Volistic BMI Calculator!\n");
             }
             static void iName() {
                 System.out.println("\nWhat is your full name? (blank to skip)");
@@ -906,7 +906,7 @@ public class Volistic {
             }
             static void help() {
                 System.out.println(
-                        "\nAvailable commands: \n'menu'      : show the items menu.\n'add'       : add an item and its amount to the order list.\n'remove'    : remove an amount of item from the order list\n'list'      : display your current orders list.\n'reset'     : discard the order list and make a new one.\n'done'      : finish choosing and purchase your order list.\n'quit'      : simply quit the program and goes back to Volgion Main menu.\n'help'      : show this help menu.\n");
+                        "\nAvailable commands: \n'menu'      : show the items menu.\n'add'       : add an item and its amount to the order list.\n'remove'    : remove an amount of item from the order list\n'list'      : display your current orders list.\n'reset'     : discard the order list and make a new one.\n'done'      : finish choosing and purchase your order list.\n'quit'      : simply quit the program and goes back to Volistic Main menu.\n'help'      : show this help menu.\n");
             }
             static void run() {
                 pWelcome();
@@ -1169,7 +1169,7 @@ public class Volistic {
                 Main.clear();
                 Main.hr();
                 System.out.println(
-                        "\nWelcome to the Volgion's Coffee Shop!\n\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)\nWhat will be your order?\n");
+                        "\nWelcome to the Volistic's Coffee Shop!\n\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)\nWhat will be your order?\n");
                 help();
             }
             static void resetVar() {
