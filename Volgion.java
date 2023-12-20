@@ -490,6 +490,7 @@ public class Volgion {
                         done();
                         break;
                     case "quit":
+                        CoffeeShop.resetVar();
                         pQuit(3);
                         CoffeeShop.end = true;
                         break;
