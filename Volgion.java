@@ -889,13 +889,13 @@ public class Volgion {
                         case "NO":
                             valid = true;
                             tristanIsEnded = true;
+                            System.out.println("\nThank you for using the Sleep Duration Calculator!! :D");
+                            pQuit(3);
                             break;
                         default:
                             System.out.println("Invalid input!");
                     }
                 }
-                System.out.println("\nThank you for using the Sleep Duration Calculator!! :D");
-                pQuit(3);
             }
             static void pRes() {
                 // kalkulasi durasi tidur:
