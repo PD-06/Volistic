@@ -778,6 +778,22 @@ public class Volgion {
                             CoffeeShop.csrun = false;
                             CoffeeShop.end = true;
                             CoffeeShop.resetVar();
+                            System.out.println("\n\n" + //
+                            "                ██    ██    ██                                    \n" + //
+                            "              ██      ██  ██                                      \n" + //
+                            "              ██    ██    ██                                      \n" + //
+                            "                ██  ██      ██                                    \n" + //
+                            "                ██    ██    ██                                    \n" + //
+                            "                                                                  \n" + //
+                            "            ████████████████████                                  \n" + //
+                            "            ██                ██████                              \n" + //
+                            "            ██                ██  ██                              \n" + //
+                            "            ██                ██  ██                              \n" + //
+                            "            ██                ██████                              \n" + //
+                            "              ██            ██                                    \n" + //
+                            "          ████████████████████████                                \n" + //
+                            "          ██                    ██                                \n" + //
+                            "            ████████████████████                                  \n");
                             CoffeeShop.pQuit(5);
                             ;
                             break;
@@ -799,22 +815,6 @@ public class Volgion {
                 }
             }
             static void pQuit(int duration) {
-                System.out.println("\n\n" + //
-"                ██    ██    ██                                    \n" + //
-"              ██      ██  ██                                      \n" + //
-"              ██    ██    ██                                      \n" + //
-"                ██  ██      ██                                    \n" + //
-"                ██    ██    ██                                    \n" + //
-"                                                                  \n" + //
-"            ████████████████████                                  \n" + //
-"            ██                ██████                              \n" + //
-"            ██                ██  ██                              \n" + //
-"            ██                ██  ██                              \n" + //
-"            ██                ██████                              \n" + //
-"              ██            ██                                    \n" + //
-"          ████████████████████████                                \n" + //
-"          ██                    ██                                \n" + //
-"            ████████████████████                                  \n");
                 System.out.println("\nQuitting in:");
                 for (int i = duration; i > 0; i--) {
                     System.out.println(i + "...");
