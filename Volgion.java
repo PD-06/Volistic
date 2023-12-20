@@ -62,19 +62,17 @@ public class Volgion {
             static String getProgramsName(int index) {
                 return programs[0][index];
             }
-            static void pbanner() {
-                System.out.printf(ansiColor.red + "__     __   ___    _        ____   ___    ___    _   _ \n" + //
+            static void pBanner() {
+                System.out.printf(ansiColor.red + //
+                        "__     __   ___    _        ____   ___    ___    _   _ \n" + //
                         "\\ \\   / /  / _ \\  | |      / ___| |_ _|  / _ \\  | \\ | |\n" + //
                         " \\ \\ / /  | | | | | |     | |  _   | |  | | | | |  \\| |\n" + //
                         "  \\ V /   | |_| | | |___  | |_| |  | |  | |_| | | |\\  |\n" + //
                         "   \\_/     \\___/  |_____|  \\____| |___|  \\___/  |_| \\_|\n" + //
                         "");
                 System.out.println("\n -- Version 1.1.1 -- ");
-                System.out
-                        .println("\nYou can contribute to this project here: https://github.com/DeffreusTheda/Volgion");
-                System.out.println(
-                        "Please report any bug here:\n    Email      : muhammad.alfin@praditadirgantara.sch.id\n    Discord    : deffreus (recommended)\n    WA         : +62 895-8077-31515"
-                                + ansiColor.reset);
+                System.out.println("\nYou can contribute to this project here: https://github.com/PD-06/Volgion");
+                System.out.println("\nPlease report any bug here:\n    Discord    : deffreus"+ ansiColor.reset);
             }
             static void pMainMenu() {
                 System.out.println("\nPrograms menu:");
@@ -972,7 +970,7 @@ public class Volgion {
         while (run) {
             try {
                 Main.clear();
-                Main.pbanner();
+                Main.pBanner();
                 Main.pQuit();
                 Main.pMainMenu();
                 System.out.println("\nSelect the program you want to run: ");
