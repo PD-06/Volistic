@@ -1,8 +1,8 @@
 # 🎉・VOLISTIC・🎊
 
-![DeffreusThedaBanner](https://github.com/DeffreusTheda/ComSci/assets/147963726/eb1f6827-0b64-49c4-8686-5c4e2cbe23ab)
+![Volistic Banner](https://github.com/PD-06/Volgion/assets/147963726/2f5450eb-fa90-4a58-9f76-e2911f7f7ce9)
 
-Version: 1.1
+Version: 1.2.1
 
 **Volistic** is an open-source Java project, bundling the programs made by PD`06 in IB Computer Science
 
