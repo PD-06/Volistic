@@ -4,9 +4,7 @@
 
 Version: 1.2.1
 
-**Volistic** is an open-source Java project, bundling the programs made by PD`06 in IB Computer Science
-
-Anyone is allowed to give feedback and even contributions, that would be much appreciated 💖
+**Volistic** is an **open-source** Java project, bundling the programs made by PD\`06 in IB Computer Science into one container program. Thie project acts as a container for students development and learning progress tracker. Any student can create their own Java CLI program and include it on `Volistic.java`. The steps and procedures to do so are articulated on the '[CONTRIBUTING.md](https://github.com/PD-06/Volistic/blob/main/CONTRIBUTING.md)' file.
 
 ## Prerequisites
 
@@ -29,15 +27,21 @@ Anyone is allowed to give feedback and even contributions, that would be much ap
 
 ## 🍎・Wanna Try it Out??
 
-1. On your local machine, [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) into a your preferred folder!
+1. On your machine, [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) into a your preferred folder!
 2. Navigate to the cloned repository, and [open a terminal at the folder](https://www.google.com/search?client=opera-gx&q=opening+a+terminal+at+a+folder&sourceid=opera&ie=UTF-8&oe=UTF-8) `VolisticCLI`!
 3. Type `pwd` to your terminal and press `return↵`! If it show `.../Volistic/VolisticCLI` then your current working directory is correct!
 4. Copy paste this command: `javac Volistic.java; java Volistic` to your terminal and press `return↵`!
 5. 🎉・It should now run the Volistic Program, have fun!・🎊
 
-## How to Contribute
+## 🎁・How to Get Started Contributing and Making Your Own Program on Volistic
 
-### Through VSCode (Recommended)
+You're highly suggested to use Pull Request to get your changes to the repository instead of direct edit. Please refer to `CODE_OF_CONDUCT.md` for follow-up on this guide here. If you need any help regarding this matter, kindly consult to: deffreus (Discord)
+
+### Through Apache NetBeans
+
+Refer to this documentation [here](https://netbeans.apache.org/tutorial/main/kb/docs/ide/git/).
+
+### Through VSCode
 
 1. Donwload & Install VSCode! See the guide [here](https://www.youtube.com/watch?v=U5swA1GRJ18)!
 2. Open VSCode, then click the 'Extension' icon on the side bar!
@@ -99,3 +103,11 @@ When you're making code changes in VSCode, you're editing your local repository.
 3. After your changes are staged, under the 'SOURCE CONTROL' dropdown, enter a commit message describing what changes you made!
 4. Press `Cmd⌘ + return↵` to send the commit!
 5. Finally, 'push' your commit(s) by pressing `Cmd⌘ + Shift⇧ + P` and typing 'Git: Push'
+
+## Support and Help
+
+We mainly use Discord for this project. Go to the '# support-and-help' under the '🎁・Volistic' category. You can join our server [here](https://discord.gg/SwycRcrXwC).
+
+## 🪪・License
+
+[MIT](https://choosealicense.com/licenses/mit/)
