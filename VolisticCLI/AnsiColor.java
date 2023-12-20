@@ -1,3 +1,4 @@
+// DON'T EDIT THIS FILE
 package VolisticCLI;
 
 public class AnsiColor {
