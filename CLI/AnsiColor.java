@@ -1,5 +1,5 @@
 // DON'T EDIT THIS FILE
-package VolisticCLI;
+package CLI;
 
 public class AnsiColor {
     static final String RESET = "\u001B[0m";

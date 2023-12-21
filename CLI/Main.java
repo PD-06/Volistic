@@ -1,5 +1,5 @@
 // DON'T EDIT THIS FILE
-package VolisticCLI;
+package CLI;
 
 public class Main {
             private static String[][] programs = {

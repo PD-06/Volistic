@@ -1,5 +1,5 @@
 // Define the folder for this file, allowing interaction with other .java file(s)
-package VolisticCLI;
+package CLI;
 
 // Import a library for scanner
 import java.util.Scanner;
