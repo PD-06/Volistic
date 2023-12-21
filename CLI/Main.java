@@ -1,4 +1,4 @@
-package VolisticCLI;
+package CLI;
 
 public class Main {
     private static String[][] programs = {
