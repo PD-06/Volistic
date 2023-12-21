@@ -30,7 +30,7 @@ Version: 1.2.1
 1. On your machine, [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) into a your preferred folder!
 2. Navigate to the cloned repository, and [open a terminal at the folder](https://www.google.com/search?client=opera-gx&q=opening+a+terminal+at+a+folder&sourceid=opera&ie=UTF-8&oe=UTF-8) `Volistic`!
 3. Type `pwd` to your terminal and press `return↵`! If it show `.../Volistic` then your current working directory is correct!
-4. Copy paste this command: `javac VolisticCLI/*.java; java VolisticCLI.Volistic` to your terminal and press `return↵`!
+4. Copy paste this command: `javac CLI/*.java; java CLI.Volistic` to your terminal and press `return↵`!
 5. 🎉・It should now run the Volistic Program, have fun!・🎊
 
 ## 🎁・How to Get Started Contributing and Making Your Own Program on Volistic

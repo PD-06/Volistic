@@ -1,4 +1,4 @@
-package VolisticCLI;
+package CLI;
 
 import java.util.*;
 

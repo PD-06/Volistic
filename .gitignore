@@ -1,11 +1,11 @@
-VolisticCLI/AnsiColor.class
-VolisticCLI/Anton.class
-VolisticCLI/BMICalculator.class
-VolisticCLI/CoffeeShop.class
-VolisticCLI/Main.class
-VolisticCLI/Tristan.class
-VolisticCLI/TwoVarCalculator.class
-VolisticCLI/Volistic.class
+CLI/AnsiColor.class
+CLI/Anton.class
+CLI/BMICalculator.class
+CLI/CoffeeShop.class
+CLI/Main.class
+CLI/Tristan.class
+CLI/TwoVarCalculator.class
+CLI/Volistic.class
 .DS_Store
 Source code.tar.gz
 Source code.zip
