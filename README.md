@@ -4,7 +4,7 @@
 
 Version: 1.2.1
 
-**Volistic** is an **open-source** Java project, bundling the programs made by PD\`06 in IB Computer Science into one container program. Thie project acts as a container for students development and learning progress tracker. Any student can create their own Java CLI program and include it on `Volistic.java`. The steps and procedures to do so are articulated on the '[CONTRIBUTING.md](https://github.com/PD-06/Volistic/blob/main/CONTRIBUTING.md)' file.
+**Volistic** is an **open-source** Java project, bundling the programs made by PD\`06 in IB Computer Science into one launcher program. Any student can create their own Java CLI program and include it on `Volistic.java` (The program launcher). The steps and procedures to do so are articulated on the '[CONTRIBUTING.md](https://github.com/PD-06/Volistic/blob/main/CONTRIBUTING.md)' file.
 
 ## Prerequisites
 
@@ -28,9 +28,9 @@ Version: 1.2.1
 ## 🍎・Wanna Try it Out??
 
 1. On your machine, [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) into a your preferred folder!
-2. Navigate to the cloned repository, and [open a terminal at the folder](https://www.google.com/search?client=opera-gx&q=opening+a+terminal+at+a+folder&sourceid=opera&ie=UTF-8&oe=UTF-8) `VolisticCLI`!
-3. Type `pwd` to your terminal and press `return↵`! If it show `.../Volistic/VolisticCLI` then your current working directory is correct!
-4. Copy paste this command: `javac Volistic.java; java Volistic` to your terminal and press `return↵`!
+2. Navigate to the cloned repository, and [open a terminal at the folder](https://www.google.com/search?client=opera-gx&q=opening+a+terminal+at+a+folder&sourceid=opera&ie=UTF-8&oe=UTF-8) `Volistic`!
+3. Type `pwd` to your terminal and press `return↵`! If it show `.../Volistic` then your current working directory is correct!
+4. Copy paste this command: `javac VolisticCLI/*.java; java VolisticCLI.Volistic` to your terminal and press `return↵`!
 5. 🎉・It should now run the Volistic Program, have fun!・🎊
 
 ## 🎁・How to Get Started Contributing and Making Your Own Program on Volistic
