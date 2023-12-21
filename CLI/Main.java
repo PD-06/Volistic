@@ -530,6 +530,7 @@ public class Main {
         int colorSeed = (int) (Math.random()*(AnsiColor.colors.length));
         System.out.println(AnsiColor.colors[colorSeed] + banners[bannerSeed]);
         System.out.println("\n -- Version 1.2.1 -- ");
+        System.out.println("\nWelcome, " + LoginPage.identity[0] + "!");
         System.out.println("\nYou can contribute to this project here: https://github.com/PD-06/Volistic");
         System.out.println("Please report any bug here:\n    Discord    : deffreus" + AnsiColor.RESET);
     }
