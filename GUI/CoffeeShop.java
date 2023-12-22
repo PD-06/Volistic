@@ -43,20 +43,12 @@ public class CoffeeShop extends JFrame {
                     }
                 }
                 if (!orderListIsEmpty) {new Transaction();}
+                reset();
             }
         });
         JButton bReset = new JButton("Reset");
         bReset.setFont(westButtonFont);
-        bReset.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cost = 0;
-                for (int i = 0; i < items.length; i++) {
-                    orders[i] = 0;
-                    tfCount[i].setText("0");
-                }
-                update();
-            }
-        });
+        bReset.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {reset();}});
         JPanel pWest = new JPanel();
         pWest.add(bPurchase);
         pWest.add(bReset);
@@ -174,18 +166,25 @@ public class CoffeeShop extends JFrame {
         String res = ns.replaceAll(" ", "");
         return res;
     }
+    void reset() {
+        cost = 0;
+        for (int i = 0; i < items.length; i++) {
+            orders[i] = 0;
+            tfCount[i].setText("0");
+        }
+        update();
+    }
 
     public class Transaction extends JFrame {
 
         Transaction() {
-            setLayout(new BorderLayout(0, 25));
+            setLayout(new BorderLayout());
             /******************************** NORTH *********************************/
             // Upper Half
             ImageIcon iiVolgion = new ImageIcon("Images/VOLGION-NOBG.png");
             JLabel lVolgion = new JLabel(iiVolgion);
             JPanel pUpperNorth = new JPanel();
             pUpperNorth.add(lVolgion);
-            pUpperNorth.setLayout(new GridLayout(1, 1));
             // Lower Half
             String date = java.time.LocalDate.now().toString();
             JLabel lDate = new JLabel(date);
