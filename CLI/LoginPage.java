@@ -24,12 +24,15 @@ public class LoginPage extends JFrame {
         setLayout(new BorderLayout());
         /********************* North *********************/
         JLabel lWelcome = new JLabel("Welcome to Volistic! Please login to continue.");
-        JLabel lAnonInfo = new JLabel("Leave blank for anonymous login.");
+        JPanel pWelcome = new JPanel();
+        pWelcome.add(lWelcome);
+        pWelcome.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JLabel lAnonInfo = new JLabel("Leave blank to login as guest.");
         JPanel pAnonInfo = new JPanel();
         pAnonInfo.add(lAnonInfo);
-        pAnonInfo.setLayout(new FlowLayout(1));
+        pAnonInfo.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel pNorth = new JPanel();
-        pNorth.add(lWelcome);
+        pNorth.add(pWelcome);
         pNorth.add(pAnonInfo);
         pNorth.setLayout(new GridLayout(2, 1));
         add(pNorth, BorderLayout.NORTH);
@@ -67,7 +70,7 @@ public class LoginPage extends JFrame {
                 for(int i = 0; i < account[0].length; i++) {if(account[0][i].equals(tfUsername.getText()) && account[1][i].equals(tfPassword.getText())) {
                     authenticationSuccessful = true;
                     identity[0] = tfUsername.getText();
-                    if(identity[0].equals("")) {identity[0] = "Anonymous";}
+                    if(identity[0].equals("")) {identity[0] = "Guest";}
                     identity[1] = tfPassword.getText();
                 }}
                 if(authenticationSuccessful) {lStatus.setText("Login successful!");}
