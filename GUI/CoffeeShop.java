@@ -10,10 +10,11 @@ public class CoffeeShop extends JFrame {
     private static int[] prices = { 21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34 };
     private static int[] orders = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     final private Font westButtonFont = new Font("Georgia", Font.PLAIN, 20);
-    double cost;
+    double cost, finalCost;
     boolean isDiscount;
     JLabel lRawCost, lIsDiscount, lFinalCost;
     JLabel[] tfCount;
+    String discount;
 
     CoffeeShop() {
         JPanel pCF = new JPanel();
@@ -157,18 +158,12 @@ public class CoffeeShop extends JFrame {
 
     void update() {
         cost = 0;
-        for (int i = 0; i < items.length; i++) {
-            cost += orders[i] * prices[i];
-        }
+        for (int i = 0; i < items.length; i++) {cost += orders[i] * prices[i];}
         lRawCost.setText("Rp. " + nice(cost) + "K");
-        if (cost >= 100) {
-            isDiscount = true;
-        } else {
-            isDiscount = false;
-        }
-        String discount = (isDiscount) ? "15%" : "None";
+        if (cost >= 100) {isDiscount = true;} else {isDiscount = false;}
+        discount = (isDiscount) ? "15%" : "None";
         lIsDiscount.setText(discount);
-        double finalCost = (isDiscount) ? cost * 0.85 : cost;
+        finalCost = (isDiscount) ? cost * 0.85 : cost;
         lFinalCost.setText("Rp. " + nice(finalCost) + "K");
     }
     String nice(double cc) {
@@ -233,19 +228,57 @@ public class CoffeeShop extends JFrame {
                     id++;
                 }
             }
-            pCenter.setLayout(new GridLayout(orderCount+1, 2));
+            // Total
+            JLabel lLTotal = new JLabel("Total:");
+            pCenter.add(lLTotal);
+            int sum = 0;
+            for(int i = 0; i < orders.length; i++) {sum += prices[i]*orders[i];}
+            JLabel lRTotal = new JLabel(Integer.toString(sum));
+            pCenter.add(lRTotal);
+            // Discount
+            JLabel lLDiscount = new JLabel("Discount:");
+            pCenter.add(lLDiscount);
+            String discount;
+            if(isDiscount) {discount = "15%";} else {discount = "None";}
+            JLabel lRDiscount = new JLabel(discount);
+            pCenter.add(lRDiscount);
+            // Price
+            JLabel lLPrice = new JLabel("Price:");
+            pCenter.add(lLPrice);
+            update();
+            JLabel lRPrice = new JLabel(String.format("%.1f", finalCost));
+            pCenter.add(lRPrice);
+
+            pCenter.setLayout(new GridLayout(orderCount+1+3, 2));
+
+            /********************************* EAST *********************************/
+            JPanel pEast = new JPanel();
+            
 
             /******************************** SOUTH *********************************/
-            JPanel pSouth = new JPanel();
+            // JPanel pSouth = new JPanel();
 
             /******************************** FRAME *********************************/
             add(pNorth, BorderLayout.NORTH);
-            add(pSouth, BorderLayout.SOUTH);
+            add(pWest, BorderLayout.WEST);
             add(pCenter, BorderLayout.CENTER);
-            int width = 250; int height = 200+100+((orderCount+1)*25);
+            add(pEast, BorderLayout.EAST);
+            // add(pSouth, BorderLayout.SOUTH);
+            int width = 250; int height = 200+200+((orderCount+1)*30);
             setSize(width, height);
             setVisible(true);
             setTitle("Volgion Coffee Shop Struck");
+        }
+
+        void update() {
+            cost = 0;
+            for (int i = 0; i < items.length; i++) {cost += orders[i] * prices[i];}
+            lRawCost.setText("Rp. " + nice(cost) + "K");
+            if (cost >= 100) {isDiscount = true;} else {isDiscount = false;}
+            discount = (isDiscount) ? "15%" : "None";
+            lIsDiscount.setText(discount);
+            finalCost = (isDiscount) ? cost * 0.85 : cost;
+            lFinalCost.setText("Rp. " + nice(finalCost) + "K");
         }
     }
 
