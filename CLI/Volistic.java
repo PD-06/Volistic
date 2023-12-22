@@ -29,7 +29,7 @@ public class Volistic {
         LoginPage lp = new LoginPage();
         while(onLoginPage) {
             tryCloseLoginPage(lp);
-            try {Thread.sleep(10);} catch(Exception e) {Main.pExcType("Thread sleep exception.");}
+            try {Thread.sleep(17);} catch(Exception e) {Main.pExcType("Thread sleep exception.");}
         }
         
         Scanner input = new Scanner(System.in);
@@ -73,16 +73,9 @@ public class Volistic {
                         break;
                 }
             } catch (Exception e) {
-                Main.pExcType(
-                        "Something went wrong. Please report immediately to: deffreus (Discord). Sorry for the inconvenience T-T");
-                if (input.hasNextLine()) {
-                    input.nextLine();
-                }
-                try {
-                    Thread.sleep(2000);
-                } catch (Exception ee) {
-                    Main.pExcType("Thread sleep error.");
-                }
+                Main.pExcType("Something went wrong. Please report immediately to: deffreus (Discord). Sorry for the inconvenience T-T");
+                if (input.hasNextLine()) {input.nextLine();}
+                try {Thread.sleep(2000);} catch (Exception ee) {Main.pExcType("Thread sleep error.");}
             }
         }
         input.close();
