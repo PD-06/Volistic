@@ -193,18 +193,22 @@ public class CoffeeShop extends JFrame {
             JPanel pLowerNorth = new JPanel();
             pLowerNorth.add(lDate);
             pLowerNorth.add(lTime);
-            pLowerNorth.setLayout(new FlowLayout(1));
+            pLowerNorth.setLayout(new FlowLayout(FlowLayout.CENTER));
+            JLabel lThanks = new JLabel("Thank your for purchasing!");
 
             JPanel pNorth = new JPanel();
             pNorth.add(pUpperNorth);
             pNorth.add(pLowerNorth);
-            pNorth.setLayout(new GridLayout(2, 1));
+            pNorth.add(lThanks);
+            pNorth.setLayout(new GridLayout(3, 1));
+
+            /********************************* WEST *********************************/ 
+            JPanel pWest = new JPanel();
 
             /******************************** CENTER ********************************/
+            // Items list
             int orderCount = 0;
-            for (int i = 0; i < orders.length; i++) {
-                if (orders[i] > 0) {orderCount++;}
-            }
+            for (int i = 0; i < orders.length; i++) {if (orders[i] > 0) {orderCount++;}}
             JPanel pCenter = new JPanel();
             JLabel lItem = new JLabel("Purchased:");
             pCenter.add(lItem);
