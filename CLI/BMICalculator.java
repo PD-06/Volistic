@@ -3,145 +3,122 @@ package CLI;
 import java.util.Scanner;
 
 public class BMICalculator {
-            // Deklarasi variabel yang akan dipakai.
-            static boolean bmirun, end, hasName;
-            static String fname, category; // fname -> "Full Name"
-            static Scanner bmiinput = new Scanner(System.in);
-            static double weight, height, bmi;
+            // Program variables declaration
+            private static boolean end;
+            private static String fullName, category;
+            private static final Scanner sc = new Scanner(System.in);
+            private static double weight, height, bmi;
 
-            // Method buat jalanin bmi kalkulatornya
+            // Similar to 'public static void main(String[] args)'
             static void run() {
-                bmirun = true;
                 end = false;
-                // Biar bisa ngulang-ulang kalkulasi BMI
-                while (bmirun) {
-                    bmirun = false;
-                    // 'try': kalau ada error (Exception) di sebuah line of code, langsung lompat ke 'catch'
+                while (!end) {
                     try {
-                        Main.clear(); // clear terminal
-                        Main.hr(); // print horizontal line
-                        // perhatiin penamaan methodnya: pWelcome -> "Print Welcome", iName -> "Input Name"
+                        Main.clear();
                         pWelcome();
-                        Main.hr();
                         iName();
-                        if (fname != "") // kalau namanya nggak kosong
-                            hasName = true;
-                        if (hasName) {System.out.println("\nHello " + fname + "!");} // kamu bisa lo nulis if begini
                         iWeight();
                         iHeight();
-                        calcBMI(weight, height); // method ini pakai 'parameter': weight & height, buat dipakai di method 'calcBMI' nya
+                        calcBMI(weight, height);
                         pResult();
                         iQuit();
-                        if (end == false) {bmirun = true;} // kamu bisa lo nulis if begini
-                    } catch (Exception e) { // ini catch!
-                        Main.pExcType(
-                                "You're not supposed to see this message.\nIf you do, report with a screenshot and how to replicate it here: deffreus (Discord)");
-                        bmirun = true; // biar ngulang
-                    }
-                }
-            }
-            // timer buat quitting aja
-            static void pQuit(int intSecond) {
-                System.out.println("\nQuitting in:");
-                for (int i = intSecond; i > 0; i--) {
-                    System.out.println(i + "...");
-                    try {
-                        Thread.sleep(1000); // wait for 1000 milisecond = 1 second
                     } catch (Exception e) {
-                        Main.pExcType("Thread sleep exception, dev's fault");
+                        System.out.println("BMI Calculator crashed. Please contact: deffreus (Discord)");
                     }
                 }
             }
-            // jujur ini kurang sih:
-            static void iQuit() {
-                System.out.println("\nDo you want to calculate again? (Y/n):");
-                String option = bmiinput.nextLine();
-                switch (option) {
-                    case "N":
-                    case "n":
-                    case "No":
-                    case "no":
-                    case "NO":
-                        end = true;
-                        pQuit(3);
-                        break;
-                }
-            }
-            static void pResult() {
-                System.out.println("\n"); // biar tetep misahin output walau `hasName == false`
-                if (hasName)
-                    System.out.println("Here is your result, " + fname + ":");
-                System.out.println("Your weight      : " + Main.nice(weight) + " kg");
-                System.out.println("Your height      : " + Main.nice(height) + " cm");
-                System.out.printf("Your BMI index   : %.1f\n", bmi);
-                System.out.println("\nYou're categorized as:\n" + category);
-            }
-            static void calcBMI(double w, double h) {
-                bmi = w / (h * h * 0.0001); // pake 0.0001 karena unit nya centimeter
-                if (bmi < 16) {
-                    category = "Underweight (Severe thinness)";
-                } else if (bmi <= 16.9) {
-                    category = "Underweight (Moderate thinness)";
-                } else if (bmi <= 18.4) {
-                    category = "Underweight (Mild thinness)";
-                } else if (bmi < 24.9) {
-                    category = "Normal";
-                } else if (bmi <= 29.9) {
-                    category = "Overweight (Pre-obese)";
-                } else if (bmi <= 34.9) {
-                    category = "Obese (Class I)";
-                } else if (bmi <= 39.9) {
-                    category = "Obese (Class II)";
-                } else {
-                    category = "Obese (Class III)";
-                }
-            }
+            // Print a welcome message
             static void pWelcome() {
+                Main.hr();
                 System.out.println("\nWelcome to the Volistic BMI Calculator!\n");
+                Main.hr();
             }
+            // Ask for user's name
             static void iName() {
-                System.out.println("\nWhat is your full name? (blank to skip)");
-                fname = bmiinput.nextLine();
+                System.out.print("\nEnter your full name (blank to skip): ");
+                fullName = sc.nextLine();
+                if (!fullName.isEmpty()) System.out.println("\nHello, " + fullName + "!");
             }
+            // Ask for user's weight
             static void iWeight() {
-                boolean valid = false;
-                while (!valid) { // minta terus input sampai input tersebut valid! (angka doang)
-                    valid = true;
+                boolean inputIsValid = false;
+                while (!inputIsValid) { //
                     try {
-                        System.out.println("\nWhat is your weight (kg)?");
-                        weight = Double.parseDouble(bmiinput.nextLine());
-                        if (weight > 635) {
-                            System.out.println("I don't think you can be that fat.\n");
-                            valid = false;
-                        } else if (weight < 0.25) {
-                            System.out.println("I don't think even a baby could be that light.\n");
-                            valid = false;
-                        }
+                        System.out.print("\nEnter your weight in kg: ");
+                        weight = Double.parseDouble(sc.nextLine());
                     } catch (Exception e) {
-                        Main.pExcType("Something is wrong with your weight.");
-                        valid = false;
+                        System.out.println("Something is wrong with your weight");
+                        continue;
                     }
+                    if(weight > 635) System.out.println("I don't think you can be that fat.");
+                    else if(weight <= 0) System.out.println("What are you?");
+                    else if(weight < 0.25) System.out.println("Are you a toothpick?");
+                    else inputIsValid = true;
                 }
             }
             static void iHeight() {
-                boolean valid = false;
-                while (!valid) { // mirip yang di `iWeight()` (angka doang)
-                    valid = true;
+                boolean inputIsValid = false;
+                while (!inputIsValid) {
                     try {
-                        System.out.println("\nWhat is your height (cm)?");
-                        height = Double.parseDouble(bmiinput.nextLine());
-                        if (height > 272) {
-                            System.out.println(
-                                    "Even the tallest man in the world, Robert Wadlow, doesn't reach that height.");
-                            valid = false;
-                        } else if (height < 25) {
-                            System.out.println("That's kinda extremely small, what are you huh?");
-                            valid = false;
-                        }
+                        System.out.print("\nEnter your height in cm: ");
+                        height = Double.parseDouble(sc.nextLine());
                     } catch (Exception e) {
-                        Main.pExcType("Something is wrong with your height.");
-                        valid = false;
+                        System.out.println("Something is wrong with your height.");
+                        continue;
                     }
+                    if      (height > 272) System.out.println("Even the tallest man in the world, Robert Wadlow, doesn't reach that height.");
+                    else if (height <= 0) System.out.println("What are you?");
+                    else if (height < 25) System.out.println("A medium-sized banana is longer than you.");
+                    else inputIsValid = true;
+                }
+            }
+            static void calcBMI(double w, double h) {
+                bmi = w / (h * h * 0.0001); // 0.0001: cm squared --> m squared
+                if      (bmi < 16)    category = "Underweight (Severe thinness)";
+                else if (bmi <= 16.9) category = "Underweight (Moderate thinness)";
+                else if (bmi <= 18.4) category = "Underweight (Mild thinness)";
+                else if (bmi < 24.9)  category = "Normal";
+                else if (bmi <= 29.9) category = "Overweight (Pre-obese)";
+                else if (bmi <= 34.9) category = "Obese (Class I)";
+                else if (bmi <= 39.9) category = "Obese (Class II)";
+                else                  category = "Obese (Class III)";
+            }
+            static void pResult() {
+                System.out.println("\n");
+                if (!fullName.isEmpty()) System.out.println("Here is your result, " + fullName + ":");
+                System.out.println("Your weight      : " + Main.nice(weight) + " kg");
+                System.out.println("Your height      : " + Main.nice(height) + " cm");
+                System.out.printf( "Your BMI index   : %.1f\n", bmi);
+                System.out.print("\nYou're categorized as: " + category);
+            }
+            // Ask user if they want to repeat calculation
+            static void iQuit() {
+                System.out.println("\n");
+                boolean inputIsValid = false;
+                while(!inputIsValid) {
+                    System.out.print("\nDo you want to calculate again? (Y/n): ");
+                    switch (sc.nextLine().toLowerCase()) {
+                        case "y","yes","yeah","yup","yoi","yep","aye","ye","":
+                            inputIsValid = true;
+                            break;
+                        case "n","no","nah","nope","nay":
+                            end = true;
+                            inputIsValid = true;
+                            break;
+                        default:
+                            Main.pExcType("Response unknown");
+                            break;
+                    }
+                }
+                if(end) pQuit();
+            }
+            // Print a 3-second quit timer
+            static void pQuit() {
+                System.out.println("\nQuitting in:");
+                for (int i = 3; i > 0; i--) {
+                    System.out.println(i + "...");
+                    try {Thread.sleep(1000);}
+                    catch (Exception e) {Main.pExcType("Thread sleep exception");}
                 }
             }
         }
