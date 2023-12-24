@@ -2,8 +2,8 @@ package CLI;
 
 public class Main {
     private static final String[][] programs = {
-        { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (NEW)", "Morse Code Translator (NEW)" },
-        { "1.0"        , "1.0.1"         , "1.0"                          , "1.0"                             , "1.0"                        } };
+        { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (NEW)", "Morse Code Translator" },
+        { "1.0.0"      , "1.0.1"         , "1.0.0"                        , "1.0.0"                          , "1.1.0"                 } };
     private static final String[][] contributors = {
     //  | Main Contributor | Others (1)       |
         { "Deffreus Theda"                    }, // Coffee Shop
