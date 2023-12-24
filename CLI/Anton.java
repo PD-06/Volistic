@@ -111,11 +111,8 @@ public class Anton { // mau bikin morse code translator katanya
                 System.out.println("\nQuitting in:");
                 for (int i = 3; i > 0; i--) {
                     System.out.println(i + "...");
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        System.out.println("Something went wrong...");
-                    }
+                    try {Thread.sleep(1000);}
+                    catch (InterruptedException e) {System.out.println("Something went wrong...");}
                 } 
             }
         }
