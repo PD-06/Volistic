@@ -3,378 +3,321 @@ package CLI;
 import java.util.Scanner;
 
 public class CoffeeShop {
-            private static String[] items = { "Americano ", "Latte     ", "Cappuccino", "Espresso  ", "Arabica   ",
-                    "Mochaccino", "Tiramisu  ", "Robusta   ", "Liberica  ", "Excelso   ", "Affogato  " };
-            private static int[] prices = { 21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34 };
-            private static int[] orders = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            static boolean csrun = true, end = false;
-            static Scanner csinput = new Scanner(System.in);
+            private static final String[] items = { "Americano ","Latte     ","Cappuccino","Espresso  ","Arabica   ","Mochaccino","Tiramisu  ","Robusta   ","Liberica  ","Excelso   ","Affogato  "};
+            private static final int[] prices = { 21, 24, 29, 19, 23, 33, 33, 30, 66, 95, 34 };
+            private static final int[] stock = new int[items.length];
+            private static final int[] orders = new int[items.length];
+            private static boolean isRunning, end;
+            private static final Scanner scanner = new Scanner(System.in);
 
-            // getter
-            static int getItemsCount() {
-                return items.length;
+            static void run() {
+                init();
+                printWelcome();
+                isRunning = true;
+                end = false;
+                while (isRunning) {
+                    printHelp();
+                    System.out.printf("\nEnter your command%s: ",commands);
+                    command(Main.noSpace(scanner.nextLine()));
+                    if (end) isRunning = false;
+                }
             }
-            static String getItems(int index) {
-                return items[index];
+            static void init() {
+                for(int i = 0; i < stock.length; i++) stock[i] = (int) (Math.random()*150);
+                for (int i = 0; i < items.length; i++) orders[i] = 0;
             }
-            static int getPrices(int index) {
-                return prices[index];
+            static void printWelcome() {
+                Main.clear();
+                Main.hr();
+                System.out.println("\nWelcome to the Volistic Coffee Shop!");
+                System.out.println("\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)");
             }
-            static int getOrdersCount() {
-                return orders.length;
+            static void printHelp() {
+                System.out.print("\n");
+                Main.hr();
+                System.out.println("""
+                
+                (Available commands)
+                'menu'      : show the coffee menu
+                'add'       : add an amount of coffee to your order
+                'remove'    : remove an amount of coffee from your order
+                'list'      : display your order list
+                'reset'     : discard your order list
+                'purchase'  : purchase your order list
+                'quit'      : goes back to Volistic main menu
+                """);
+                Main.hr();
             }
-
             static void command(String command) {
                 switch (command) {
                     case "menu":
-                        pMenu();
+                        printMenu(true);
                         break;
                     case "add":
                         iAdd();
                         break;
-                    case "rm":
-                    case "remove":
+                    case "rm","remove":
                         iRemove();
                         break;
-                    case "ls":
-                    case "list":
+                    case "ls","list":
                         Main.clear();
                         list();
                         break;
-                    case "rst":
-                    case "reset":
+                    case "rst","reset":
                         resetList();
                         break;
-                    case "fin":
-                    case "done":
-                        done();
+                    case "done","purchase":
+                        purchase();
                         break;
-                    case "quit":
-                        CoffeeShop.resetVar();
-                        pQuit(3);
-                        CoffeeShop.end = true;
-                        break;
-                    case "help":
-                        Main.clear();
-                        help();
+                    case "quit","q":
+                        purchase(); // Who could've thought lol
                         break;
                     default:
                         Main.clear();
-                        Main.pExcType("Command unknown.");
-                        System.out.println("Type 'help' to display the help menu");
-                        break;
+                        Main.pExcType("Command unknown");
                 }
             }
-            static void list() {
-                double total = 0, net = 0;
-                boolean bdiscount = false, isEmpty = true;
-                ;
-                for (int i = 0; i < getOrdersCount(); i++) {
-                    if (orders[i] != 0) {
-                        isEmpty = false;
-                    }
-                }
-                if (isEmpty) {
-                    System.out.println("Your list is empty, use 'add' to add an item.");
-                } else {
-                    for (int i = 0; i < getItemsCount(); i++) {
-                        if (orders[i] != 0) {
-                            System.out.println((i + 1) + ". (" + orders[i] + " items) " + items[i] + " = ("
-                                    + (orders[i] * getPrices(i)) + "K)");
-                            total += (orders[i] * prices[i]);
-                        }
-                    }
-                    System.out.printf("\nTotal price                = %,.0fK\n", total);
-                    if (total >= 100) {
-                        bdiscount = true;
-                    }
-                    if (bdiscount) {
-                        net = (total * 0.85);
-                    } else {
-                        net = (int) total;
-                    }
-                    System.out.println("Discount (15%)             = " + bdiscount);
-                    if (net == (int) net) {
-                        System.out.println("Payment                    = " + (int) net + "K");
-                    } else {
-                        System.out.printf("Payment                    = %,.2fK\n", net);
-                    }
-                }
-            }
-            static void help() {
-                System.out.println(
-                        "\nAvailable commands: \n'menu'      : show the items menu.\n'add'       : add an item and its amount to the order list.\n'remove'    : remove an amount of item from the order list\n'list'      : display your current orders list.\n'reset'     : discard the order list and make a new one.\n'done'      : finish choosing and purchase your order list.\n'quit'      : simply quit the program and goes back to Volistic Main menu.\n'help'      : show this help menu.\n");
-            }
-            static void run() {
-                pWelcome();
-                csrun = true;
-                end = false;
-                while (CoffeeShop.csrun) {
-                    CoffeeShop.csrun = false;
-                    try {
-                        Main.hr();
-                        System.out.println("\nEnter your command: ");
-                        command(csinput.nextLine());
-                        if (CoffeeShop.end == false) {
-                            CoffeeShop.csrun = true;
-                        }
-                    } catch (Exception e) {
-                        Main.pExcType(
-                                "You're not supposed to see this message.\nIf you do, report with a screenshot here: deffreus (Discord)");
-                        csinput.nextLine();
-                        CoffeeShop.csrun = true;
-                    }
-                }
-            }
-            static void pMenu() {
+            static void printMenu(boolean printOnly) {
                 Main.clear();
-                System.out.println("\nAvailable items:");
-                System.out.println(" 0 = (Cancel current command)");
-                String space;
-                for (int i = 0; i < getItemsCount(); i++) {
-                    if (i < 9) {
-                        space = " ";
-                    } else {
-                        space = "";
-                    }
-                    System.out.println(space + (i + 1) + " = " + getItems(i) + "         (" + prices[i] + "K)");
+                if(!printOnly) System.out.println(" 0 = Cancel current command\n");
+                System.out.println("Available coffees:\n");
+                System.out.println("ID | Coffee Name      | Stock | Price\n");
+                for (int i = 0; i < items.length; i++) {
+                    String IDSpace = ""; if (i < 9) IDSpace = " ";
+                    String QTYSpace = " ";if(stock[i]<100)QTYSpace="  ";if(stock[i]<10)QTYSpace="   ";
+                    System.out.printf("%s%d | %s       | %s%d  | (%dK)\n",IDSpace,i+1,items[i],QTYSpace,stock[i],prices[i]);
                 }
-                System.out.println("\n");
             }
             static void iAdd() {
+                boolean IDIsValid = false, QTYIsValid = false;
+                short index = 0, count = 0;
+
                 Main.clear();
-                pMenu();
-                boolean bindex = true, bcount = true;
-                ;
-                int index = 0;
-                long count = 0;
-                while (bindex) {
-                    bindex = false;
-                    try {
-                        System.out.println("\nEnter the index number of the item you want to add: ");
-                        index = csinput.nextInt();
-                        csinput.nextLine();
-                        if (index < 0 || index > getItemsCount()) {
-                            System.out.println("(OUT OF RANGE) Please enter an integer between 0 to " + getItemsCount()
-                                    + " (Inclusive) !");
-                            bindex = true;
-                        }
-                    } catch (Exception e) {
-                        Main.pExcType(
-                                "Please enter an integer number between 0 to " + getItemsCount() + " (Inclusive) !");
-                        csinput.nextLine();
-                        bindex = true;
+                printMenu(false);
+                while (!IDIsValid) {
+                    System.out.print("\nEnter the coffee ID: ");
+                    try {index = Short.parseShort(scanner.nextLine());}
+                    catch (Exception e) {
+                        Main.pExcType("Not an ID");
+                        continue;
                     }
+                    if (index < 0 || index > items.length) Main.pExcType("Unknown ID");
+                    else IDIsValid = true;
                 }
                 if (index == 0) {
                     System.out.println("Cancelling adding item...");
-                } else {
-                    System.out
-                            .println("Selecting : " + Main.nospace(items[index - 1]) + " (" + prices[index - 1] + "K)");
-                    while (bcount) {
-                        bcount = false;
-                        try {
-                            System.out.println("\nHow many do you want to order?");
-                            count = csinput.nextLong();
-                            csinput.nextLine();
-                            if (count < 0) {
-                                System.out.println("(OUT OF RANGE) Please enter a real integer number!");
-                                bcount = true;
-                            }
-                        } catch (Exception e) {
-                            Main.pExcType("Please enter a real integer number!");
-                            csinput.nextLine();
-                            bcount = true;
-
-                        }
+                    return;
+                }
+                if (stock[index-1] == 0) {
+                    System.out.printf("We've run out of %s today...\n",Main.noSpace(items[index-1]));
+                    return;
+                }
+                System.out.println("Selecting : " + Main.noSpace(items[index-1]) + " (" + prices[index-1] + "K)");
+                while (!QTYIsValid) {
+                    System.out.print("\nEnter the amount: ");
+                    try {count = Short.parseShort(scanner.nextLine());}
+                    catch (Exception e) {
+                        Main.pExcType("Not a number");
+                        continue;
                     }
-                    if (count == 0) {
-                        Main.clear();
-                        System.out.println("Cancelling adding item...");
-                    } else {
-                        Main.clear();
-                        orders[index - 1] += count;
-                        System.out.println("Your order list is updated successfully.\n");
+                    if(count < 0) Main.pExcType("Must be a positive integer");
+                    else if(count > stock[index-1]) {
+                        if(stock[index-1]==0) System.out.printf("Sorry, we run out of %s today...\n",Main.noSpace(items[index-1]));
+                        else System.out.printf("Sorry, we only have %d %s left today...\n",stock[index-1],Main.noSpace(items[index-1]));
                     }
+                    else QTYIsValid = true;
+                }
+                Main.clear();
+                if (count == 0) System.out.println("Cancelling adding item...");
+                else {
+                    orders[index-1] += count;
+                    stock[index-1] -= count;
+                    System.out.printf("Successfully added %d %s.\n", count, Main.noSpace(items[index-1]));
                 }
             }
             static void iRemove() {
+                boolean isEmpty = true, isOnlyOne = false, IDIsValid = false, AmountIsValid = false;
+                short orderCount = 0, ID = 0, lastNonEmptyID = -1;
+                long count = 0;
+
                 Main.clear();
-                boolean isEmpty = true;
-                int orderCount = 0, lastIndex = 0;
-                for (int i = 0; i < getOrdersCount(); i++) {
+                for (int i = 0; i < orders.length; i++) {
                     if (orders[i] != 0) {
                         orderCount++;
                         isEmpty = false;
-                        lastIndex = i + 1;
+                        lastNonEmptyID = (short) (i+1);
                     }
                 }
-                if (isEmpty == true) {
-                    System.out.println("Your list is empty, use 'add' to add an item.");
-                } else {
-                    System.out.println("Your current order list: ");
-                    list();
-                    boolean bindex = true, bcount = true;
-                    ;
-                    int index = 0;
-                    long count = 0;
-                    while (bindex) {
-                        bindex = false;
-                        try {
-                            if (orderCount != 1) {
-                                System.out.println("\nEnter the index number of the item you want to remove: ");
-                                index = csinput.nextInt();
-                                csinput.nextLine();
-                                if (index < 0 || index > getItemsCount()) {
-                                    System.out.println("(OUT OF RANGE) Please enter an integer between 0 to "
-                                            + getItemsCount() + " (Inclusive) !");
-                                    bindex = true;
-                                } else if (orders[index - 1] == 0) {
-                                    System.out.println(Main.nospace(items[index - 1]) + " is not on your order list.");
-                                }
-                            } else {
-                                index = lastIndex;
-                            }
-                        } catch (Exception e) {
-                            Main.pExcType("Please enter an integer between 0 to " + getItemsCount() + " (Inclusive) !");
-                            csinput.nextLine();
-                            bindex = true;
+                if (isEmpty) {
+                    System.out.println("Your order list is empty, use 'add' to add an item.");
+                    return;
+                } else System.out.println("Your current order list: \n");
+                if (orderCount == 1) {
+                    isOnlyOne = true;
+                    ID = lastNonEmptyID;
+                }
+                list();
+                if(!isOnlyOne) {
+                    while (!IDIsValid) {
+                        System.out.print("\nEnter the coffee ID: ");
+                        try {ID = Short.parseShort(scanner.nextLine());}
+                        catch (Exception e) {
+                            Main.pExcType("Not an ID");
+                            continue;
                         }
+                        if (ID < 0 || ID > items.length) Main.pExcType("Unknown ID");
+                        else if (orders[ID-1] == 0) System.out.printf("%s is not on your order list.\n",Main.noSpace(items[ID-1]));
+                        else IDIsValid = true;
                     }
-                    if (index == 0 || orders[index - 1] == 0) {
+                    if (ID == 0) {
                         System.out.println("Cancelling removing item...");
-                    } else {
-                        if (orderCount == 1) {
-                            System.out.println("\nSelecting : " + Main.nospace(items[index - 1]) + " ("
-                                    + prices[index - 1] + "K)");
-                        } else {
-                            System.out.println(
-                                    "Selecting : " + Main.nospace(items[index - 1]) + " (" + prices[index - 1] + "K)");
-                        }
-                        while (bcount) {
-                            bcount = false;
-                            try {
-                                if (orderCount != 1) {
-                                    System.out.println("\nHow many do you want to remove? (Type '0' to cancel)");
-                                } else {
-                                    System.out.println("\nHow many " + Main.nospace(items[index - 1])
-                                            + " do you want to remove? (Type '0' to cancel)");
-                                }
-                                count = csinput.nextLong();
-                                csinput.nextLine();
-                                if (count < 0) {
-                                    System.out.println("(OUT OF RANGE) Please enter a non-negative integer number!");
-                                    bcount = true;
-                                }
-                            } catch (Exception e) {
-                                Main.pExcType("Please enter a non-negative integer number!");
-                                csinput.nextLine();
-                                bcount = true;
-
-                            }
-                        }
-                        if (count == 0) {
-                            System.out.println("Cancelling removing item...");
-                        } else if (count >= orders[index - 1]) {
-                            System.out.println("Successfullly removed all " + Main.nospace(items[index - 1]) + ".");
-                            orders[index - 1] = 0;
-                        } else {
-                            System.out.println(
-                                    "Successfully removed " + count + " " + Main.nospace(items[index - 1]) + ".");
-                            orders[index - 1] -= count;
-                        }
+                        return;
+                    }
+                    System.out.printf("Selecting : %s (%dK)\n",Main.noSpace(items[ID-1]),prices[ID-1]);
+                }
+                while (!AmountIsValid) {
+                    if(!isOnlyOne) System.out.printf("\nEnter the amount of %s to remove: ",Main.noSpace(items[ID-1]));
+                    else System.out.printf("\nEnter the amount of %s to remove: ",Main.noSpace(items[lastNonEmptyID]));
+                    try {count = Long.parseLong(scanner.nextLine());}
+                    catch (Exception e) {
+                        Main.pExcType("Not a number");
+                        continue;
+                    }
+                    if (count < 0) Main.pExcType("Must be a non-negative number");
+                    else AmountIsValid = true;
+                }
+                if (count == 0) System.out.println("Cancelling removing item...");
+                else if (count >= orders[ID-1]) {
+                    System.out.printf("Successfully removed all %s.\n",Main.noSpace(items[ID-1]));
+                    stock[ID-1] += orders[ID-1];
+                    orders[ID-1] = 0;
+                } else {
+                    System.out.printf("Successfully removed %d %s.\n",count,Main.noSpace(items[ID-1]));
+                    orders[ID-1] -= (int) count;
+                    stock[ID-1] += (int) count;
+                }
+            }
+            static void list() {
+                int grossPrice = 0;
+                double netPrice;
+                boolean isDiscount = false, isEmpty = true;
+                for (int order : orders) {
+                    if (order != 0) {
+                        isEmpty = false;
+                        break;
                     }
                 }
+                if (isEmpty) {
+                    System.out.println("Your order list is empty, use 'add' to add an item.");
+                    return;
+                }
+                System.out.println("ID | Coffee Name      | QTY | Price\n");
+                for (int i = 0; i < items.length; i++) {
+                    if (orders[i] != 0) {
+                        String IDSpace = "", QTYSpace = "";
+                        if (i < 9) IDSpace = " ";
+                        if(orders[i]<100)QTYSpace=" ";if (orders[i] < 10) QTYSpace = "  ";
+                        System.out.printf("%s%d | %s       | %s%d | (%dK)\n",IDSpace,i+1,items[i],QTYSpace,orders[i],prices[i]);
+                        grossPrice += orders[i] * prices[i];
+                    }
+                }
+                System.out.printf("\nGross price                 = %dK\n", grossPrice);
+                if (grossPrice >= 100) {
+                    isDiscount = true;
+                    netPrice = (grossPrice * 0.85);
+                } else netPrice = grossPrice;
+                String discount = "None";
+                if(isDiscount) discount = "15%";
+                System.out.printf("Discount                    = %s\n",discount);
+                if (netPrice == (int)netPrice) System.out.printf("Net price                   = %dK",(int)netPrice);
+                else System.out.printf("Net price                   = %.2fK\n",netPrice);
             }
             static void resetList() {
                 Main.clear();
-                for (int i = 0; i < getOrdersCount(); i++) {
+                for(int i = 0; i < orders.length; i++) {
+                    stock[i] += orders[i];
                     orders[i] = 0;
                 }
-                System.out.println("Your order list have been discarded!");
+                boolean isEmpty = true;
+                for (int order : orders) {
+                    if (order != 0) {
+                        isEmpty = false;
+                        break;
+                    }
+                }
+                if(isEmpty) System.out.println("Your order list is already empty.");
+                else System.out.println("Your order list have been discarded!");
             }
-            static void done() {
+            static void purchase() {
                 Main.clear();
                 boolean listIsEmpty = true;
-                for (int i = 0; i < getItemsCount(); i++) {
-                    if (orders[i] != 0) {
+                for (int order : orders) {
+                    if (order != 0) {
                         listIsEmpty = false;
                         break;
                     }
                 }
                 if (listIsEmpty) {
                     System.out.println("Your list is empty.");
-                    System.out.println("\nQuit purchase? (y/n): ");
-                    switch (csinput.nextLine()) {
-                        case "":
-                        case "Y":
-                        case "Yes":
-                        case "yes":
-                        case "ye":
-                        case "Ye":
-                        case "y":
+                    System.out.print("\nLeave empty handed? (y/n): ");
+                    switch (scanner.nextLine()) {
+                        case "y", "yes", "yeah", "yup", "yoi", "yep", "aye", "ye", "":
                             System.out.println("You haven't buy anything for now...\nCome back later!");
-                            CoffeeShop.csrun = false;
-                            CoffeeShop.end = true;
-                            pQuit(3);
-                            Main.hr();
-                            Main.hr();
-                            break;
+                            isRunning = false;
+                            end = true;
+                            printQuit(3);
+                            return;
+                        case "n", "no", "nah", "nope", "nay":
+                            if (!secretIsActivated) {
+                                System.out.println("""
+                                        Sorry if things seem overpriced...
+                                        Special for you, all coffee cost 10K less!
+                                        You like it now?""");
+                                activateSecret();
+                            }
+                            return;
                         default:
-                            break;
+                            Main.pExcType("Response unknown.");
+                            return;
                     }
-                } else {
-                    System.out.println("Your order will be :");
-                    list();
-                    System.out.println("\nConfirm purchase? (y/n): ");
-                    switch (csinput.nextLine()) {
-                        case "":
-                        case "Y":
-                        case "Yes":
-                        case "yes":
-                        case "ye":
-                        case "Ye":
-                        case "y":
-                            System.out.println("Purchase completed!\nEnjoy your coffee!");
-                            CoffeeShop.csrun = false;
-                            CoffeeShop.end = true;
-                            CoffeeShop.resetVar();
+                }
+                System.out.println("Your order will be :");
+                list();
+                boolean responseIsValid = false;
+                while(!responseIsValid) {
+                    System.out.print("\nPurchase now? (Y/n): ");
+                    switch (scanner.nextLine()) {
+                        case "y", "yes", "yeah", "yup", "yoi", "yep", "aye", "ye", "":
+                            System.out.println("\nPurchase completed!\nEnjoy your coffee!");
+                            end = true;
                             System.out.println("\n\n" + //
-                            "                ██    ██    ██                                    \n" + //
-                            "              ██      ██  ██                                      \n" + //
-                            "              ██    ██    ██                                      \n" + //
-                            "                ██  ██      ██                                    \n" + //
-                            "                ██    ██    ██                                    \n" + //
-                            "                                                                  \n" + //
-                            "            ████████████████████                                  \n" + //
-                            "            ██                ██████                              \n" + //
-                            "            ██                ██  ██                              \n" + //
-                            "            ██                ██  ██                              \n" + //
-                            "            ██                ██████                              \n" + //
-                            "              ██            ██                                    \n" + //
-                            "          ████████████████████████                                \n" + //
-                            "          ██                    ██                                \n" + //
-                            "            ████████████████████                                  \n");
-                            CoffeeShop.pQuit(5);
+                                    "                ██    ██    ██                                    \n" + //
+                                    "              ██      ██  ██                                      \n" + //
+                                    "              ██    ██    ██                                      \n" + //
+                                    "                ██  ██      ██                                    \n" + //
+                                    "                ██    ██    ██                                    \n" + //
+                                    "                                                                  \n" + //
+                                    "            ████████████████████                                  \n" + //
+                                    "            ██                ██████                              \n" + //
+                                    "            ██                ██  ██                              \n" + //
+                                    "            ██                ██  ██                              \n" + //
+                                    "            ██                ██████                              \n" + //
+                                    "              ██            ██                                    \n" + //
+                                    "          ████████████████████████                                \n" + //
+                                    "          ██                    ██                                \n" + //
+                                    "            ████████████████████                                  \n");
+                            responseIsValid = true;
+                            printQuit(5);
+                            break;
+                        case "n", "no", "nah", "nope", "nay":
+                            responseIsValid = true;
                             break;
                         default:
-                            System.out.println("Purchase cancelled, going back to listing your order!");
+                            Main.pExcType("Response unknown.");
                     }
                 }
             }
-            static void pWelcome() {
-                Main.clear();
-                Main.hr();
-                System.out.println(
-                        "\nWelcome to the Volistic's Coffee Shop!\n\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)\nWhat will be your order?\n");
-                help();
-            }
-            static void resetVar() {
-                for (int i = 0; i < getItemsCount(); i++) {
-                    CoffeeShop.orders[i] = 0;
-                }
-            }
-            static void pQuit(int duration) {
+            static void printQuit(int duration) {
                 System.out.println("\nQuitting in:");
                 for (int i = duration; i > 0; i--) {
                     System.out.println(i + "...");
@@ -385,4 +328,13 @@ public class CoffeeShop {
                     }
                 }
             }
+            static void activateSecret() {
+                if(!secretIsActivated) {
+                    for (int i = 0; i < prices.length; i++) prices[i] -= 10;
+                    secretIsActivated = true;
+                }
+                commands = ", sweetheart";
+            }
+            private static String commands = "";
+            private static boolean secretIsActivated = false;
         }
