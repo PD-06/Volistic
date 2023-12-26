@@ -96,7 +96,7 @@ public class CoffeeShop {
                 break;
             default:
                 Main.clear();
-                Main.pExcType("Command unknown");
+                Main.pEcxInvalI("Command unknown");
         }
     }
     static void printMenu(boolean printOnly) {
@@ -120,10 +120,10 @@ public class CoffeeShop {
             System.out.print("\nEnter the coffee ID: ");
             try {index = Short.parseShort(scanner.nextLine());}
             catch (Exception e) {
-                Main.pExcType("Not an ID");
+                Main.pEcxInvalI("Not an ID");
                 continue;
             }
-            if (index < 0 || index > items.length) Main.pExcType("Unknown ID");
+            if (index < 0 || index > items.length) Main.pEcxInvalI("Unknown ID");
             else IDIsValid = true;
         }
         if (index == 0) {
@@ -139,10 +139,10 @@ public class CoffeeShop {
             System.out.print("\nEnter the amount: ");
             try {count = Short.parseShort(scanner.nextLine());}
             catch (Exception e) {
-                Main.pExcType("Not a number");
+                Main.pEcxInvalI("Not a number");
                 continue;
             }
-            if(count < 0) Main.pExcType("Must be a positive integer");
+            if(count < 0) Main.pEcxInvalI("Must be a positive integer");
             else if(count > stock[index-1]) {
                 if(stock[index-1]==0) System.out.printf("Sorry, we run out of %s today...\n",Main.noSpace(items[index-1]));
                 else System.out.printf("Sorry, we only have %d %s left today...\n",stock[index-1],Main.noSpace(items[index-1]));
@@ -184,10 +184,10 @@ public class CoffeeShop {
                 System.out.print("\nEnter the coffee ID: ");
                 try {ID = Short.parseShort(scanner.nextLine());}
                 catch (Exception e) {
-                    Main.pExcType("Not an ID");
+                    Main.pEcxInvalI("Not an ID");
                     continue;
                 }
-                if (ID < 0 || ID > items.length) Main.pExcType("Unknown ID");
+                if (ID < 0 || ID > items.length) Main.pEcxInvalI("Unknown ID");
                 else if (orders[ID-1] == 0) System.out.printf("%s is not on your order list.\n",Main.noSpace(items[ID-1]));
                 else IDIsValid = true;
             }
@@ -202,10 +202,10 @@ public class CoffeeShop {
             else System.out.printf("\nEnter the amount of %s to remove: ",Main.noSpace(items[lastNonEmptyID]));
             try {count = Long.parseLong(scanner.nextLine());}
             catch (Exception e) {
-                Main.pExcType("Not a number");
+                Main.pEcxInvalI("Not a number");
                 continue;
             }
-            if (count < 0) Main.pExcType("Must be a non-negative number");
+            if (count < 0) Main.pEcxInvalI("Must be a non-negative number");
             else AmountIsValid = true;
         }
         if (count == 0) System.out.println("Cancelling removing item...");
@@ -282,7 +282,7 @@ public class CoffeeShop {
         if (listIsEmpty) {
             System.out.println("Your list is empty.");
             System.out.print("\nLeave empty handed? (y/n): ");
-            switch (scanner.nextLine()) {
+            switch (scanner.nextLine().trim().toLowerCase()) {
                 case "y", "yes", "yeah", "yup", "yoi", "yep", "aye", "ye", "":
                     System.out.println("You haven't buy anything for now...\nCome back later!");
                     isRunning = false;
@@ -299,7 +299,7 @@ public class CoffeeShop {
                     }
                     return;
                 default:
-                    Main.pExcType("Response unknown.");
+                    Main.pEcxInvalI("Response unknown.");
                     return;
             }
         }
@@ -308,7 +308,7 @@ public class CoffeeShop {
         boolean responseIsValid = false;
         while(!responseIsValid) {
             System.out.print("\nPurchase now? (Y/n): ");
-            switch (scanner.nextLine()) {
+            switch (scanner.nextLine().trim().toLowerCase()) {
                 case "y", "yes", "yeah", "yup", "yoi", "yep", "aye", "ye", "":
                     System.out.println("\nPurchase completed!\nEnjoy your coffee!");
                     end = true;
@@ -335,7 +335,7 @@ public class CoffeeShop {
                     responseIsValid = true;
                     break;
                 default:
-                    Main.pExcType("Response unknown.");
+                    Main.pEcxInvalI("Response unknown.");
             }
         }
     }

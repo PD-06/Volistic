@@ -40,7 +40,7 @@ public class Main {
         for (int i = 3; i > 0; i--) {
             System.out.println(i + "...");
             try {Thread.sleep(1000);}
-            catch (Exception e) {Main.pExcType("Thread sleep error");}
+            catch (Exception e) {Main.pEcxInvalI("Thread sleep error");}
         }
         Main.clear();
         Volistic.run = false;
@@ -555,8 +555,11 @@ public class Main {
             } System.out.print("\n");
         }
     }
-    static void pExcType(String message) {
+    static void pEcxInvalI(String message) { // Print Exception: Invalid Input
         System.out.printf("%sException found: INVALID INPUT (%s)%s", AnsiColor.RED, message, AnsiColor.RESET);
+    }
+    static void printRed(String message) {
+    System.out.printf("%s%s%s", AnsiColor.RED, message, AnsiColor.RESET);
     }
     static String noSpace(String string) {
         return string.replaceAll("\\s", "");

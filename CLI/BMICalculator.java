@@ -28,7 +28,7 @@ public class BMICalculator {
     // Program variables declaration
     private static boolean end;
     private static String fullName, category;
-    private static final Scanner sc = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static double weight, height, bmi;
 
     // Similar to 'public static void main(String[] args)'
@@ -58,7 +58,7 @@ public class BMICalculator {
     // Ask for user's name
     static void iName() {
         System.out.print("\nEnter your full name (blank to skip): ");
-        fullName = sc.nextLine();
+        fullName = scanner.nextLine();
         if (!fullName.isEmpty()) System.out.println("\nHello, " + fullName + "!");
     }
     // Ask for user's weight
@@ -67,7 +67,7 @@ public class BMICalculator {
         while (!inputIsValid) { //
             try {
                 System.out.print("\nEnter your weight in kg: ");
-                weight = Double.parseDouble(sc.nextLine());
+                weight = Double.parseDouble(scanner.nextLine());
             } catch (Exception e) {
                 System.out.println("Something is wrong with your weight");
                 continue;
@@ -83,7 +83,7 @@ public class BMICalculator {
         while (!inputIsValid) {
             try {
                 System.out.print("\nEnter your height in cm: ");
-                height = Double.parseDouble(sc.nextLine());
+                height = Double.parseDouble(scanner.nextLine());
             } catch (Exception e) {
                 System.out.println("Something is wrong with your height.");
                 continue;
@@ -119,7 +119,7 @@ public class BMICalculator {
         boolean inputIsValid = false;
         while(!inputIsValid) {
             System.out.print("\nDo you want to calculate again? (Y/n): ");
-            switch (sc.nextLine().toLowerCase()) {
+            switch (scanner.nextLine().trim().toLowerCase()) {
                 case "y","yes","yeah","yup","yoi","yep","aye","ye","":
                     inputIsValid = true;
                     break;
@@ -128,7 +128,7 @@ public class BMICalculator {
                     inputIsValid = true;
                     break;
                 default:
-                    Main.pExcType("Response unknown");
+                    Main.pEcxInvalI("Response unknown");
                     break;
             }
         }
@@ -142,7 +142,7 @@ public class BMICalculator {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
-                Main.pExcType("Thread sleep exception");
+                Main.pEcxInvalI("Thread sleep exception");
             }
         }
     }

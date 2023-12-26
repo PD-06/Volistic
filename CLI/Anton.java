@@ -59,12 +59,12 @@ public class Anton { // Amrul named it
                     mode = 0;
                     System.out.print("\nSelect translation mode\n1 = Alphabet --> Morse Code\n2 = Morse Code --> Alphabet\n(Enter the number): ");
                     try {mode = Integer.parseInt(BAPAKMU.nextLine());}
-                    catch(Exception e) {Main.pExcType("Please enter either '1' or '2'!");}
+                    catch(Exception e) {Main.pEcxInvalI("Please enter either '1' or '2'!");}
                     switch (mode) {
                         case 1, 2:
                             inputIsValid = true;
                             break;
-                        default: Main.pExcType("Not '1' or '2'");
+                        default: Main.pEcxInvalI("Not '1' or '2'");
                     }
                 }
             }
@@ -125,7 +125,7 @@ public class Anton { // Amrul named it
                 boolean inputIsValid = false;
                 while(!inputIsValid) {
                     System.out.print("\nTranslate again? (Y/n): ");
-                    String quit = Main.noSpace(BAPAKMU.nextLine().toLowerCase());
+                    String quit = BAPAKMU.nextLine().trim().toLowerCase();
                     switch (quit) {
                         case "y","yes","yeah","yup","yoi","yep","aye","":
                             inputIsValid = true;
@@ -136,7 +136,7 @@ public class Anton { // Amrul named it
                             isEnded = true;
                             pQuit();
                             break;
-                        default: Main.pExcType("Response unknown");
+                        default: Main.pEcxInvalI("Response unknown");
                     }
                 }
             }
