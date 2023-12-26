@@ -22,6 +22,7 @@
 
 package CLI;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CoffeeShop {
@@ -40,13 +41,13 @@ public class CoffeeShop {
         while (isRunning) {
             printHelp();
             System.out.printf("\nEnter your command%s: ",commands);
-            command(Main.noSpace(scanner.nextLine()));
+            command(scanner.nextLine().trim().toLowerCase());
             if (end) isRunning = false;
         }
     }
     static void init() {
-        for(int i = 0; i < stock.length; i++) stock[i] = (int) (Math.random()*150);
-        for (int i = 0; i < items.length; i++) orders[i] = 0;
+        for (int i = 0; i < stock.length; i++) stock[i] = (int) (Math.random() * (200 / items.length));
+        Arrays.fill(orders, 0);
     }
     static void printWelcome() {
         Main.clear();
@@ -199,7 +200,7 @@ public class CoffeeShop {
         }
         while (!AmountIsValid) {
             if(!isOnlyOne) System.out.printf("\nEnter the amount of %s to remove: ",Main.noSpace(items[ID-1]));
-            else System.out.printf("\nEnter the amount of %s to remove: ",Main.noSpace(items[lastNonEmptyID]));
+            else System.out.printf("\nEnter the amount of %s to remove: ",Main.noSpace(items[lastNonEmptyID-1]));
             try {count = Long.parseLong(scanner.nextLine());}
             catch (Exception e) {
                 Main.pEcxInvalI("Not a number");
