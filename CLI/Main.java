@@ -25,7 +25,7 @@ package CLI;
 public class Main {
     private static final String[][] programs = {
         { "Coffee Shop", "BMI Calculator", "Two Variable Calculator", "Sleep Duration Calculator", "Morse Code Translator" },
-        { "V1.1.0"     , "V1.1.0"        , "V1.0.0"                 , "V1.0.0"                   , "V1.1.0"                } };
+        { "V1.1.1"     , "V1.1.0"        , "V1.0.0"                 , "V1.0.0"                   , "V1.1.0"                } };
     private static final String[][] contributors = {
     //  | Main Contributor | Others (1) |
         { "Deffreus Theda"              }, // Coffee Shop
@@ -537,7 +537,7 @@ public class Main {
         System.out.println(AnsiColor.colors[colorSeed] + banners[bannerSeed]);
         System.out.println("\n -- Version 1.3.0 -- ");
         System.out.println("\nYou can contribute to this project here: https://github.com/PD-06/Volistic");
-        System.out.println("Please report any bug here:\n    Discord    : deffreus" + AnsiColor.RESET);
+        System.out.println("Please report any bug to 'deffreus' on Discord" + AnsiColor.RESET);
     }
     static void pMainMenu() {
         System.out.println("\nPrograms menu:");
