@@ -1,16 +1,38 @@
+/********************************************************************************
+ * Copyright (c) 2024 PD`06
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************/
+
 package CLI;
 
 public class Main {
     private static final String[][] programs = {
-        { "Coffee Shop", "BMI Calculator", "Two Variable Calculator (NEW)", "Sleep Duration Calculator (NEW)", "Morse Code Translator" },
-        { "1.0.0"      , "1.0.1"         , "1.0.0"                        , "1.0.0"                          , "1.1.0"                 } };
+        { "Coffee Shop", "BMI Calculator", "Two Variable Calculator", "Sleep Duration Calculator", "Morse Code Translator" },
+        { "V1.1.0"     , "V1.1.0"        , "V1.0.0"                 , "V1.0.0"                   , "V1.1.0"                } };
     private static final String[][] contributors = {
-    //  | Main Contributor | Others (1)       |
-        { "Deffreus Theda"                    }, // Coffee Shop
-        { "Deffreus Theda"                    }, // BMI Calculator
-        { "Deffreus Theda"                    }, // Two Variable Calculator
-        { "Tristan"        , "Deffreus Theda" }, // Sleep Duration Calculator
-        { "Anton"          , "Deffreus Theda" }, // Morse Code Translator
+    //  | Main Contributor | Others (1) |
+        { "Deffreus Theda"              }, // Coffee Shop
+        { "Deffreus Theda"              }, // BMI Calculator
+        { "Deffreus Theda"              }, // Two Variable Calculator
+        { "Deffreus Theda" , "Tristan"  }, // Sleep Duration Calculator
+        { "Deffreus Theda" , "Anton"    }, // Morse Code Translator
     };
 
     static void quit() {
@@ -31,25 +53,12 @@ public class Main {
     static int getProgramsCount() {
         return programs[0].length;
     }
-    static void hr() {
-        System.out.println("================================================================================");
-    }
+    static void hr() {System.out.println("================================================================================");}
     static String getProgramsName(int index) {
         return programs[0][index];
     }
     static void pBanner() {
         String[] banners = {
-                "                                                             \n" + //
-                "                                                             \n" + //
-                "                                                             \n" + //
-                "\\ \\   / /  / _ \\  | |     |_ _| / ___|  |_   _| |_ _|  / ___|\n" + //
-                " \\ \\ / /  | | | | | |      | |  \\___ \\    | |    | |  | |    \n" + //
-                "  \\ V /   | |_| | | |___   | |   ___) |   | |    | |  | |___ \n" + //
-                "   \\_/     \\___/  |_____| |___| |____/    |_|   |___|  \\____|\n" + //
-                "                                                             \n" + //
-                "                                                             \n" + //
-                "                                                             \n" //
-                ,
                 "                                                             \n" + //
                 "                                                             \n" + //
                 " __   __            _       _              _        _      ___   \n" + //
@@ -481,11 +490,11 @@ public class Main {
                 ,
                 "                                                             \n" + //
                 "                                                             \n" + //
-                "o   o     o        o      o-o \n" + //
-                "|   |     | o      |  o  /    \n" + //
-                "o   o o-o |   o-o -o-   O     \n" + //
-                " \\ /  | | | |  \\   |  |  \\    \n" + //
-                "  o   o-o o | o-o  o  |   o-o \n" + //
+                "o   o       o           o        o-o \n" + //
+                "|   |       |  o        |   o   /    \n" + //
+                "o   o  o-o  |     o-o  -o-     O     \n" + //
+                " \\ /   | |  |  |   \\    |   |   \\    \n" + //
+                "  o    o-o  o  |  o-o   o   |    o-o \n" + //
                 "                                                             \n" + //
                 "                                                             \n" + //
                 "                                                             \n" //
@@ -526,31 +535,30 @@ public class Main {
         int bannerSeed = (int) (Math.random()*(banners.length));
         int colorSeed = (int) (Math.random()*(AnsiColor.colors.length));
         System.out.println(AnsiColor.colors[colorSeed] + banners[bannerSeed]);
-        System.out.println("\n -- Version 1.2.1 -- ");
+        System.out.println("\n -- Version 1.3.0 -- ");
         System.out.println("\nYou can contribute to this project here: https://github.com/PD-06/Volistic");
         System.out.println("Please report any bug here:\n    Discord    : deffreus" + AnsiColor.RESET);
     }
     static void pMainMenu() {
         System.out.println("\nPrograms menu:");
         for (int i = 0; i < getProgramsCount(); i++) {
-            System.out.print((i + 1) + " = " + getProgramsName(i) + " (V" + programs[1][i] + ")" + " by ");
+            System.out.printf("%d = %s (%s) by ", i+1, getProgramsName(i), programs[1][i]);
             int ContributorCount = contributors[i].length;
-            for(int j = 0; j < ContributorCount; j++) {
+            for (int j = 0; j < ContributorCount; j++) {
                 System.out.print(contributors[i][j]);
-                if(ContributorCount == 2) {
-                    if(j == 0) {System.out.print(" & ");}
-                } else { 
-                    if(j < ContributorCount-2) {System.out.print(", ");}
-                    if(j == ContributorCount-2) {System.out.print(", & ");}
+                if (ContributorCount == 2 && j == 0) {
+                    System.out.print(" & ");
+                    continue;
                 }
+                if (j < ContributorCount-2) {System.out.print(", ");}
+                if (j == ContributorCount-2) {System.out.print(", & ");}
             } System.out.print("\n");
         }
     }
     static void pExcType(String message) {
-        System.out
-                .println(AnsiColor.RED + "Main.pExcType: (ERROR: INVALID INPUT): " + message + AnsiColor.RESET);
+        System.out.printf("%sException found: INVALID INPUT (%s)%s", AnsiColor.RED, message, AnsiColor.RESET);
     }
-    static String nospace(String string) {
+    static String noSpace(String string) {
         return string.replaceAll("\\s", "");
     }
     static void pQuit() {
@@ -559,8 +567,8 @@ public class Main {
     }
     static String nice(double value) {
         int valint = (int) value; String res;
-        if(valint == value) {res = Integer.toString(valint);}
-        else {res = Double.toString(value);}
+        if (valint == value) res = Integer.toString(valint);
+        else res = Double.toString(value);
         return res;
     }
 }
