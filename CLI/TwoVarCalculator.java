@@ -1,3 +1,25 @@
+/********************************************************************************
+ * Copyright (c) 2024 PD`06
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************/
+
 package CLI;
 
 import java.util.Scanner;
@@ -20,30 +42,25 @@ public class TwoVarCalculator {
                         pWelcome();
                         Main.hr();
                         iOperator();
-                        if(!tvcIsEnded) {iA(); iB(); pRes(); iQuit();}
-                        if(!tvcIsEnded) {tvcIsRunning = true;}
-                    } catch (Exception e) {
-                        Main.pExcType(AnsiColor.RED + "CALCULATOR ERROR." + AnsiColor.RESET);
-                    }
+                        if (!tvcIsEnded) {iA(); iB(); pRes(); iQuit();}
+                        if (!tvcIsEnded) {tvcIsRunning = true;}
+                    } catch (Exception e) {Main.pEcxInvalI(AnsiColor.RED + "CALCULATOR ERROR." + AnsiColor.RESET);}
                 }
-                pQuit(3);
+                pQuit();
             }
-            static void pQuit(int seconds) {
+            static void pQuit() {
                 System.out.println("\nThank you so much for using the Volistic Two Variable Calculator!! :D");
                 System.out.println("\nQuitting in:");
-                for (int i = seconds; i > 0; i--) {
+                for (int i = 3; i > 0; i--) {
                     System.out.println(i + "...");
-                    try {
-                        Thread.sleep(1000); // wait for 1000 milisecond = 1 second
-                    } catch (Exception e) {
-                        Main.pExcType("Thread sleep exception, dev's fault");
-                    }
+                    try {Thread.sleep(1000);}
+                    catch (Exception e) {Main.pEcxInvalI("Thread sleep exception.");}
                 } 
             }
             static void iQuit() {
                 String opt;
                 boolean valid = false;
-                while (valid != true) {
+                while (!valid) {
                     System.out.println("\nDo you want calculate again? (Y/n)");
                     opt = tvcinput.nextLine();
                     switch (opt) {
@@ -51,8 +68,7 @@ public class TwoVarCalculator {
                         case "y":
                         case "Yes":
                         case "yes":
-                        case "YES":
-                        case "":
+                        case "YES", "":
                             valid = true;
                             tvcIsEnded = false;
                             break;
@@ -65,14 +81,14 @@ public class TwoVarCalculator {
                             tvcIsEnded = true;
                             break;
                         default:
-                            Main.pExcType("Please enter yes or no!");
+                            Main.pEcxInvalI("Please enter yes or no!");
                     }
                 }
             }
             static void pRes() {
                 double resdouble = calc(operator);
                 int resint = (int) calc(operator);
-                if(resdouble == resint) {System.out.println("\nThe result of the calculation is: " + resint);}
+                if (resdouble == resint) {System.out.println("\nThe result of the calculation is: " + resint);}
                 else {System.out.println("\nThe result of the calculation is: " + resdouble);}
             }
             static double calc(String val) {
@@ -137,7 +153,7 @@ public class TwoVarCalculator {
                         B = Double.parseDouble(tvcinput.nextLine());
                         BIsValid = true;
                     } catch(Exception e) {
-                        if(!tvcIsEnded) {Main.pExcType("Please enter a number for variable B!");}
+                        if (!tvcIsEnded) {Main.pEcxInvalI("Please enter a number for variable B!");}
                     }
                 }
             }
@@ -149,12 +165,12 @@ public class TwoVarCalculator {
                         A = Double.parseDouble(tvcinput.nextLine());
                         AIsValid = true;
                     } catch(Exception e) {
-                        if(!tvcIsEnded) {Main.pExcType("Please enter a number for variable A!");}
+                        if (!tvcIsEnded) {Main.pEcxInvalI("Please enter a number for variable A!");}
                     }
                 }
             }
             static void iOperator() {
-                String calculations[][] = {
+                String[][] calculations = {
                     {"Symbol","Description"        ,"Name"          ,"Format" },
                     {"+"     ,"Increase A by B"    ,"Incrementation","(A + B)"},
                     {"-"     ,"Substract B from A" ,"Substraction"  ,"(A - B)"}, 
@@ -165,22 +181,18 @@ public class TwoVarCalculator {
                     {"%"     ,"A modulo B"         ,"Modulus"       ,"(A % B)"}
                 };
                 System.out.println("\nWhat type of calculation you want?\n");
-                for(int i = 1; i < calculations.length; i++) {System.out.printf("%s (%s) = %s\n", i, calculations[i][0], calculations[i][1]);}
+                for (int i = 1; i < calculations.length; i++) {System.out.printf("%s (%s) = %s\n", i, calculations[i][0], calculations[i][1]);}
                 boolean keepAsking = true;
                 while (keepAsking) {
-                    keepAsking = true;
                     System.out.println("\n(Enter the index number or symbol):");
                     try {
-                        operator = Main.nospace(tvcinput.nextLine());
+                        operator = Main.noSpace(tvcinput.nextLine());
                         calc(operator);
-                        if(operatorIsValid) {keepAsking = false;}
-                        else {Main.pExcType("Please enter the index number or symbol above!");}
-                    } catch (Exception e) {
-                        Main.pExcType("Please input a number or symbol!");
-                        keepAsking = true;
-                    }
+                        if (operatorIsValid) {keepAsking = false;}
+                        else {Main.pEcxInvalI("Please enter the index number or symbol above!");}
+                    } catch (Exception e) {Main.pEcxInvalI("Please input a number or symbol!");}
                 }
-                if(!tvcIsEnded) {System.out.println("Selecting: " + calculations[op][2] + "... " + calculations[op][3]);}
+                if (!tvcIsEnded) {System.out.println("Selecting: " + calculations[op][2] + "... " + calculations[op][3]);}
             }
             static void pWelcome() {
                 System.out.println("\nWelcome to the Volistic's Two Variable Calculator!");
