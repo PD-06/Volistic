@@ -2,9 +2,11 @@
 
 ![Volistic Banner](https://github.com/PD-06/Volgion/assets/147963726/2f5450eb-fa90-4a58-9f76-e2911f7f7ce9)
 
-Version: 1.2.1
+Version: 1.3.0
 
-**Volistic** is an **open-source** Java project, bundling the programs made by PD\`06 in IB Computer Science into one launcher program. Any student can create their own Java CLI program and include it on `Volistic.java` (The program launcher). The steps and procedures to do so are articulated on the '[CONTRIBUTING.md](https://github.com/PD-06/Volistic/blob/main/CONTRIBUTING.md)' file.
+**Volistic** is a simple open-source launcher program made in Java for the programs made by PD\`06 in IB Computer Science class. 
+Any student can create their own Java CLI program and include it on `Volistic.java` (The program launcher). 
+The steps and procedures to do so are articulated on the '[CONTRIBUTING.md](https://github.com/PD-06/Volistic/blob/main/CONTRIBUTING.md)' file.
 
 ## Prerequisites
 
