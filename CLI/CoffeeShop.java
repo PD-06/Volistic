@@ -51,13 +51,13 @@ public class CoffeeShop {
     }
     static void printWelcome() {
         Main.clear();
-        Main.hr();
+        Main.printHorizontalLine();
         System.out.println("\nWelcome to the Volistic Coffee Shop!");
         System.out.println("\n(If your total purchase reach Rp. 100K, you will get a 15% discount!)");
     }
     static void printHelp() {
         System.out.print("\n");
-        Main.hr();
+        Main.printHorizontalLine();
         System.out.println("""
         
         (Available commands)
@@ -69,7 +69,7 @@ public class CoffeeShop {
         'purchase'  : purchase your order list
         'quit'      : goes back to Volistic main menu
         """);
-        Main.hr();
+        Main.printHorizontalLine();
     }
     static void command(String command) {
         switch (command) {
@@ -97,7 +97,7 @@ public class CoffeeShop {
                 break;
             default:
                 Main.clear();
-                Main.pEcxInvalI("Command unknown");
+                Main.printExceptionInvalidInput("Command unknown");
         }
     }
     static void printMenu(boolean printOnly) {
@@ -121,10 +121,10 @@ public class CoffeeShop {
             System.out.print("\nEnter the coffee ID: ");
             try {index = Short.parseShort(scanner.nextLine());}
             catch (Exception e) {
-                Main.pEcxInvalI("Not an ID");
+                Main.printExceptionInvalidInput("Not an ID");
                 continue;
             }
-            if (index < 0 || index > items.length) Main.pEcxInvalI("Unknown ID");
+            if (index < 0 || index > items.length) Main.printExceptionInvalidInput("Unknown ID");
             else IDIsValid = true;
         }
         if (index == 0) {
@@ -140,10 +140,10 @@ public class CoffeeShop {
             System.out.print("\nEnter the amount: ");
             try {count = Short.parseShort(scanner.nextLine());}
             catch (Exception e) {
-                Main.pEcxInvalI("Not a number");
+                Main.printExceptionInvalidInput("Not a number");
                 continue;
             }
-            if(count < 0) Main.pEcxInvalI("Must be a positive integer");
+            if(count < 0) Main.printExceptionInvalidInput("Must be a positive integer");
             else if(count > stock[index-1]) {
                 if(stock[index-1]==0) System.out.printf("Sorry, we run out of %s today...\n",Main.noSpace(items[index-1]));
                 else System.out.printf("Sorry, we only have %d %s left today...\n",stock[index-1],Main.noSpace(items[index-1]));
@@ -185,10 +185,10 @@ public class CoffeeShop {
                 System.out.print("\nEnter the coffee ID: ");
                 try {ID = Short.parseShort(scanner.nextLine());}
                 catch (Exception e) {
-                    Main.pEcxInvalI("Not an ID");
+                    Main.printExceptionInvalidInput("Not an ID");
                     continue;
                 }
-                if (ID < 0 || ID > items.length) Main.pEcxInvalI("Unknown ID");
+                if (ID < 0 || ID > items.length) Main.printExceptionInvalidInput("Unknown ID");
                 else if (orders[ID-1] == 0) System.out.printf("%s is not on your order list.\n",Main.noSpace(items[ID-1]));
                 else IDIsValid = true;
             }
@@ -203,10 +203,10 @@ public class CoffeeShop {
             else System.out.printf("\nEnter the amount of %s to remove: ",Main.noSpace(items[lastNonEmptyID-1]));
             try {count = Long.parseLong(scanner.nextLine());}
             catch (Exception e) {
-                Main.pEcxInvalI("Not a number");
+                Main.printExceptionInvalidInput("Not a number");
                 continue;
             }
-            if (count < 0) Main.pEcxInvalI("Must be a non-negative number");
+            if (count < 0) Main.printExceptionInvalidInput("Must be a non-negative number");
             else AmountIsValid = true;
         }
         if (count == 0) System.out.println("Cancelling removing item...");
@@ -252,15 +252,12 @@ public class CoffeeShop {
         String discount = "None";
         if(isDiscount) discount = "15%";
         System.out.printf("Discount                    = %s\n",discount);
-        if (netPrice == (int)netPrice) System.out.printf("Net price                   = %dK",(int)netPrice);
+        if (netPrice == (int)netPrice) System.out.printf("Net price                   = %dK\n",(int)netPrice);
         else System.out.printf("Net price                   = %.2fK\n",netPrice);
     }
     static void resetList() {
         Main.clear();
-        for(int i = 0; i < orders.length; i++) {
-            stock[i] += orders[i];
-            orders[i] = 0;
-        }
+        // If list is empty
         boolean isEmpty = true;
         for (int order : orders) {
             if (order != 0) {
@@ -268,8 +265,16 @@ public class CoffeeShop {
                 break;
             }
         }
-        if(isEmpty) System.out.println("Your order list is already empty.");
-        else System.out.println("Your order list have been discarded!");
+        if(isEmpty) {
+            System.out.println("Your order list is already empty.");
+            return;
+        }
+        // If list is not empty
+        for(int i = 0; i < orders.length; i++) {
+            stock[i] += orders[i];
+            orders[i] = 0;
+        }
+        System.out.println("Your order list have been discarded!");
     }
     static void purchase() {
         Main.clear();
@@ -300,11 +305,11 @@ public class CoffeeShop {
                     }
                     return;
                 default:
-                    Main.pEcxInvalI("Response unknown.");
+                    Main.printExceptionInvalidInput("Response unknown.");
                     return;
             }
         }
-        System.out.println("Your order will be :");
+        System.out.println("Your order will be:\n");
         list();
         boolean responseIsValid = false;
         while(!responseIsValid) {
@@ -336,7 +341,7 @@ public class CoffeeShop {
                     responseIsValid = true;
                     break;
                 default:
-                    Main.pEcxInvalI("Response unknown.");
+                    Main.printExceptionInvalidInput("Response unknown.");
             }
         }
     }

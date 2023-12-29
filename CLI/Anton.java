@@ -48,10 +48,10 @@ public class Anton { // Amrul named it
                 }
             }
             static void pWelcome() {
-                Main.hr();
+                Main.printHorizontalLine();
                 System.out.println("\nWelcome to Anton's Morse Code Translator!");
                 System.out.println("\n*Note: 3 space in morse = 1 space in alphabets, and vice versa!\n");
-                Main.hr();
+                Main.printHorizontalLine();
             }
             static void iMode() {
                 boolean inputIsValid = false;
@@ -59,12 +59,12 @@ public class Anton { // Amrul named it
                     mode = 0;
                     System.out.print("\nSelect translation mode\n1 = Alphabet --> Morse Code\n2 = Morse Code --> Alphabet\n(Enter the number): ");
                     try {mode = Integer.parseInt(BAPAKMU.nextLine());}
-                    catch(Exception e) {Main.pEcxInvalI("Please enter either '1' or '2'!");}
+                    catch(Exception e) {Main.printExceptionInvalidInput("Please enter either '1' or '2'!");}
                     switch (mode) {
                         case 1, 2:
                             inputIsValid = true;
                             break;
-                        default: Main.pEcxInvalI("Not '1' or '2'");
+                        default: Main.printExceptionInvalidInput("Not '1' or '2'");
                     }
                 }
             }
@@ -134,13 +134,13 @@ public class Anton { // Amrul named it
                         case "n","no","nah","nope","nay":
                             inputIsValid = true;
                             isEnded = true;
-                            pQuit();
+                            printQuit();
                             break;
-                        default: Main.pEcxInvalI("Response unknown");
+                        default: Main.printExceptionInvalidInput("Response unknown");
                     }
                 }
             }
-            static void pQuit() {
+            static void printQuit() {
                 System.out.println("\nQuitting in:");
                 for (int i = 3; i > 0; i--) {
                     System.out.println(i + "...");

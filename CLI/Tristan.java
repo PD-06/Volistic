@@ -46,10 +46,10 @@ public class Tristan {
         }
     }
     static void printWelcome() {
-        Main.hr();
+        Main.printHorizontalLine();
         System.out.println("\nWelcome to Tristan's Sleep Duration Calculator!\n");
         System.out.println("Note: Please use the 24 hour format!\n");
-        Main.hr();
+        Main.printHorizontalLine();
     }
     static void inputSleepTime() {
         boolean inputIsValid = false;
@@ -93,8 +93,8 @@ public class Tristan {
             inputIsValid = true;
         }
     }
-    static void printInvalidFormat() {Main.pEcxInvalI("Not in format 'HH:MM'");}
-    static void printInvalidTime() {Main.pEcxInvalI("Invalid time");}
+    static void printInvalidFormat() {Main.printExceptionInvalidInput("Not in format 'HH:MM'");}
+    static void printInvalidTime() {Main.printExceptionInvalidInput("Invalid time");}
     static void inputWakeUpTime() {
         boolean inputIsValid = false;
         int wakeUpHour, wakeUpMinute;
@@ -166,15 +166,15 @@ public class Tristan {
                 case "n", "no", "nah", "nope", "nay":
                     end = true;
                     System.out.println("\nThank you for using the Sleep Duration Calculator!! :D");
-                    pQuit();
+                    printQuit();
                     break;
                 default:
-                    Main.pEcxInvalI("Response unknown.");
+                    Main.printExceptionInvalidInput("Response unknown.");
                     valid = false;
             }
         }
     }
-    static void pQuit() {
+    static void printQuit() {
         System.out.println("\nQuitting in:");
         for (int i = 3; i > 0; i--) {
             System.out.println(i + "...");

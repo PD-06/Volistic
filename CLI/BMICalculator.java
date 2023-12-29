@@ -51,9 +51,9 @@ public class BMICalculator {
     }
     // Print a welcome message
     static void pWelcome() {
-        Main.hr();
+        Main.printHorizontalLine();
         System.out.println("\nWelcome to the Volistic BMI Calculator!\n");
-        Main.hr();
+        Main.printHorizontalLine();
     }
     // Ask for user's name
     static void iName() {
@@ -108,8 +108,8 @@ public class BMICalculator {
     static void pResult() {
         System.out.println("\n");
         if (!fullName.isEmpty()) System.out.println("Here is your result, " + fullName + ":");
-        System.out.println("Your weight      : " + Main.nice(weight) + " kg");
-        System.out.println("Your height      : " + Main.nice(height) + " cm");
+        System.out.println("Your weight      : " + Main.wholeDouble2Int(weight) + " kg");
+        System.out.println("Your height      : " + Main.wholeDouble2Int(height) + " cm");
         System.out.printf( "Your BMI index   : %.1f\n", bmi);
         System.out.print("\nYou're categorized as: " + category);
     }
@@ -128,21 +128,21 @@ public class BMICalculator {
                     inputIsValid = true;
                     break;
                 default:
-                    Main.pEcxInvalI("Response unknown");
+                    Main.printExceptionInvalidInput("Response unknown");
                     break;
             }
         }
-        if (end) pQuit();
+        if (end) printQuit();
     }
     // Print a 3-second quit timer
-    static void pQuit() {
+    static void printQuit() {
         System.out.println("\nQuitting in:");
         for (int i = 3; i > 0; i--) {
             System.out.println(i + "...");
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
-                Main.pEcxInvalI("Thread sleep exception");
+                Main.printExceptionInvalidInput("Thread sleep exception");
             }
         }
     }

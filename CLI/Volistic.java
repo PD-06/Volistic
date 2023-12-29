@@ -32,9 +32,9 @@ public class Volistic {
 
         while (run) {
             Main.clear();
-            Main.pBanner();
-            Main.pQuit();
-            Main.pMainMenu();
+            Main.printBanner();
+            Main.printQuit();
+            Main.printMainMenu();
             System.out.print("\nEnter the ID of the program that you want to run: ");
             String chosenProgram = input.nextLine().trim().toLowerCase();
             switch (chosenProgram) {

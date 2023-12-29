@@ -24,8 +24,8 @@ package CLI;
 
 public class Main {
     private static final String[][] programs = {
-        { "Coffee Shop", "BMI Calculator", "Two Variable Calculator", "Sleep Duration Calculator", "Morse Code Translator" },
-        { "V1.1.1"     , "V1.1.0"        , "V1.0.0"                 , "V1.0.0"                   , "V1.1.0"                } };
+        { "Coffee Shop", "BMI Calculator", "Two Variable Calculator", "Sleep Duration Calculator", "Morse Code Translator", "Message: Cryptography"},
+        { "V1.1.2"     , "V1.1.0"        , "V1.0.0"                 , "V1.0.0"                   , "V1.1.0"               , "V0.1.0"               } };
     private static final String[][] contributors = {
     //  | Main Contributor | Others (1) |
         { "Deffreus Theda"              }, // Coffee Shop
@@ -33,14 +33,15 @@ public class Main {
         { "Deffreus Theda"              }, // Two Variable Calculator
         { "Deffreus Theda" , "Tristan"  }, // Sleep Duration Calculator
         { "Deffreus Theda" , "Anton"    }, // Morse Code Translator
+        { "Deffreus Theda"              }  // Message Cryptography
     };
 
     static void quit() {
-        System.out.println("\nQuitting in:");
+        System.out.println("\nQuitting Volistic in:");
         for (int i = 3; i > 0; i--) {
             System.out.println(i + "...");
             try {Thread.sleep(1000);}
-            catch (Exception e) {Main.pEcxInvalI("Thread sleep error");}
+            catch (Exception e) {Main.printExceptionInvalidInput("Thread sleep error");}
         }
         Main.clear();
         Volistic.run = false;
@@ -53,11 +54,11 @@ public class Main {
     static int getProgramsCount() {
         return programs[0].length;
     }
-    static void hr() {System.out.println("================================================================================");}
+    static void printHorizontalLine() {System.out.println("================================================================================");}
     static String getProgramsName(int index) {
         return programs[0][index];
     }
-    static void pBanner() {
+    static void printBanner() {
         String[] banners = {
                 "                                                             \n" + //
                 "                                                             \n" + //
@@ -539,7 +540,7 @@ public class Main {
         System.out.println("\nYou can contribute to this project here: https://github.com/PD-06/Volistic");
         System.out.println("Please report any bug to 'deffreus' on Discord" + AnsiColor.RESET);
     }
-    static void pMainMenu() {
+    static void printMainMenu() {
         System.out.println("\nPrograms menu:");
         for (int i = 0; i < getProgramsCount(); i++) {
             System.out.printf("%d = %s (%s) by ", i+1, getProgramsName(i), programs[1][i]);
@@ -555,7 +556,7 @@ public class Main {
             } System.out.print("\n");
         }
     }
-    static void pEcxInvalI(String message) { // Print Exception: Invalid Input
+    static void printExceptionInvalidInput(String message) { // Print Exception: Invalid Input
         System.out.printf("%sException found: INVALID INPUT (%s)%s", AnsiColor.RED, message, AnsiColor.RESET);
     }
     static void printRed(String message) {
@@ -564,11 +565,11 @@ public class Main {
     static String noSpace(String string) {
         return string.replaceAll("\\s", "");
     }
-    static void pQuit() {
+    static void printQuit() {
         System.out.println("\n(Type 'quit' or 'exit' to quit Volistic from this menu)");
         System.out.println("(Hold the return key for something)");
     }
-    static String nice(double value) {
+    static String wholeDouble2Int(double value) {
         int valint = (int) value; String res;
         if (valint == value) res = Integer.toString(valint);
         else res = Double.toString(value);
