@@ -43,6 +43,7 @@ public class Volistic {
                 case "3", "tvc", "two variable calculator": TwoVarCalculator.run(); break;
                 case "4", "tristan", "sleep duration calculator": Tristan.run(); break;
                 case "5", "anton", "morse": Anton.run(); break;
+                case "6", "crypt", "cryptography", "message", "message cryptography": Cryptography.run(); break;
                 case "exit", "quit", "q": Main.quit();
             }
         }
