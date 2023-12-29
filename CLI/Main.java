@@ -24,7 +24,7 @@ package CLI;
 
 public class Main {
     private static final String[][] programs = {
-        { "Coffee Shop", "BMI Calculator", "Two Variable Calculator", "Sleep Duration Calculator", "Morse Code Translator", "Message: Cryptography"},
+        { "Coffee Shop", "BMI Calculator", "Two Variable Calculator", "Sleep Duration Calculator", "Morse Code Translator", "Message: Cryptography (ALPHA)"},
         { "V1.1.2"     , "V1.1.0"        , "V1.0.0"                 , "V1.0.0"                   , "V1.1.0"               , "V0.1.0"               } };
     private static final String[][] contributors = {
     //  | Main Contributor | Others (1) |
