@@ -24,47 +24,16 @@ package CLI;
 
 import java.util.*;
 
-<<<<<<< HEAD
 public class Volistic {
     static boolean run;
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        run = true;
-
-        while (run) {
-            Main.clear();
-            Main.pBanner();
-            Main.pQuit();
-            Main.pMainMenu();
-            System.out.print("\nEnter the ID of the program that you want to run: ");
-            String chosenProgram = input.nextLine().trim().toLowerCase();
-            switch (chosenProgram) {
-                case "coffee shop", "1", "coffee": CoffeeShop.run(); break;
-                case "bmi", "bmi calculator", "2": BMICalculator.run(); break;
-                case "3", "tvc", "two variable calculator": TwoVarCalculator.run(); break;
-                case "4", "tristan", "sleep duration calculator": Tristan.run(); break;
-                case "5", "anton", "morse": Anton.run(); break;
-                case "exit", "quit", "q": Main.quit();
-=======
-// Let start over again:
-/*
- * Hello friends!
- * Here, you can change the code however you want,
- * Lines that start with '#' is a command, press Ccommand + Shift + P adn then type the following command!
- * 
- * If you want to publish the changes you made:
- * # Git: Commit
- * # Git: Push
- * 
- * Also, don't forget to Fetch frequently
- * # Git: Fetch
- */
-
-public class Volistic {
     static boolean onLoginPage = true;
     static void tryCloseLoginPage(LoginPage ow) {
         if(LoginPage.authenticationSuccessful) {
-            try {Thread.sleep(1000);} catch(Exception e) {Main.pExcType("Thread sleep exception.");}
+            try {
+                Thread.sleep(1000);
+            } catch(Exception e) {
+                Main.printInvalidInputException("Thread sleep exception.");
+            }
             ow.dispose();
             onLoginPage = false;
         }
@@ -73,55 +42,35 @@ public class Volistic {
         LoginPage lp = new LoginPage();
         while(onLoginPage) {
             tryCloseLoginPage(lp);
-            try {Thread.sleep(17);} catch(Exception e) {Main.pExcType("Thread sleep exception.");}
-        }
-        
-        Scanner input = new Scanner(System.in);
-
-        boolean run = true;
-        while (run) {
             try {
+                Thread.sleep(17);
+            } catch(Exception e) {
+                Main.printInvalidInputException("Thread sleep exception.");
+            }
+        }
+        Scanner input = new Scanner(System.in);
+        boolean run = true;
+        try {
+            while (run) {
                 Main.clear();
                 Main.pBanner();
                 Main.pQuit();
                 Main.pMainMenu();
-                System.out.println("\nSelect the program you want to run: ");
-                String chosenProgram = input.nextLine();
+                System.out.print("\nEnter the ID of the program that you want to run: ");
+                String chosenProgram = input.nextLine().trim().toLowerCase();
                 switch (chosenProgram) {
-                    case "Coffee Shop":
-                    case "1":
-                        CoffeeShop.run();
-                        break;
-                    case "BMI":
-                    case "BMI Calculator":
-                    case "2":
-                        BMICalculator.run();
-                        break;
-                    case "3":
-                        TwoVarCalculator.run();
-                        break;
-                    case "4":
-                    case "Tristan":
-                    case "Tristan's Sleep Duration Calculator":
-                        Tristan.run();
-                        break;
-                    case "5":
-                    case "Anton":
-                    case "Morse":
-                    case "morse":
-                        Anton.run();
-                        break;
-                    case "exit":
-                    case "quit":
-                        Main.quit(3);
-                        break;
+                    case "coffee shop", "1", "coffee": CoffeeShop.run(); break;
+                    case "bmi", "bmi calculator", "2": BMICalculator.run(); break;
+                    case "3", "tvc", "two variable calculator": TwoVarCalculator.run(); break;
+                    case "4", "tristan", "sleep duration calculator": Tristan.run(); break;
+                    case "5", "anton", "morse": Anton.run(); break;
+                    case "exit", "quit", "q": Main.quit(); run = false;
                 }
-            } catch (Exception e) {
-                Main.pExcType("Something went wrong. Please report immediately to: deffreus (Discord). Sorry for the inconvenience T-T");
-                if (input.hasNextLine()) {input.nextLine();}
-                try {Thread.sleep(2000);} catch (Exception ee) {Main.pExcType("Thread sleep error.");}
->>>>>>> login-page-GUI
             }
+        } catch (Exception e) {
+            Main.printInvalidInputException("Something went wrong. Please report immediately to: deffreus (Discord). Sorry for the inconvenience T-T");
+            if (input.hasNextLine()) {input.nextLine();}
+            try {Thread.sleep(2000);} catch (Exception ee) {Main.printInvalidInputException("Thread sleep error.");}
         }
         input.close();
     }
