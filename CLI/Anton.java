@@ -59,12 +59,12 @@ public class Anton { // Amrul named it
                     mode = 0;
                     System.out.print("\nSelect translation mode\n1 = Alphabet --> Morse Code\n2 = Morse Code --> Alphabet\n(Enter the number): ");
                     try {mode = Integer.parseInt(BAPAKMU.nextLine());}
-                    catch(Exception e) {Main.pEcxInvalI("Please enter either '1' or '2'!");}
+                    catch(Exception e) {Main.printInvalidInputException("Please enter either '1' or '2'!");}
                     switch (mode) {
                         case 1, 2:
                             inputIsValid = true;
                             break;
-                        default: Main.pEcxInvalI("Not '1' or '2'");
+                        default: Main.printInvalidInputException("Not '1' or '2'");
                     }
                 }
             }
@@ -136,7 +136,7 @@ public class Anton { // Amrul named it
                             isEnded = true;
                             pQuit();
                             break;
-                        default: Main.pEcxInvalI("Response unknown");
+                        default: Main.printInvalidInputException("Response unknown");
                     }
                 }
             }

@@ -93,8 +93,8 @@ public class Tristan {
             inputIsValid = true;
         }
     }
-    static void printInvalidFormat() {Main.pEcxInvalI("Not in format 'HH:MM'");}
-    static void printInvalidTime() {Main.pEcxInvalI("Invalid time");}
+    static void printInvalidFormat() {Main.printInvalidInputException("Not in format 'HH:MM'");}
+    static void printInvalidTime() {Main.printInvalidInputException("Invalid time");}
     static void inputWakeUpTime() {
         boolean inputIsValid = false;
         int wakeUpHour, wakeUpMinute;
@@ -169,7 +169,7 @@ public class Tristan {
                     pQuit();
                     break;
                 default:
-                    Main.pEcxInvalI("Response unknown.");
+                    Main.printInvalidInputException("Response unknown.");
                     valid = false;
             }
         }

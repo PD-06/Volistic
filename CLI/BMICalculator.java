@@ -128,7 +128,7 @@ public class BMICalculator {
                     inputIsValid = true;
                     break;
                 default:
-                    Main.pEcxInvalI("Response unknown");
+                    Main.printInvalidInputException("Response unknown");
                     break;
             }
         }
@@ -142,7 +142,7 @@ public class BMICalculator {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
-                Main.pEcxInvalI("Thread sleep exception");
+                Main.printInvalidInputException("Thread sleep exception");
             }
         }
     }

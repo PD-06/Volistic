@@ -44,7 +44,7 @@ public class TwoVarCalculator {
                         iOperator();
                         if (!tvcIsEnded) {iA(); iB(); pRes(); iQuit();}
                         if (!tvcIsEnded) {tvcIsRunning = true;}
-                    } catch (Exception e) {Main.pEcxInvalI(AnsiColor.RED + "CALCULATOR ERROR." + AnsiColor.RESET);}
+                    } catch (Exception e) {Main.printInvalidInputException(AnsiColor.RED + "CALCULATOR ERROR." + AnsiColor.RESET);}
                 }
                 pQuit();
             }
@@ -54,7 +54,7 @@ public class TwoVarCalculator {
                 for (int i = 3; i > 0; i--) {
                     System.out.println(i + "...");
                     try {Thread.sleep(1000);}
-                    catch (Exception e) {Main.pEcxInvalI("Thread sleep exception.");}
+                    catch (Exception e) {Main.printInvalidInputException("Thread sleep exception.");}
                 } 
             }
             static void iQuit() {
@@ -81,7 +81,7 @@ public class TwoVarCalculator {
                             tvcIsEnded = true;
                             break;
                         default:
-                            Main.pEcxInvalI("Please enter yes or no!");
+                            Main.printInvalidInputException("Please enter yes or no!");
                     }
                 }
             }
@@ -153,7 +153,7 @@ public class TwoVarCalculator {
                         B = Double.parseDouble(tvcinput.nextLine());
                         BIsValid = true;
                     } catch(Exception e) {
-                        if (!tvcIsEnded) {Main.pEcxInvalI("Please enter a number for variable B!");}
+                        if (!tvcIsEnded) {Main.printInvalidInputException("Please enter a number for variable B!");}
                     }
                 }
             }
@@ -165,7 +165,7 @@ public class TwoVarCalculator {
                         A = Double.parseDouble(tvcinput.nextLine());
                         AIsValid = true;
                     } catch(Exception e) {
-                        if (!tvcIsEnded) {Main.pEcxInvalI("Please enter a number for variable A!");}
+                        if (!tvcIsEnded) {Main.printInvalidInputException("Please enter a number for variable A!");}
                     }
                 }
             }
@@ -189,8 +189,8 @@ public class TwoVarCalculator {
                         operator = Main.noSpace(tvcinput.nextLine());
                         calc(operator);
                         if (operatorIsValid) {keepAsking = false;}
-                        else {Main.pEcxInvalI("Please enter the index number or symbol above!");}
-                    } catch (Exception e) {Main.pEcxInvalI("Please input a number or symbol!");}
+                        else {Main.printInvalidInputException("Please enter the index number or symbol above!");}
+                    } catch (Exception e) {Main.printInvalidInputException("Please input a number or symbol!");}
                 }
                 if (!tvcIsEnded) {System.out.println("Selecting: " + calculations[op][2] + "... " + calculations[op][3]);}
             }
