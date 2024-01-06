@@ -29,7 +29,7 @@ The steps and procedures to do so are articulated on the '[CONTRIBUTING.md](http
 
 ## 🍎・Wanna Try it Out??
 
-1. On your machine, [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) into a your preferred folder!
+1. On your machine, [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) into your preferred folder!
 2. Navigate to the cloned repository, and [open a terminal at the folder](https://www.google.com/search?client=opera-gx&q=opening+a+terminal+at+a+folder&sourceid=opera&ie=UTF-8&oe=UTF-8) `Volistic`!
 3. Type `pwd` to your terminal and press `return↵`! If it show `.../Volistic` then your current working directory is correct!
 4. Copy paste this command: `javac CLI/*.java; java CLI.Volistic` to your terminal and press `return↵`!
@@ -108,7 +108,7 @@ When you're making code changes in VSCode, you're editing your local repository.
 
 ## Support and Help
 
-We mainly use Discord for this project. Go to the '# support-and-help' under the '🎁・Volistic' category. You can join our server [here](https://discord.gg/SwycRcrXwC).
+We mainly use Discord for this project. Go to the '#support-and-help' under the '🎁・Volistic' category. You can join our server [here](https://discord.gg/SwycRcrXwC).
 
 ## 🪪・License
 
