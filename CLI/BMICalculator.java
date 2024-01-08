@@ -55,13 +55,13 @@ public class BMICalculator {
         System.out.println("\nWelcome to the Volistic BMI Calculator!\n");
         Main.hr();
     }
-    // Ask for user's name
+    // Ask for user's name and check its validity
     static void iName() {
         System.out.print("\nEnter your full name (blank to skip): ");
         fullName = sc.nextLine();
         if (!fullName.isEmpty()) System.out.println("\nHello, " + fullName + "!");
     }
-    // Ask for user's weight
+    // Ask for user's weight and check its validity
     static void iWeight() {
         boolean inputIsValid = false;
         while (!inputIsValid) { //
@@ -78,6 +78,7 @@ public class BMICalculator {
             else inputIsValid = true;
         }
     }
+    // Ask for user's height and check its validity
     static void iHeight() {
         boolean inputIsValid = false;
         while (!inputIsValid) {
@@ -94,6 +95,7 @@ public class BMICalculator {
             else inputIsValid = true;
         }
     }
+    // Calculate BMI Index and set the category accordingly
     static void calcBMI(double w, double h) {
         bmi = w / (h * h * 0.0001); // 0.0001: cm squared --> m squared
         if      (bmi < 16)    category = "Underweight (Severe thinness)";
@@ -105,6 +107,7 @@ public class BMICalculator {
         else if (bmi <= 39.9) category = "Obese (Class II)";
         else                  category = "Obese (Class III)";
     }
+    // Print the user's category and BMI Index, including their weight & height
     static void pResult() {
         System.out.println("\n");
         if (!fullName.isEmpty()) System.out.println("Here is your result, " + fullName + ":");
