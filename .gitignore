@@ -6,3 +6,4 @@ out
 .idea
 /Volistic.iml
 /qodana.yaml
+GUI/*.class
